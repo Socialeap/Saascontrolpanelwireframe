@@ -5,81 +5,128 @@
   <title>HELLO! LeadScout™ Control Panel</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Optional: Inter font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+    /* --- LINKUP DESIGN SYSTEM --- */
     :root {
-      --bg-main: #050712;
-      --bg-panel: #0d101f;
-      --bg-panel-alt: #111427;
-      --border-subtle: rgba(255, 255, 255, 0.06);
-      --accent-cyan: #00e5ff;
-      --accent-purple: #9b5cff;
-      --accent-soft: rgba(0, 229, 255, 0.12);
-      --text-main: #f5f7ff;
-      --text-muted: #9ca3c7;
-      --text-soft: #6b7280;
-      --danger: #fb7185;
-      --success: #4ade80;
-      --radius-lg: 14px;
-      --radius-md: 10px;
+      --ink: #EAEAF6;
+      --muted: #A9AFD9;
+      --panel: rgba(29,22,52,.85);
+      --panel-2: rgba(25,19,45,.6);
+      --line: rgba(140,106,240,.35);
+      --accent: #A78BFA;
+      --accent-2: #8B5CF6;
+      --teal: #22D3EE;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --radius-lg: 16px;
+      --radius-md: 12px;
       --radius-pill: 999px;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
-      --transition-fast: 0.18s ease-out;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(circle at top, #151a35 0, #050712 45%, #020308 100%);
-      color: var(--text-main);
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(124,58,237,.25), transparent 60%),
+        radial-gradient(1200px 600px at 120% 0%, rgba(34,211,238,.16), transparent 55%),
+        linear-gradient(180deg, #0D0B17, #0E0B1A 40%, #0C0A16 100%);
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Layout shell */
+    /* Common Utility Classes from LinkUp */
+    .glass {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.05);
+      backdrop-filter: blur(8px);
+    }
+
+    .chip {
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      padding: 0.35rem 0.7rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.76rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+    }
+
+    .chip.sel {
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      color: #170E2F;
+      border-color: transparent;
+      font-weight: 800;
+    }
+
+    .btn {
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--ink);
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn:hover { background: rgba(255,255,255,.12); transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      color: #170E2F;
+      border: none;
+      font-weight: 800;
+    }
+    .btn-primary:hover { opacity: 0.9; }
+
+    .avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.14);
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--panel), #000);
+      font-weight: 700; color: var(--teal);
+    }
+
+    .card-title {
+      color: #C7B7FF;
+      font-weight: 800;
+      letter-spacing: .2px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .text-teal { color: var(--teal); }
+    .text-accent { color: var(--accent); }
+    .text-muted { color: var(--muted); }
+
+    /* --- LAYOUT SPECIFICS --- */
     .app-shell {
-      max-width: 1240px;
-      margin: 32px auto;
-      padding: 0 16px 40px;
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 16px 60px;
     }
 
-    @media (max-width: 900px) {
-      .app-shell {
-        margin-top: 16px;
-      }
-    }
-
-    .card {
-      background: radial-gradient(circle at top left, rgba(155, 92, 255, 0.1), transparent 55%),
-                  radial-gradient(circle at bottom right, rgba(0, 229, 255, 0.1), transparent 55%),
-                  var(--bg-panel);
-      border-radius: 22px;
-      border: 1px solid rgba(148, 163, 255, 0.18);
-      box-shadow: var(--shadow-soft);
-      padding: 18px 20px 22px;
-      position: relative;
+    .main-container {
+      border-radius: 24px;
       overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      border: 1px solid rgba(148, 163, 255, 0.22);
-      opacity: 0.35;
-      pointer-events: none;
+      padding: 24px 28px;
     }
 
     /* Header */
@@ -87,660 +134,256 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 16px;
+      margin-bottom: 24px;
     }
 
     @media (max-width: 700px) {
-      .app-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    .app-title-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      .app-header { flex-direction: column; align-items: flex-start; }
     }
 
     .app-title {
-      font-size: 1.1rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent-cyan);
-      font-weight: 600;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #C7B7FF;
+      letter-spacing: -0.02em;
     }
 
     .app-subtitle {
       font-size: 0.9rem;
-      color: var(--text-muted);
+      color: var(--muted);
+      margin-top: 4px;
     }
 
     .header-meta {
       display: flex;
       align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: var(--radius-pill);
-      padding: 4px 10px;
-      font-size: 0.76rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border: 1px solid rgba(148, 163, 255, 0.5);
-      background: linear-gradient(90deg, rgba(0, 229, 255, 0.16), rgba(155, 92, 255, 0.12));
-      color: var(--text-main);
-    }
-
-    .pill-dot {
-      width: 7px;
-      height: 7px;
+    .dot {
+      width: 8px; height: 8px;
       border-radius: 50%;
       background: var(--success);
-      box-shadow: 0 0 12px rgba(74, 222, 128, 0.9);
-    }
-
-    .pill-secondary {
-      border-color: rgba(148, 163, 255, 0.3);
-      background: rgba(15, 23, 42, 0.8);
-      color: var(--text-muted);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.6);
     }
 
     /* Tabs */
     .tab-bar {
       display: flex;
       gap: 6px;
-      margin: 10px 0 14px;
-      padding: 4px;
+      margin-bottom: 20px;
+      padding: 6px;
       border-radius: var(--radius-pill);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.96));
-      border: 1px solid rgba(148, 163, 255, 0.4);
-      position: relative;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.05);
+      flex-wrap: wrap;
     }
 
     .tab {
-      position: relative;
-      flex: 1 1 0;
-      border-radius: 999px;
-      padding: 8px 10px;
-      font-size: 0.78rem;
+      flex: 1;
       text-align: center;
+      padding: 8px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
       cursor: pointer;
-      color: var(--text-soft);
-      transition: var(--transition-fast);
-      user-select: none;
+      transition: all 0.2s;
       white-space: nowrap;
     }
 
-    .tab span {
-      position: relative;
-      z-index: 1;
+    .tab:hover:not(.tab-active) {
+      color: var(--ink);
+      background: rgba(255,255,255,0.05);
     }
 
     .tab-active {
-      color: var(--text-main);
-      font-weight: 500;
-      text-shadow: 0 0 10px rgba(0, 229, 255, 0.9);
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      color: #170E2F;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
     }
 
-    .tab-active::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(circle at top, rgba(0, 229, 255, 0.22), rgba(15, 23, 42, 0.95));
-      box-shadow: 0 0 18px rgba(0, 229, 255, 0.6);
-      z-index: 0;
-    }
-
-    .tab:hover:not(.tab-active) {
-      color: #e5e7ff;
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    @media (max-width: 800px) {
-      .tab-bar {
-        flex-wrap: wrap;
-        border-radius: 16px;
-      }
-      .tab {
-        flex: 1 0 calc(50% - 6px);
-      }
-    }
-
-    /* Content area */
+    /* Content Area */
     .tab-content {
-      margin-top: 4px;
-      border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.95), rgba(3, 7, 18, 0.98));
-      border: 1px solid rgba(148, 163, 255, 0.2);
-      padding: 18px 18px 20px;
-      min-height: 380px;
+      min-height: 400px;
     }
 
-    .tab-panel {
-      display: none;
-    }
-
-    .tab-panel.active {
-      display: block;
-    }
+    .tab-panel { display: none; animation: fadeIn 0.3s ease; }
+    .tab-panel.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
     .panel-header-row {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      gap: 8px;
-      margin-bottom: 12px;
+      gap: 12px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 12px;
     }
 
-    .panel-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #e5e7ff;
-    }
-
-    .panel-subtitle {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .panel-tagline {
-      font-size: 0.75rem;
-      color: var(--text-soft);
-      text-align: right;
-    }
+    .panel-title { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .panel-subtitle { font-size: 0.85rem; color: var(--muted); margin-top: 2px;}
+    .panel-tagline { font-size: 0.75rem; color: var(--teal); font-weight: 500; text-align: right; }
 
     @media (max-width: 700px) {
-      .panel-header-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .panel-tagline {
-        text-align: left;
-      }
+      .panel-header-row { flex-direction: column; align-items: flex-start; }
+      .panel-tagline { text-align: left; }
     }
 
-    /* Grid & cards inside panels */
-    .grid {
-      display: grid;
-      gap: 12px;
-    }
+    /* Grids */
+    .grid { display: grid; gap: 16px; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 850px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
 
-    .grid-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .grid-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    @media (max-width: 880px) {
-      .grid-2,
-      .grid-3 {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
+    /* Panel Cards (Inner) */
     .panel-card {
-      background: radial-gradient(circle at top left, rgba(148, 163, 255, 0.18), transparent 65%),
-                  radial-gradient(circle at bottom right, rgba(0, 229, 255, 0.12), transparent 55%),
-                  var(--bg-panel-alt);
+      background: var(--panel-2);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: var(--radius-md);
-      border: 1px solid rgba(148, 163, 255, 0.26);
-      padding: 12px 12px 13px;
+      padding: 16px;
       position: relative;
-      overflow: hidden;
-    }
-
-    .panel-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      border: 1px solid rgba(148, 163, 255, 0.26);
-      opacity: 0.4;
-      pointer-events: none;
     }
 
     .panel-card-title {
-      font-size: 0.8rem;
-      font-weight: 500;
+      color: #C7B7FF;
+      font-weight: 700;
+      font-size: 0.85rem;
       margin-bottom: 4px;
-      color: #e5e7ff;
     }
+    .panel-card-sub { font-size: 0.75rem; color: var(--muted); margin-bottom: 12px; line-height: 1.4; }
 
-    .panel-card-sub {
-      font-size: 0.75rem;
-      color: var(--text-soft);
-      margin-bottom: 6px;
-    }
+    /* Metric Rows */
+    .metric-row { display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.85rem; }
+    .metric-label { color: var(--muted); }
+    .metric-value { font-weight: 700; color: var(--teal); }
+    .metric-value-soft { color: var(--ink); }
 
-    /* Status metrics */
-    .metric-row {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-top: 4px;
-      gap: 8px;
-    }
-
-    .metric-label {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-    }
-
-    .metric-value {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--accent-cyan);
-    }
-
-    .metric-value-soft {
-      color: #e5e7ff;
-      font-weight: 400;
-    }
-
-    .badge-soft {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 2px 8px;
-      border-radius: var(--radius-pill);
-      background: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(148, 163, 255, 0.35);
-      font-size: 0.7rem;
-      color: var(--text-muted);
-    }
-
-    .badge-pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent-cyan);
-    }
-
-    /* Alignment radar stub */
+    /* Radar / Alignment */
     .radar-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 6px;
+      display: flex; align-items: center; gap: 16px; margin-top: 10px;
     }
-
     .radar-circle {
-      width: 64px;
-      height: 64px;
+      width: 60px; height: 60px;
       border-radius: 50%;
-      border: 2px solid rgba(0, 229, 255, 0.6);
-      box-shadow: 0 0 18px rgba(0, 229, 255, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border: 2px solid var(--teal);
+      display: flex; align-items: center; justify-content: center;
       position: relative;
+      background: rgba(34, 211, 238, 0.05);
+      box-shadow: 0 0 20px rgba(34,211,238,0.2);
     }
+    .radar-score { font-size: 1.1rem; font-weight: 800; color: var(--teal); }
+    .radar-list { flex: 1; list-style: none; padding: 0; margin: 0; font-size: 0.75rem; }
+    .radar-list li { display: flex; justify-content: space-between; margin-bottom: 4px; color: var(--muted); }
+    .radar-chip { font-weight: 600; color: var(--accent); }
 
-    .radar-circle::before {
-      content: "";
-      position: absolute;
-      width: 44px;
-      height: 44px;
-      border-radius: inherit;
-      border: 1px dashed rgba(155, 92, 255, 0.7);
-    }
-
-    .radar-score {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--accent-cyan);
-    }
-
-    .radar-list {
-      flex: 1;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-    }
-
-    .radar-list li {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 2px;
-    }
-
-    .radar-chip {
-      width: 28%;
-      text-align: right;
-      color: var(--accent-cyan);
-    }
-
-    /* Activity log */
-    .activity-log {
-      list-style: none;
-      padding-left: 0;
-      margin: 6px 0 0;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
+    /* Logs */
+    .activity-log { list-style: none; padding: 0; margin: 0; font-size: 0.75rem; }
     .activity-log li {
-      display: flex;
-      justify-content: space-between;
-      padding: 3px 0;
-      border-bottom: 1px dashed rgba(148, 163, 255, 0.25);
+      display: flex; justify-content: space-between; padding: 6px 0;
+      border-bottom: 1px dashed rgba(255,255,255,0.1);
+      color: var(--muted);
     }
+    .activity-log li:last-child { border-bottom: none; }
+    .activity-time { color: var(--teal); opacity: 0.8; }
 
-    .activity-time {
-      color: var(--text-soft);
-    }
-
-    /* Form elements */
+    /* Forms */
     .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
     }
+    @media (max-width: 800px) { .form-grid { grid-template-columns: 1fr; } }
 
-    @media (max-width: 880px) {
-      .form-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .form-field {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .field-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .field-input,
-    .field-textarea,
-    .field-select {
-      border-radius: 9px;
-      border: 1px solid rgba(148, 163, 255, 0.45);
-      background: rgba(15, 23, 42, 0.95);
-      color: var(--text-main);
-      padding: 7px 9px;
-      font-size: 0.8rem;
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .field-label { font-size: 0.75rem; color: var(--muted); font-weight: 500; }
+    
+    .field-input, .field-select, .field-textarea {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 0.85rem;
       outline: none;
-      transition: var(--transition-fast);
+      transition: 0.2s;
     }
-
-    .field-input:focus,
-    .field-textarea:focus,
-    .field-select:focus {
-      border-color: var(--accent-cyan);
-      box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.4);
+    .field-input:focus, .field-select:focus, .field-textarea:focus {
+      border-color: var(--accent);
+      background: rgba(0,0,0,0.5);
+      box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.3);
     }
-
-    .field-textarea {
-      resize: vertical;
-      min-height: 52px;
-    }
+    .field-textarea { min-height: 80px; resize: vertical; }
 
     /* Sliders */
-    .slider-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-
-    .slider-label {
-      width: 44%;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    .slider-input {
-      flex: 1;
-    }
-
+    .slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .slider-label { width: 40%; font-size: 0.8rem; color: var(--muted); }
+    .slider-input { flex: 1; display: flex; align-items: center; }
     .slider-input input[type="range"] {
-      width: 100%;
-      accent-color: var(--accent-cyan);
+      width: 100%; -webkit-appearance: none; height: 4px; border-radius: 99px;
+      background: rgba(255,255,255,0.1); outline: none;
     }
-
-    .slider-value {
-      width: 36px;
-      text-align: right;
-      font-size: 0.76rem;
-      color: var(--accent-cyan);
+    .slider-input input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%;
+      background: var(--teal); cursor: pointer; box-shadow: 0 0 10px var(--teal);
     }
+    .slider-value { width: 30px; text-align: right; font-weight: 700; color: var(--teal); font-size: 0.8rem; }
 
-    /* Toggles */
-    .toggle-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-      margin-bottom: 6px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .toggle-switch {
-      position: relative;
-      width: 38px;
-      height: 20px;
-    }
-
-    .toggle-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
+    /* Toggle Switch */
+    .toggle-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.85rem; color: var(--muted); }
+    .toggle-switch { position: relative; width: 40px; height: 22px; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
     .toggle-slider {
-      position: absolute;
-      cursor: pointer;
-      inset: 0;
-      background-color: rgba(15, 23, 42, 0.9);
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 255, 0.5);
-      transition: 0.2s;
+      position: absolute; cursor: pointer; inset: 0; background-color: rgba(255,255,255,0.1);
+      border-radius: 99px; transition: .3s; border: 1px solid rgba(255,255,255,0.1);
     }
-
-    .toggle-slider::before {
-      content: "";
-      position: absolute;
-      height: 14px;
-      width: 14px;
-      left: 3px;
-      top: 2px;
-      border-radius: 50%;
-      background-color: var(--accent-cyan);
-      box-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
-      transition: 0.2s;
+    .toggle-slider:before {
+      position: absolute; content: ""; height: 16px; width: 16px; left: 3px; top: 2px;
+      background-color: var(--muted); border-radius: 50%; transition: .3s;
     }
+    input:checked + .toggle-slider { background-color: rgba(34, 211, 238, 0.2); border-color: var(--teal); }
+    input:checked + .toggle-slider:before { transform: translateX(18px); background-color: var(--teal); box-shadow: 0 0 8px var(--teal); }
 
-    .toggle-switch input:checked + .toggle-slider {
-      background: radial-gradient(circle at top, rgba(0, 229, 255, 0.35), rgba(15, 23, 42, 0.9));
-      border-color: rgba(56, 189, 248, 0.9);
-    }
-
-    .toggle-switch input:checked + .toggle-slider::before {
-      transform: translateX(14px);
-    }
-
-    /* Domain list */
-    .domain-list {
-      list-style: none;
-      padding-left: 0;
-      margin: 4px 0 0;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
+    /* Domain List */
+    .domain-list { list-style: none; padding: 0; margin: 0; }
     .domain-list li {
-      padding: 2px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.8rem; color: var(--muted);
     }
+    .tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 999px; border: 1px solid; }
+    .tag.allowed { border-color: var(--success); color: var(--success); background: rgba(34, 197, 94, 0.1); }
+    .tag.blocked { border-color: var(--danger); color: var(--danger); background: rgba(239, 68, 68, 0.1); }
 
-    .domain-pill {
-      font-size: 0.7rem;
-      padding: 1px 7px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(148, 163, 255, 0.5);
-      background: rgba(15, 23, 42, 0.95);
-      color: var(--text-soft);
-    }
-
-    /* Lead card */
-    .lead-card {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .lead-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: radial-gradient(circle at top, rgba(0, 229, 255, 0.3), rgba(15, 23, 42, 0.95));
-      border: 1px solid rgba(148, 163, 255, 0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .lead-main {
-      flex: 1;
-    }
-
-    .lead-name {
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
-    .lead-role {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .lead-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      font-size: 0.7rem;
-      color: var(--text-soft);
-    }
-
-    .lead-tag-pill {
-      border-radius: var(--radius-pill);
-      padding: 2px 7px;
-      border: 1px solid rgba(148, 163, 255, 0.4);
-      background: rgba(15, 23, 42, 0.9);
-    }
-
+    /* Lead Card (Big) */
+    .lead-big-card { display: flex; gap: 16px; align-items: center; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 16px; }
+    .lead-info { flex: 1; }
+    .lead-name { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .lead-role { font-size: 0.85rem; color: var(--teal); margin-bottom: 8px; }
+    .lead-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .lead-pill { font-size: 0.7rem; background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 99px; color: var(--muted); }
+    
     .score-ring {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      border: 3px solid rgba(0, 229, 255, 0.8);
-      box-shadow: 0 0 18px rgba(0, 229, 255, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--accent-cyan);
+      width: 64px; height: 64px; border-radius: 50%; border: 3px solid var(--accent);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      box-shadow: 0 0 20px rgba(167, 139, 250, 0.3);
     }
+    .score-num { font-size: 1.2rem; font-weight: 800; color: var(--ink); line-height: 1; }
+    .score-lbl { font-size: 0.6rem; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
 
-    .score-caption {
-      text-align: center;
-      font-size: 0.7rem;
-      color: var(--text-soft);
-      margin-top: 4px;
-    }
+    .lead-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; font-size: 0.85rem; color: var(--muted); }
+    .lead-details-grid strong { color: #C7B7FF; display: block; margin-bottom: 4px; font-size: 0.8rem; }
 
-    .lead-subgrid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 8px;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
+    .hint { font-size: 0.75rem; color: var(--muted); margin-top: 8px; font-style: italic; opacity: 0.7; }
 
-    .lead-subgrid strong {
-      color: var(--text-main);
-      font-weight: 500;
-    }
-
-    .btn-row {
-      margin-top: 10px;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      border-radius: var(--radius-pill);
-      padding: 6px 11px;
-      font-size: 0.78rem;
-      border: 1px solid rgba(148, 163, 255, 0.6);
-      background: rgba(15, 23, 42, 0.95);
-      color: var(--text-main);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: var(--transition-fast);
-    }
-
-    .btn-primary {
-      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
-      border-color: transparent;
-      color: #020617;
-      font-weight: 600;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.8);
-    }
-
-    .btn-icon-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: currentColor;
-    }
-
-    /* Small helper text */
-    .hint {
-      font-size: 0.72rem;
-      color: var(--text-soft);
-      margin-top: 4px;
-    }
   </style>
 </head>
 <body>
+
   <div class="app-shell">
-    <div class="card">
-      <!-- Header -->
+    <div class="main-container glass">
+      
       <header class="app-header">
         <div class="app-title-group">
           <div class="app-title">HELLO! LeadScout™</div>
@@ -749,62 +392,41 @@
           </div>
         </div>
         <div class="header-meta">
-          <div class="pill">
-            <span class="pill-dot"></span>
+          <div class="chip sel">
+            <span class="dot"></span>
             <span>Agent Online</span>
           </div>
-          <div class="pill pill-secondary" id="next-run-pill">
-            Next scout run in <span id="next-run-timer">14h 22m</span>
+          <div class="chip">
+            Next run: <span id="next-run-timer" style="margin-left:4px; color:var(--teal)">14h 22m</span>
           </div>
         </div>
       </header>
 
-      <!-- Tabs -->
       <nav class="tab-bar" id="tab-bar">
-        <div class="tab tab-active" data-tab="system-status">
-          <span>System Status</span>
-        </div>
-        <div class="tab" data-tab="your-goals">
-          <span>Your Goals</span>
-        </div>
-        <div class="tab" data-tab="lead-criteria">
-          <span>Lead Criteria</span>
-        </div>
-        <div class="tab" data-tab="matching-priorities">
-          <span>Matching Priorities</span>
-        </div>
-        <div class="tab" data-tab="search-settings">
-          <span>Search Settings</span>
-        </div>
-        <div class="tab" data-tab="daily-output">
-          <span>Daily Output</span>
-        </div>
+        <div class="tab tab-active" data-tab="system-status">System Status</div>
+        <div class="tab" data-tab="your-goals">Your Goals</div>
+        <div class="tab" data-tab="lead-criteria">Lead Criteria</div>
+        <div class="tab" data-tab="matching-priorities">Matching Priorities</div>
+        <div class="tab" data-tab="search-settings">Search Settings</div>
+        <div class="tab" data-tab="daily-output">Daily Output</div>
       </nav>
 
-      <!-- Content -->
       <section class="tab-content">
-        <!-- System Status -->
+        
         <div class="tab-panel active" id="panel-system-status">
           <div class="panel-header-row">
             <div>
               <div class="panel-title">System Status</div>
-              <div class="panel-subtitle">
-                High-level view of LeadScout’s daily cycles and engine health.
-              </div>
+              <div class="panel-subtitle">High-level view of LeadScout’s daily cycles and engine health.</div>
             </div>
-            <div class="panel-tagline">
-              LeadScout runs your searches in the background and delivers one
-              curated lead per cycle.
-            </div>
+            <div class="panel-tagline">Running background searches...</div>
           </div>
 
           <div class="grid grid-3">
-            <!-- Activity -->
             <div class="panel-card">
-              <div class="panel-card-title">Cycle Activity</div>
-              <div class="panel-card-sub">
-                Snapshot of the most recent scouting run.
-              </div>
+              <div class="panel-card-title">CYCLE ACTIVITY</div>
+              <div class="panel-card-sub">Snapshot of the most recent scouting run.</div>
+              
               <div class="metric-row">
                 <span class="metric-label">Last run</span>
                 <span class="metric-value-soft">Today, 10:14 AM</span>
@@ -821,326 +443,181 @@
                 <span class="metric-label">Lead promoted</span>
                 <span class="metric-value-soft">1 (Fit ≥ 87)</span>
               </div>
-              <div class="hint">
-                Summary generated from Playwright-powered web retrieval.
-              </div>
             </div>
 
-            <!-- Alignment -->
             <div class="panel-card">
-              <div class="panel-card-title">Alignment Vector Snapshot</div>
-              <div class="panel-card-sub">
-                How today’s promoted lead scored across your top dimensions.
-              </div>
+              <div class="panel-card-title">ALIGNMENT VECTOR</div>
+              <div class="panel-card-sub">Scoring breakdown for today's lead.</div>
               <div class="radar-wrapper">
                 <div class="radar-circle">
                   <span class="radar-score">92</span>
                 </div>
                 <ul class="radar-list">
-                  <li>
-                    <span>Intent match</span>
-                    <span class="radar-chip">95</span>
-                  </li>
-                  <li>
-                    <span>Skill relevance</span>
-                    <span class="radar-chip">89</span>
-                  </li>
-                  <li>
-                    <span>Domain overlap</span>
-                    <span class="radar-chip">91</span>
-                  </li>
-                  <li>
-                    <span>Value exchange</span>
-                    <span class="radar-chip">93</span>
-                  </li>
+                  <li><span>Intent match</span> <span class="radar-chip">95</span></li>
+                  <li><span>Skill relevance</span> <span class="radar-chip">89</span></li>
+                  <li><span>Domain overlap</span> <span class="radar-chip">91</span></li>
+                  <li><span>Value exchange</span> <span class="radar-chip">93</span></li>
                 </ul>
-              </div>
-              <div class="hint">
-                Scores computed using your current Matching Priorities weights.
               </div>
             </div>
 
-            <!-- Log -->
             <div class="panel-card">
-              <div class="panel-card-title">Recent Activity</div>
-              <div class="panel-card-sub">
-                High-level trace of the most recent automated cycles.
-              </div>
+              <div class="panel-card-title">RECENT ACTIVITY</div>
+              <div class="panel-card-sub">Trace of automated cycles.</div>
               <ul class="activity-log">
-                <li>
-                  <span>Promoted lead: SaaS GTM advisor</span>
-                  <span class="activity-time">10:14</span>
-                </li>
-                <li>
-                  <span>Scan: startup blogs & founder posts</span>
-                  <span class="activity-time">10:10</span>
-                </li>
-                <li>
-                  <span>Query refresh from Your Goals</span>
-                  <span class="activity-time">10:07</span>
-                </li>
-                <li>
-                  <span>Playwright session started</span>
-                  <span class="activity-time">10:04</span>
-                </li>
-                <li>
-                  <span>Daily cycle triggered</span>
-                  <span class="activity-time">10:00</span>
-                </li>
+                <li><span>Promoted lead: SaaS Advisor</span> <span class="activity-time">10:14</span></li>
+                <li><span>Scan: startup blogs</span> <span class="activity-time">10:10</span></li>
+                <li><span>Query refresh</span> <span class="activity-time">10:07</span></li>
+                <li><span>Playwright session</span> <span class="activity-time">10:04</span></li>
               </ul>
-              <div class="hint">
-                For a full trace, connect these logs to your preferred analytics
-                stack.
-              </div>
             </div>
           </div>
         </div>
 
-        <!-- Your Goals -->
         <div class="tab-panel" id="panel-your-goals">
           <div class="panel-header-row">
             <div>
               <div class="panel-title">Your Goals</div>
-              <div class="panel-subtitle">
-                Tell LeadScout what “a good opportunity” looks like for you.
-              </div>
-            </div>
-            <div class="panel-tagline">
-              This tab feeds your Intent Definition Model (IDM) that powers
-              every search.
+              <div class="panel-subtitle">Tell LeadScout what “a good opportunity” looks like.</div>
             </div>
           </div>
 
           <div class="form-grid">
             <div class="form-field">
               <label class="field-label">Primary professional goal</label>
-              <input
-                class="field-input"
-                type="text"
-                placeholder="e.g. Secure 3–5 strategic partnerships per quarter"
-              />
+              <input class="field-input" type="text" placeholder="e.g. Secure 3–5 strategic partnerships per quarter" />
             </div>
             <div class="form-field">
-              <label class="field-label">Short-term focus (next 90 days)</label>
-              <input
-                class="field-input"
-                type="text"
-                placeholder="e.g. B2B SaaS founders who need GTM help"
-              />
+              <label class="field-label">Short-term focus (90 days)</label>
+              <input class="field-input" type="text" placeholder="e.g. B2B SaaS founders who need GTM help" />
             </div>
             <div class="form-field">
-              <label class="field-label">Types of opportunities you want</label>
+              <label class="field-label">Opportunity Type</label>
               <select class="field-select">
                 <option>Advisory & consulting</option>
                 <option>Co-founder & equity</option>
                 <option>Clients & retainers</option>
-                <option>Speaking & visibility</option>
-                <option>Hiring & recruiting</option>
               </select>
             </div>
             <div class="form-field">
-              <label class="field-label">Who you are trying to help</label>
-              <input
-                class="field-input"
-                type="text"
-                placeholder="e.g. Seed–Series B founders with product-market fit"
-              />
+              <label class="field-label">Who you want to help</label>
+              <input class="field-input" type="text" placeholder="e.g. Seed–Series B founders" />
             </div>
-            <div class="form-field">
-              <label class="field-label">How you want to show up</label>
-              <input
-                class="field-input"
-                type="text"
-                placeholder="e.g. Strategic, practical, low-drama, no fluff"
-              />
-            </div>
-            <div class="form-field">
+            <div class="form-field" style="grid-column: 1/-1;">
               <label class="field-label">Optional notes to the agent</label>
-              <textarea
-                class="field-textarea"
-                placeholder="Anything LeadScout should always consider before recommending someone."
-              ></textarea>
+              <textarea class="field-textarea" placeholder="Anything LeadScout should consider..."></textarea>
             </div>
           </div>
 
-          <div class="btn-row">
-            <button class="btn btn-primary">
-              <span class="btn-icon-dot"></span>
-              Save goals to LeadScout
-            </button>
-            <button class="btn">
-              Preview how this shapes search
-            </button>
+          <div style="margin-top:20px; display:flex; gap:10px;">
+            <button class="btn btn-primary">Save goals to LeadScout</button>
+            <button class="btn">Preview search shape</button>
           </div>
         </div>
 
-        <!-- Lead Criteria -->
         <div class="tab-panel" id="panel-lead-criteria">
           <div class="panel-header-row">
             <div>
               <div class="panel-title">Lead Criteria</div>
-              <div class="panel-subtitle">
-                Describe the humans LeadScout should try to find for you.
-              </div>
-            </div>
-            <div class="panel-tagline">
-              These fields become the core filters for who qualifies as a lead.
+              <div class="panel-subtitle">Define the humans LeadScout should find.</div>
             </div>
           </div>
 
           <div class="form-grid">
             <div class="form-field">
-              <label class="field-label">Industries of interest</label>
-              <input
-                class="field-input"
-                type="text"
-                placeholder="e.g. SaaS, creator tools, AI productivity, B2B services"
-              />
+              <label class="field-label">Industries</label>
+              <input class="field-input" type="text" placeholder="e.g. SaaS, AI, B2B services" />
             </div>
             <div class="form-field">
-              <label class="field-label">Roles & titles to target</label>
-              <input
-                class="field-input"
-                type="text"
-                placeholder="e.g. Founder, CMO, Head of Growth, RevOps lead"
-              />
+              <label class="field-label">Target Roles</label>
+              <input class="field-input" type="text" placeholder="e.g. Founder, CMO, Head of Growth" />
             </div>
             <div class="form-field">
-              <label class="field-label">Pain points you help solve</label>
-              <textarea
-                class="field-textarea"
-                placeholder="e.g. Inconsistent pipeline, weak messaging, inefficient onboarding..."
-              ></textarea>
+              <label class="field-label">Pain points you solve</label>
+              <textarea class="field-textarea" placeholder="Inconsistent pipeline, weak messaging..."></textarea>
             </div>
             <div class="form-field">
-              <label class="field-label">Pain points you want solved</label>
-              <textarea
-                class="field-textarea"
-                placeholder="e.g. Need distribution partners, warm intros, fractional ops support..."
-              ></textarea>
+              <label class="field-label">Pain points you have</label>
+              <textarea class="field-textarea" placeholder="Need distribution partners, warm intros..."></textarea>
             </div>
             <div class="form-field">
-              <label class="field-label">Hard exclusions (no-go leads)</label>
-              <textarea
-                class="field-textarea"
-                placeholder="e.g. Crypto, MLM, high-pressure sales, early idea stage without validation..."
-              ></textarea>
+              <label class="field-label">Hard Exclusions</label>
+              <input class="field-input" type="text" placeholder="e.g. Crypto, MLM, Idea stage" />
             </div>
             <div class="form-field">
-              <label class="field-label">Preferred geography</label>
-              <input
-                class="field-input"
-                type="text"
-                placeholder="e.g. North America & EU, remote-first"
-              />
+              <label class="field-label">Geography</label>
+              <input class="field-input" type="text" placeholder="e.g. North America, Remote" />
             </div>
-          </div>
-
-          <div class="hint">
-            LeadScout will still explore the edges of your criteria, but will not
-            promote leads that violate your hard exclusions.
           </div>
         </div>
 
-        <!-- Matching Priorities -->
         <div class="tab-panel" id="panel-matching-priorities">
           <div class="panel-header-row">
             <div>
               <div class="panel-title">Matching Priorities</div>
-              <div class="panel-subtitle">
-                Fine-tune how strongly each alignment dimension should matter.
-              </div>
-            </div>
-            <div class="panel-tagline">
-              Weights are applied to your Alignment Vector before scoring each lead.
+              <div class="panel-subtitle">Adjust weights for the alignment algorithm.</div>
             </div>
           </div>
 
-          <div class="panel-card">
-            <div class="panel-card-title">Alignment weights</div>
-            <div class="panel-card-sub">
-              Drag the sliders to tell LeadScout what you care about most.
-            </div>
+          <div class="panel-card" style="max-width: 600px;">
+            <div class="panel-card-title">ALIGNMENT WEIGHTS</div>
+            <div class="panel-card-sub" style="margin-bottom:20px">Drag to prioritize what matters most.</div>
 
             <div id="priority-sliders">
               <div class="slider-row">
-                <div class="slider-label">Intent match (goals & direction)</div>
+                <div class="slider-label">Intent match</div>
                 <div class="slider-input">
                   <input type="range" min="0" max="100" value="90" data-slider />
                 </div>
                 <div class="slider-value">90</div>
               </div>
-
               <div class="slider-row">
-                <div class="slider-label">Skill & expertise relevance</div>
+                <div class="slider-label">Skill relevance</div>
                 <div class="slider-input">
                   <input type="range" min="0" max="100" value="82" data-slider />
                 </div>
                 <div class="slider-value">82</div>
               </div>
-
               <div class="slider-row">
-                <div class="slider-label">Domain / industry overlap</div>
+                <div class="slider-label">Domain overlap</div>
                 <div class="slider-input">
                   <input type="range" min="0" max="100" value="78" data-slider />
                 </div>
                 <div class="slider-value">78</div>
               </div>
-
               <div class="slider-row">
-                <div class="slider-label">Momentum & signals of seriousness</div>
+                <div class="slider-label">Momentum signals</div>
                 <div class="slider-input">
                   <input type="range" min="0" max="100" value="70" data-slider />
                 </div>
                 <div class="slider-value">70</div>
               </div>
-
               <div class="slider-row">
-                <div class="slider-label">Mutual value exchange & fit</div>
+                <div class="slider-label">Value exchange</div>
                 <div class="slider-input">
                   <input type="range" min="0" max="100" value="88" data-slider />
                 </div>
                 <div class="slider-value">88</div>
               </div>
-
-              <div class="slider-row">
-                <div class="slider-label">Communication style & personality</div>
-                <div class="slider-input">
-                  <input type="range" min="0" max="100" value="65" data-slider />
-                </div>
-                <div class="slider-value">65</div>
-              </div>
-            </div>
-
-            <div class="hint">
-              These values don’t have to equal 100. LeadScout normalizes the vector behind the scenes.
             </div>
           </div>
         </div>
 
-        <!-- Search Settings -->
         <div class="tab-panel" id="panel-search-settings">
           <div class="panel-header-row">
             <div>
               <div class="panel-title">Search Settings</div>
-              <div class="panel-subtitle">
-                Control how often LeadScout runs and where it’s allowed to search.
-              </div>
-            </div>
-            <div class="panel-tagline">
-              Powered by a Playwright-based retrieval agent with multi-query expansion.
+              <div class="panel-subtitle">Control agent behavior and scope.</div>
             </div>
           </div>
 
           <div class="grid grid-2">
             <div class="panel-card">
-              <div class="panel-card-title">Frequency & mode</div>
-              <div class="panel-card-sub">
-                How often scans run and how the agent behaves.
-              </div>
-
-              <div class="form-field">
-                <label class="field-label">Scan frequency</label>
+              <div class="panel-card-title">FREQUENCY & MODE</div>
+              <div class="panel-card-sub">Configuration for the headless browser.</div>
+              
+              <div class="form-field" style="margin-bottom:12px;">
+                <label class="field-label">Scan Frequency</label>
                 <select class="field-select">
                   <option>Daily (recommended)</option>
                   <option>Every 2 days</option>
@@ -1149,160 +626,111 @@
               </div>
 
               <div class="toggle-row">
-                <span>Headless browser sessions</span>
+                <span>Headless browser</span>
                 <label class="toggle-switch">
                   <input type="checkbox" checked />
                   <span class="toggle-slider"></span>
                 </label>
               </div>
               <div class="toggle-row">
-                <span>Stealth & polite throttling</span>
+                <span>Polite throttling</span>
                 <label class="toggle-switch">
                   <input type="checkbox" checked />
                   <span class="toggle-slider"></span>
                 </label>
               </div>
-
-              <div class="form-field" style="margin-top:6px;">
-                <label class="field-label">Crawl depth per domain</label>
-                <select class="field-select">
-                  <option>Shallow (1–2 hops)</option>
-                  <option>Standard (3–4 hops)</option>
-                  <option>Deep (5+ hops)</option>
-                </select>
-              </div>
             </div>
 
             <div class="panel-card">
-              <div class="panel-card-title">Domains & query preview</div>
-              <div class="panel-card-sub">
-                Where the agent is allowed to look for leads.
-              </div>
-
+              <div class="panel-card-title">ALLOWED DOMAINS</div>
+              <div class="panel-card-sub">Where the agent looks for leads.</div>
+              
               <ul class="domain-list">
                 <li>
-                  <span>Startup blogs & founder essays</span>
-                  <span class="domain-pill">Allowed</span>
+                  <span>Startup blogs</span>
+                  <span class="tag allowed">Allowed</span>
                 </li>
                 <li>
-                  <span>Professional communities & forums</span>
-                  <span class="domain-pill">Allowed</span>
+                  <span>Professional communities</span>
+                  <span class="tag allowed">Allowed</span>
                 </li>
                 <li>
                   <span>Low-quality directories</span>
-                  <span class="domain-pill" style="border-color: var(--danger); color: var(--danger);">
-                    Blocked
-                  </span>
+                  <span class="tag blocked">Blocked</span>
                 </li>
                 <li>
-                  <span>Job boards (generic)</span>
-                  <span class="domain-pill" style="border-color: var(--danger); color: var(--danger);">
-                    Blocked
-                  </span>
+                  <span>Generic Job Boards</span>
+                  <span class="tag blocked">Blocked</span>
                 </li>
               </ul>
-
-              <div class="form-field" style="margin-top:8px;">
-                <label class="field-label">Example expanded query</label>
-                <textarea
-                  class="field-textarea"
-                  readonly
-                >"B2B SaaS founder" AND ("pipeline" OR "client acquisition") AND (newsletter OR "personal site" OR "founder blog")</textarea>
-              </div>
-
-              <div class="hint">
-                Actual search queries are generated dynamically from Your Goals + Lead Criteria.
-              </div>
             </div>
           </div>
         </div>
 
-        <!-- Daily Output -->
         <div class="tab-panel" id="panel-daily-output">
           <div class="panel-header-row">
             <div>
               <div class="panel-title">Daily Output</div>
-              <div class="panel-subtitle">
-                Preview how a promoted lead is presented to you each cycle.
-              </div>
-            </div>
-            <div class="panel-tagline">
-              One highly aligned lead per run, with explanation and suggested outreach.
+              <div class="panel-subtitle">One highly aligned lead per run.</div>
             </div>
           </div>
 
           <div class="panel-card">
-            <div class="panel-card-title">Lead of the day</div>
-            <div class="panel-card-sub">
-              A single, high-signal recommendation based on your current settings.
-            </div>
+            <div class="panel-card-title">LEAD OF THE DAY</div>
+            <div class="panel-card-sub">Recommendation based on current settings.</div>
 
-            <div class="lead-card">
-              <div class="lead-avatar">AK</div>
-              <div class="lead-main">
+            <div class="lead-big-card">
+              <div class="avatar">AK</div>
+              <div class="lead-info">
                 <div class="lead-name">Amina Khan</div>
-                <div class="lead-role">
-                  Founder @ SignalNorth — B2B SaaS GTM Studio
-                </div>
+                <div class="lead-role">Founder @ SignalNorth — B2B SaaS GTM</div>
                 <div class="lead-tags">
-                  <span class="lead-tag-pill">SaaS GTM</span>
-                  <span class="lead-tag-pill">Pipeline design</span>
-                  <span class="lead-tag-pill">Fractional CMO</span>
-                  <span class="lead-tag-pill">NYC / Remote</span>
+                  <span class="lead-pill">SaaS GTM</span>
+                  <span class="lead-pill">Pipeline</span>
+                  <span class="lead-pill">NYC / Remote</span>
                 </div>
               </div>
-              <div>
-                <div class="score-ring">93</div>
-                <div class="score-caption">Overall fit</div>
+              <div class="score-ring">
+                <span class="score-num">93</span>
+                <span class="score-lbl">FIT</span>
               </div>
             </div>
 
-            <div class="lead-subgrid">
+            <div class="lead-details-grid">
               <div>
-                <strong>Why this lead?</strong><br />
-                Strong overlap with your ideal buyers (post-PMF SaaS), and
-                consistent focus on structured client acquisition systems.
+                <strong>WHY THIS LEAD?</strong>
+                Strong overlap with your ideal buyers (post-PMF SaaS), and consistent focus on structured client acquisition systems.
               </div>
               <div>
-                <strong>Key alignment signals</strong><br />
-                • Writes weekly on GTM playbooks<br />
-                • Case studies on multi-channel funnels<br />
-                • Open to co-created offers & partnerships
-              </div>
-            </div>
-
-            <div class="lead-subgrid" style="margin-top:4px;">
-              <div>
-                <strong>Risk / caveats</strong><br />
-                Busy schedule; prioritizes collaborations with clear outcomes
-                and shared IP.
+                <strong>ALIGNMENT SIGNALS</strong>
+                • Writes weekly on GTM playbooks<br/>
+                • Case studies on multi-channel funnels<br/>
+                • Open to co-created offers
               </div>
               <div>
-                <strong>Suggested outreach angle</strong><br />
-                Offer a joint “signature audit → GTM redesign” experiment with
-                limited slots, framed as a co-built case study.
+                <strong>CAVEATS</strong>
+                Busy schedule; prioritizes collaborations with clear outcomes.
+              </div>
+              <div>
+                <strong>SUGGESTED ANGLE</strong>
+                Offer a joint “signature audit → GTM redesign” experiment framed as a co-built case study.
               </div>
             </div>
 
-            <div class="btn-row">
-              <button class="btn btn-primary">
-                Use suggested outreach
-              </button>
-              <button class="btn">
-                Edit message before sending
-              </button>
-              <button class="btn">
-                Not my type of lead
-              </button>
+            <div style="display:flex; gap:10px;">
+              <button class="btn btn-primary">Use suggested outreach</button>
+              <button class="btn">Edit message</button>
+              <button class="btn" style="color: var(--danger); border-color: rgba(239,68,68,0.3);">Dismiss</button>
             </div>
           </div>
         </div>
+
       </section>
     </div>
   </div>
 
   <script>
-    // Basic tab switching
+    // Tab Switching Logic
     const tabs = document.querySelectorAll(".tab");
     const panels = {
       "system-status": document.getElementById("panel-system-status"),
@@ -1316,17 +744,17 @@
     tabs.forEach(tab => {
       tab.addEventListener("click", () => {
         const target = tab.getAttribute("data-tab");
-
+        // Update Tabs
         tabs.forEach(t => t.classList.remove("tab-active"));
         tab.classList.add("tab-active");
-
+        // Update Panels
         Object.keys(panels).forEach(key => {
           panels[key].classList.toggle("active", key === target);
         });
       });
     });
 
-    // Slider values
+    // Slider Logic
     document.querySelectorAll("[data-slider]").forEach(slider => {
       const row = slider.closest(".slider-row");
       const valueEl = row.querySelector(".slider-value");
@@ -1337,11 +765,10 @@
       updateVal();
     });
 
-    // Simple fake countdown display (no real timing logic)
+    // Fake Timer
     (function initFakeCountdown() {
       const el = document.getElementById("next-run-timer");
       if (!el) return;
-      // Just keep a static string here; could be upgraded later.
       el.textContent = "≈ 23h 55m";
     })();
   </script>
