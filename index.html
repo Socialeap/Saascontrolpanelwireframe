@@ -12,9 +12,9 @@
   <style>
     /* --- LINKUP DESIGN SYSTEM --- */
     :root {
-      --ink: #F0F0F8; /* Slightly brighter for better contrast */
-      --muted: #BFC4E6; /* Lightened for better readability */
-      --panel: rgba(29,22,52,.92); /* Slightly more opaque */
+      --ink: #F0F0F8;
+      --muted: #BFC4E6;
+      --panel: rgba(29,22,52,.92);
       --panel-2: rgba(25,19,45,.7);
       --line: rgba(140,106,240,.4);
       --accent: #A78BFA;
@@ -33,7 +33,6 @@
     body {
       margin: 0;
       min-height: 100vh;
-      /* Increased base font size */
       font-size: 17px; 
       font-family: "Inter", system-ui, sans-serif;
       color: var(--ink);
@@ -45,7 +44,7 @@
       line-height: 1.5;
     }
 
-    /* Common Utility Classes from LinkUp */
+    /* Common Utility Classes */
     .glass {
       background: var(--panel);
       border: 1px solid var(--line);
@@ -77,7 +76,7 @@
       border: 1px solid rgba(255,255,255,.2);
       background: rgba(255,255,255,.08);
       color: var(--ink);
-      padding: 10px 18px; /* Larger hit area */
+      padding: 10px 18px;
       border-radius: var(--radius-pill);
       cursor: pointer;
       font-family: inherit;
@@ -114,7 +113,6 @@
       position: relative;
       cursor: help;
     }
-    /* Tooltip appearance */
     [data-tooltip]:hover::after {
       content: attr(data-tooltip);
       position: absolute;
@@ -137,7 +135,6 @@
       text-align: center;
       white-space: normal;
     }
-    /* Small arrow for tooltip */
     [data-tooltip]:hover::before {
       content: "";
       position: absolute;
@@ -273,7 +270,7 @@
     .grid-3 { grid-template-columns: repeat(3, 1fr); }
     @media (max-width: 850px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
 
-    /* Panel Cards (Inner) */
+    /* Panel Cards */
     .panel-card {
       background: var(--panel-2);
       border: 1px solid rgba(255,255,255,0.1);
@@ -393,7 +390,7 @@
     .tag.allowed { border-color: var(--success); color: var(--success); background: rgba(74, 222, 128, 0.1); }
     .tag.blocked { border-color: var(--danger); color: var(--danger); background: rgba(248, 113, 113, 0.1); }
 
-    /* Lead Card (Big) */
+    /* Lead Card */
     .lead-big-card { display: flex; gap: 20px; align-items: center; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; }
     .lead-info { flex: 1; }
     .lead-name { font-size: 1.3rem; font-weight: 700; color: var(--ink); }
@@ -413,6 +410,16 @@
     .lead-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
     .lead-details-grid strong { color: #C7B7FF; display: block; margin-bottom: 6px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
+    /* Outreach Generator Styles */
+    .outreach-container {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .outreach-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .outreach-title { font-weight: 700; color: #C7B7FF; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .outreach-anim { animation: fadeIn 0.3s ease; }
+
   </style>
 </head>
 <body>
@@ -422,9 +429,9 @@
       
       <header class="app-header">
         <div class="app-title-group">
-          <div class="app-title">HELLO! LeadScout™</div>
+          <div class="app-title">HELLO! LeadScout™ Control Panel</div>
           <div class="app-subtitle">
-            Your personal AI scout. finding the best opportunities for you.
+            Your personal AI scout, finding the best opportunities for you.
           </div>
         </div>
         <div class="header-meta">
@@ -439,11 +446,11 @@
       </header>
 
       <nav class="tab-bar" id="tab-bar">
-        <div class="tab tab-active" data-tab="system-status" data-tooltip="See how the system is working right now.">Activity</div>
+        <div class="tab tab-active" data-tab="system-status" data-tooltip="See how the system is working right now.">Overview</div>
         <div class="tab" data-tab="your-goals" data-tooltip="Define what you want to achieve.">My Goals</div>
-        <div class="tab" data-tab="lead-criteria" data-tooltip="Describe the people you want to meet.">Ideal Person</div>
-        <div class="tab" data-tab="matching-priorities" data-tooltip="Adjust how we score the matches.">Priorities</div>
-        <div class="tab" data-tab="search-settings" data-tooltip="Configure how and where we search.">Settings</div>
+        <div class="tab" data-tab="lead-criteria" data-tooltip="Describe the people you want to meet.">Ideal Lead</div>
+        <div class="tab" data-tab="matching-priorities" data-tooltip="Adjust how we score the matches.">Match Points</div>
+        <div class="tab" data-tab="search-settings" data-tooltip="Configure how and where we search.">Search Settings</div>
         <div class="tab" data-tab="daily-output" data-tooltip="View your best matches for today.">Results</div>
       </nav>
 
@@ -452,7 +459,7 @@
         <div class="tab-panel active" id="panel-system-status">
           <div class="panel-header-row">
             <div>
-              <div class="panel-title">Activity Dashboard</div>
+              <div class="panel-title">Overview Dashboard</div>
               <div class="panel-subtitle">A quick look at what LeadScout is doing for you today.</div>
             </div>
             <div class="panel-tagline">Searching in the background...</div>
@@ -554,7 +561,7 @@
         <div class="tab-panel" id="panel-lead-criteria">
           <div class="panel-header-row">
             <div>
-              <div class="panel-title">Ideal Person</div>
+              <div class="panel-title">Ideal Lead</div>
               <div class="panel-subtitle">Describe the actual humans we should be looking for.</div>
             </div>
           </div>
@@ -590,7 +597,7 @@
         <div class="tab-panel" id="panel-matching-priorities">
           <div class="panel-header-row">
             <div>
-              <div class="panel-title">Priorities</div>
+              <div class="panel-title">Match Points</div>
               <div class="panel-subtitle">Drag the sliders to tell us what is most important to you.</div>
             </div>
           </div>
@@ -642,7 +649,7 @@
         <div class="tab-panel" id="panel-search-settings">
           <div class="panel-header-row">
             <div>
-              <div class="panel-title">Settings</div>
+              <div class="panel-title">Search Settings</div>
               <div class="panel-subtitle">Control how the AI behaves.</div>
             </div>
           </div>
@@ -753,11 +760,33 @@
               </div>
             </div>
 
-            <div style="display:flex; gap:12px;">
-              <button class="btn btn-primary" data-tooltip="Copy the suggested message to your clipboard.">Use Suggested Message</button>
-              <button class="btn" data-tooltip="Open the editor to write your own message.">Write My Own</button>
-              <button class="btn" style="color: var(--danger); border-color: rgba(239,68,68,0.3);" data-tooltip="Hide this person and show me someone else.">Not a Fit</button>
+            <div class="outreach-container">
+                <div class="outreach-header">
+                    <span class="outreach-title">AI Outreach Writer</span>
+                </div>
+                
+                <div id="outreach-controls-initial" style="display:flex; gap:12px;">
+                    <button class="btn btn-primary" onclick="generateMessage('dm')" data-tooltip="Create a short, punchy message for LinkedIn or Twitter.">
+                       Generate DM
+                    </button>
+                    <button class="btn btn-primary" onclick="generateMessage('email')" data-tooltip="Create a formal email draft with subject line.">
+                       Generate Email
+                    </button>
+                </div>
+
+                <div id="outreach-result" style="display:none;" class="outreach-anim">
+                    <div class="form-field" style="margin-bottom:12px;">
+                        <label class="field-label" id="outreach-label">Draft Message</label>
+                        <textarea id="outreach-text" class="field-textarea" style="height:140px; font-family:monospace; line-height:1.5; font-size:0.9rem; color:#EAEAF6;"></textarea>
+                    </div>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <button class="btn btn-primary" onclick="copyToClipboard()" data-tooltip="Copy text to clipboard.">Copy Text</button>
+                        <button class="btn" onclick="document.getElementById('outreach-text').focus()" data-tooltip="Edit the text manually.">Tweak Message</button>
+                        <button class="btn" style="margin-left:auto; opacity:0.8;" onclick="resetOutreach()" data-tooltip="Start over.">Cancel</button>
+                    </div>
+                </div>
             </div>
+
           </div>
         </div>
 
@@ -807,6 +836,46 @@
       if (!el) return;
       el.textContent = "≈ 14h 22m";
     })();
+
+    // Outreach Generator Logic
+    function generateMessage(type) {
+        const textArea = document.getElementById('outreach-text');
+        const initialControls = document.getElementById('outreach-controls-initial');
+        const resultArea = document.getElementById('outreach-result');
+
+        let text = "";
+        
+        if(type === 'dm') {
+            text = "Hi Amina,\n\nBeen following SignalNorth's work on SaaS GTM frameworks—really love the structured approach you take.\n\nI'm looking to partner with a few post-PMF founders on a joint 'audit' experiment. Given your focus on pipeline clarity, I thought this might align perfectly.\n\nOpen to a quick chat?\n\nBest,\n[Your Name]";
+        } else {
+            text = "Subject: Collaboration idea: SignalNorth + [Your Brand]\n\nHi Amina,\n\nI've been reading your weekly essays on GTM playbooks and have been impressed by your clarity on pipeline design.\n\nI work with B2B founders to solve [Your Skillset], and I noticed we share a very similar audience. I have an idea for a joint case study/audit that could drive value for both our networks.\n\nWould you be open to a brief 15-min intro call next Tuesday or Wednesday?\n\nCheers,\n[Your Name]";
+        }
+
+        textArea.value = text;
+        
+        // UI toggle
+        initialControls.style.display = 'none';
+        resultArea.style.display = 'block';
+    }
+
+    function resetOutreach() {
+        document.getElementById('outreach-controls-initial').style.display = 'flex';
+        document.getElementById('outreach-result').style.display = 'none';
+    }
+
+    function copyToClipboard() {
+        const copyText = document.getElementById("outreach-text");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); 
+        navigator.clipboard.writeText(copyText.value);
+        
+        // Simple feedback
+        const originalText = document.querySelector("button[onclick='copyToClipboard()']").textContent;
+        document.querySelector("button[onclick='copyToClipboard()']").textContent = "Copied!";
+        setTimeout(() => {
+            document.querySelector("button[onclick='copyToClipboard()']").textContent = originalText;
+        }, 2000);
+    }
   </script>
 </body>
 </html>
