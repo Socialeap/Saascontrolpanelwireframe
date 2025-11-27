@@ -10,16 +10,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* --- LINKUP DESIGN SYSTEM --- */
+    /* --- LINKUP DESIGN SYSTEM (UPDATED GREEN THEME) --- */
     :root {
-      --ink: #F0F0F8;
-      --muted: #BFC4E6;
-      --panel: rgba(29,22,52,.92);
-      --panel-2: rgba(25,19,45,.7);
-      --line: rgba(140,106,240,.4);
-      --accent: #A78BFA;
-      --accent-2: #8B5CF6;
-      --teal: #22D3EE;
+      --ink: #F0Fdf4; /* Very light green tint for text */
+      --muted: #bbf7d0; /* Muted green-white */
+      --panel: rgba(20, 40, 30, 0.92); /* Dark green-black tint */
+      --panel-2: rgba(10, 30, 20, 0.7);
+      --line: rgba(74, 222, 128, 0.25);
+      
+      /* New Green Accents */
+      --accent: #4ade80; /* Green 400 - Bright */
+      --accent-2: #16a34a; /* Green 600 - Deep */
+      
+      --teal: #2DD4BF; /* Keep teal for metrics contrast */
       --success: #4ade80;
       --warning: #facc15;
       --danger: #f87171;
@@ -37,9 +40,9 @@
       font-family: "Inter", system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(124,58,237,.25), transparent 60%),
-        radial-gradient(1200px 600px at 120% 0%, rgba(34,211,238,.16), transparent 55%),
-        linear-gradient(180deg, #0D0B17, #0E0B1A 40%, #0C0A16 100%);
+        radial-gradient(1200px 600px at 20% -10%, rgba(74, 222, 128, 0.15), transparent 60%),
+        radial-gradient(1200px 600px at 120% 0%, rgba(34, 211, 238, 0.12), transparent 55%),
+        linear-gradient(180deg, #020617, #052e16 40%, #020617 100%);
       -webkit-font-smoothing: antialiased;
       line-height: 1.5;
     }
@@ -53,8 +56,8 @@
     }
 
     .chip {
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.03);
       padding: 0.4rem 0.8rem;
       border-radius: var(--radius-pill);
       font-size: 0.8rem;
@@ -67,14 +70,14 @@
 
     .chip.sel {
       background: linear-gradient(180deg, var(--accent), var(--accent-2));
-      color: #170E2F;
+      color: #022c22;
       border-color: transparent;
       font-weight: 800;
     }
 
     .btn {
-      border: 1px solid rgba(255,255,255,.2);
-      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(74, 222, 128, 0.2);
+      background: rgba(74, 222, 128, 0.05);
       color: var(--ink);
       padding: 10px 18px;
       border-radius: var(--radius-pill);
@@ -88,15 +91,15 @@
       transition: all 0.2s ease;
       position: relative;
     }
-    .btn:hover { background: rgba(255,255,255,.15); transform: translateY(-1px); }
+    .btn:hover { background: rgba(74, 222, 128, 0.15); transform: translateY(-1px); }
 
     .btn-primary {
       background: linear-gradient(180deg, var(--accent), var(--accent-2));
-      color: #170E2F;
+      color: #022c22;
       border: none;
       font-weight: 800;
     }
-    .btn-primary:hover { opacity: 0.95; box-shadow: 0 0 15px rgba(139, 92, 246, 0.4); }
+    .btn-primary:hover { opacity: 0.95; box-shadow: 0 0 15px rgba(74, 222, 128, 0.4); }
 
     .avatar {
       width: 54px; height: 54px;
@@ -121,9 +124,9 @@
       transform: translateX(-50%) translateY(-8px);
       width: max-content;
       max-width: 250px;
-      background: #1e1b2e;
+      background: #064e3b;
       border: 1px solid var(--accent);
-      color: #EAEAF6;
+      color: #f0fdf4;
       padding: 8px 12px;
       border-radius: 8px;
       font-size: 0.8rem;
@@ -176,7 +179,7 @@
     .app-title {
       font-size: 1.5rem;
       font-weight: 800;
-      color: #C7B7FF;
+      color: #86efac; /* Light Green */
       letter-spacing: -0.02em;
     }
 
@@ -213,7 +216,10 @@
 
     .tab {
       flex: 1;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       padding: 10px 16px;
       border-radius: var(--radius-pill);
       font-size: 0.9rem;
@@ -231,9 +237,29 @@
 
     .tab-active {
       background: linear-gradient(180deg, var(--accent), var(--accent-2));
-      color: #170E2F;
+      color: #022c22;
       font-weight: 800;
-      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+      box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
+    }
+
+    /* Audio Icon in Tabs */
+    .audio-icon-btn {
+        display: none; /* Hidden by default */
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(0,0,0,0.2);
+        align-items: center;
+        justify-content: center;
+        margin-left: 4px;
+        transition: transform 0.2s;
+    }
+    .tab-active .audio-icon-btn {
+        display: inline-flex; /* Show only when active */
+    }
+    .audio-icon-btn:hover {
+        transform: scale(1.1);
+        background: rgba(0,0,0,0.4);
     }
 
     /* Content Area */
@@ -251,7 +277,7 @@
       align-items: flex-end;
       gap: 12px;
       margin-bottom: 22px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(74, 222, 128, 0.15);
       padding-bottom: 16px;
     }
 
@@ -273,14 +299,14 @@
     /* Panel Cards */
     .panel-card {
       background: var(--panel-2);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(74, 222, 128, 0.15);
       border-radius: var(--radius-md);
       padding: 20px;
       position: relative;
     }
 
     .panel-card-title {
-      color: #C7B7FF;
+      color: #86efac; /* Light Green */
       font-weight: 800;
       font-size: 0.9rem;
       text-transform: uppercase;
@@ -317,7 +343,7 @@
     .activity-log { list-style: none; padding: 0; margin: 0; font-size: 0.85rem; }
     .activity-log li {
       display: flex; justify-content: space-between; padding: 8px 0;
-      border-bottom: 1px dashed rgba(255,255,255,0.15);
+      border-bottom: 1px dashed rgba(74, 222, 128, 0.2);
       color: var(--muted);
     }
     .activity-log li:last-child { border-bottom: none; }
@@ -334,7 +360,7 @@
     
     .field-input, .field-select, .field-textarea {
       background: rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(74, 222, 128, 0.25);
       border-radius: 12px;
       padding: 12px 14px;
       color: var(--ink);
@@ -346,7 +372,7 @@
     .field-input:focus, .field-select:focus, .field-textarea:focus {
       border-color: var(--accent);
       background: rgba(0,0,0,0.5);
-      box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.25);
+      box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.25);
     }
     .field-textarea { min-height: 90px; resize: vertical; }
 
@@ -377,8 +403,8 @@
       position: absolute; content: ""; height: 18px; width: 18px; left: 4px; top: 3px;
       background-color: var(--muted); border-radius: 50%; transition: .3s;
     }
-    input:checked + .toggle-slider { background-color: rgba(34, 211, 238, 0.2); border-color: var(--teal); }
-    input:checked + .toggle-slider:before { transform: translateX(20px); background-color: var(--teal); box-shadow: 0 0 8px var(--teal); }
+    input:checked + .toggle-slider { background-color: rgba(74, 222, 128, 0.2); border-color: var(--accent); }
+    input:checked + .toggle-slider:before { transform: translateX(20px); background-color: var(--accent); box-shadow: 0 0 8px var(--accent); }
 
     /* Domain List */
     .domain-list { list-style: none; padding: 0; margin: 0; }
@@ -401,14 +427,14 @@
     .score-ring {
       width: 72px; height: 72px; border-radius: 50%; border: 4px solid var(--accent);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      box-shadow: 0 0 25px rgba(167, 139, 250, 0.35);
-      background: rgba(167, 139, 250, 0.05);
+      box-shadow: 0 0 25px rgba(74, 222, 128, 0.35);
+      background: rgba(74, 222, 128, 0.05);
     }
     .score-num { font-size: 1.5rem; font-weight: 800; color: var(--ink); line-height: 1; }
     .score-lbl { font-size: 0.65rem; text-transform: uppercase; color: var(--muted); margin-top: 2px; font-weight: 600; }
 
     .lead-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
-    .lead-details-grid strong { color: #C7B7FF; display: block; margin-bottom: 6px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .lead-details-grid strong { color: #86efac; display: block; margin-bottom: 6px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
     /* Outreach Generator Styles */
     .outreach-container {
@@ -417,7 +443,7 @@
       border-top: 1px solid rgba(255,255,255,0.1);
     }
     .outreach-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-    .outreach-title { font-weight: 700; color: #C7B7FF; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .outreach-title { font-weight: 700; color: #86efac; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; }
     .outreach-anim { animation: fadeIn 0.3s ease; }
 
   </style>
@@ -446,12 +472,47 @@
       </header>
 
       <nav class="tab-bar" id="tab-bar">
-        <div class="tab tab-active" data-tab="system-status" data-tooltip="See how the system is working right now.">Overview</div>
-        <div class="tab" data-tab="your-goals" data-tooltip="Define what you want to achieve.">My Goals</div>
-        <div class="tab" data-tab="lead-criteria" data-tooltip="Describe the people you want to meet.">Ideal Lead</div>
-        <div class="tab" data-tab="matching-priorities" data-tooltip="Adjust how we score the matches.">Match Points</div>
-        <div class="tab" data-tab="search-settings" data-tooltip="Configure how and where we search.">Search Settings</div>
-        <div class="tab" data-tab="daily-output" data-tooltip="View your best matches for today.">Results</div>
+        <div class="tab tab-active" data-tab="system-status" data-tooltip="See how the system is working right now.">
+          <span>Overview</span>
+          <span class="audio-icon-btn" onclick="playTabAudio('https://static.wixstatic.com/mp3/c3283f_2f052d1ae2a24adeab408173ba60ab78.mp3', event)" title="Play Description">
+             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#fff;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          </span>
+        </div>
+        
+        <div class="tab" data-tab="your-goals" data-tooltip="Define what you want to achieve.">
+          <span>My Goals</span>
+          <span class="audio-icon-btn" onclick="playTabAudio('https://static.wixstatic.com/mp3/c3283f_211c5d4a1225477d96be022af4ee2c1b.mp3', event)" title="Play Description">
+             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#fff;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          </span>
+        </div>
+        
+        <div class="tab" data-tab="lead-criteria" data-tooltip="Describe the people you want to meet.">
+          <span>Ideal Lead</span>
+          <span class="audio-icon-btn" onclick="playTabAudio('https://static.wixstatic.com/mp3/c3283f_690cd57fac81428b94705e62c3f5699b.mp3', event)" title="Play Description">
+             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#fff;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          </span>
+        </div>
+        
+        <div class="tab" data-tab="matching-priorities" data-tooltip="Adjust how we score the matches.">
+          <span>Match Points</span>
+          <span class="audio-icon-btn" onclick="playTabAudio('https://static.wixstatic.com/mp3/c3283f_21fdd87da4114d1eaaee0b5b3cdf76c7.mp3', event)" title="Play Description">
+             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#fff;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          </span>
+        </div>
+        
+        <div class="tab" data-tab="search-settings" data-tooltip="Configure how and where we search.">
+          <span>Search Settings</span>
+          <span class="audio-icon-btn" onclick="playTabAudio('https://static.wixstatic.com/mp3/c3283f_e291a64113554dd8b4092a33f2c634a5.mp3', event)" title="Play Description">
+             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#fff;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          </span>
+        </div>
+        
+        <div class="tab" data-tab="daily-output" data-tooltip="View your best matches for today.">
+          <span>Results</span>
+          <span class="audio-icon-btn" onclick="playTabAudio('https://static.wixstatic.com/mp3/c3283f_c0bdfbf8a9e64ee7bb0b408e7b111dfe.mp3', event)" title="Play Description">
+             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#fff;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          </span>
+        </div>
       </nav>
 
       <section class="tab-content">
@@ -777,7 +838,7 @@
                 <div id="outreach-result" style="display:none;" class="outreach-anim">
                     <div class="form-field" style="margin-bottom:12px;">
                         <label class="field-label" id="outreach-label">Draft Message</label>
-                        <textarea id="outreach-text" class="field-textarea" style="height:140px; font-family:monospace; line-height:1.5; font-size:0.9rem; color:#EAEAF6;"></textarea>
+                        <textarea id="outreach-text" class="field-textarea" style="height:140px; font-family:monospace; line-height:1.5; font-size:0.9rem; color:#F0Fdf4;"></textarea>
                     </div>
                     <div style="display:flex; gap:10px; flex-wrap:wrap;">
                         <button class="btn btn-primary" onclick="copyToClipboard()" data-tooltip="Copy text to clipboard.">Copy Text</button>
@@ -807,7 +868,10 @@
     };
 
     tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
+      tab.addEventListener("click", (e) => {
+        // Prevent triggering tab switch if we clicked the audio icon (optional, handled via stopPropagation too)
+        if(e.target.closest('.audio-icon-btn')) return;
+
         const target = tab.getAttribute("data-tab");
         // Update Tabs
         tabs.forEach(t => t.classList.remove("tab-active"));
@@ -818,6 +882,23 @@
         });
       });
     });
+
+    // Audio Playback Logic
+    let currentAudio = null;
+    function playTabAudio(url, e) {
+       // Stop the click from bubbling up to the tab and switching context unnecessarily
+       e.stopPropagation(); 
+       
+       if(currentAudio) {
+           currentAudio.pause();
+           currentAudio.currentTime = 0;
+       }
+       
+       currentAudio = new Audio(url);
+       currentAudio.play().catch(err => {
+           console.log("Audio play blocked or failed:", err);
+       });
+    }
 
     // Slider Logic
     document.querySelectorAll("[data-slider]").forEach(slider => {
