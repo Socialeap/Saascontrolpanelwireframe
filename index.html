@@ -21,10 +21,10 @@
       /* Original Purple Accents (for general UI elements) */
       --accent-purple: #A78BFA;
       
-      /* NEW: Green Accents for specific requests */
-      --green-light: #86efac;  /* For Text Headers */
-      --green-btn-1: #4ade80;  /* For Active Buttons Gradient Start */
-      --green-btn-2: #16a34a;  /* For Active Buttons Gradient End */
+      /* NEW: Green Accents for headers/buttons */
+      --green-light: #86efac;  
+      --green-btn-1: #4ade80;  
+      --green-btn-2: #16a34a;  
       
       --teal: #22D3EE;
       --success: #4ade80;
@@ -74,8 +74,6 @@
     }
 
     .chip.sel {
-      /* Keep the original purple/blue for 'Online' status or change to green? 
-         Keeping consistent with "Green Buttons" request, let's make it green */
       background: linear-gradient(180deg, var(--green-btn-1), var(--green-btn-2));
       color: #022c22;
       border-color: transparent;
@@ -101,7 +99,6 @@
     .btn:hover { background: rgba(255,255,255,.15); transform: translateY(-1px); }
 
     .btn-primary {
-      /* Primary buttons now Green */
       background: linear-gradient(180deg, var(--green-btn-1), var(--green-btn-2));
       color: #022c22;
       border: none;
@@ -175,7 +172,6 @@
     .app-title {
       font-size: 1.5rem;
       font-weight: 800;
-      /* GREEN HEADER TEXT */
       color: var(--green-light);
       letter-spacing: -0.02em;
     }
@@ -226,7 +222,6 @@
     }
 
     .tab-active {
-      /* GREEN ACTIVE TAB BUTTON */
       background: linear-gradient(180deg, var(--green-btn-1), var(--green-btn-2));
       color: #022c22;
       font-weight: 800;
@@ -235,7 +230,7 @@
 
     /* Audio Icon in Tabs */
     .audio-icon-btn {
-        display: none; /* Hidden by default */
+        display: none; 
         width: 24px; height: 24px;
         border-radius: 50%;
         background: rgba(0,0,0,0.2);
@@ -261,7 +256,6 @@
 
     .panel-title { 
       font-size: 1.25rem; font-weight: 700; 
-      /* GREEN HEADER TEXT */
       color: var(--green-light); 
     }
     .panel-subtitle { font-size: 0.95rem; color: var(--muted); margin-top: 4px;}
@@ -288,7 +282,6 @@
     }
 
     .panel-card-title {
-      /* GREEN HEADER TEXT */
       color: var(--green-light);
       font-weight: 800;
       font-size: 0.9rem;
@@ -304,21 +297,23 @@
     .metric-value { font-weight: 700; color: var(--teal); }
     .metric-value-soft { color: var(--ink); }
 
-    /* Radar / Alignment */
-    .radar-wrapper { display: flex; align-items: center; gap: 20px; margin-top: 12px; }
-    .radar-circle {
-      width: 70px; height: 70px;
-      border-radius: 50%;
-      border: 3px solid var(--teal);
-      display: flex; align-items: center; justify-content: center;
-      position: relative;
-      background: rgba(34, 211, 238, 0.05);
-      box-shadow: 0 0 25px rgba(34,211,238,0.2);
+    /* SHORTLIST LIST STYLES (New for Overview Tab) */
+    .shortlist-list {
+      list-style: none; padding: 0; margin: 0;
     }
-    .radar-score { font-size: 1.4rem; font-weight: 800; color: var(--teal); }
-    .radar-list { flex: 1; list-style: none; padding: 0; margin: 0; font-size: 0.85rem; }
-    .radar-list li { display: flex; justify-content: space-between; margin-bottom: 6px; color: var(--muted); }
-    .radar-chip { font-weight: 600; color: var(--accent-purple); }
+    .shortlist-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .shortlist-item:last-child { border-bottom: none; }
+    .sl-avatar {
+      width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: var(--green-light);
+    }
+    .sl-info { flex: 1; }
+    .sl-name { font-size: 0.9rem; font-weight: 600; color: #fff; }
+    .sl-role { font-size: 0.75rem; color: var(--muted); }
+    .sl-score { font-weight: 700; color: var(--teal); font-size: 0.9rem; }
 
     /* Logs */
     .activity-log { list-style: none; padding: 0; margin: 0; font-size: 0.85rem; }
@@ -413,7 +408,6 @@
 
     .lead-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
     .lead-details-grid strong { 
-      /* GREEN HEADER TEXT */
       color: var(--green-light); 
       display: block; margin-bottom: 6px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; 
     }
@@ -425,7 +419,6 @@
     .outreach-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
     .outreach-title { 
       font-weight: 700; 
-      /* GREEN HEADER TEXT */
       color: var(--green-light); 
       font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; 
     }
@@ -458,7 +451,7 @@
 
       <nav class="tab-bar" id="tab-bar">
         <div class="tab tab-active" data-tab="system-status" data-tooltip="See how the system is working right now.">
-          <span>Today's Overview</span>
+          <span>Overview</span>
           <span class="audio-icon-btn" onclick="playTabAudio('https://static.wixstatic.com/mp3/c3283f_2f052d1ae2a24adeab408173ba60ab78.mp3', event)" title="Play Description">
              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#022c22;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
           </span>
@@ -506,54 +499,75 @@
           <div class="panel-header-row">
             <div>
               <div class="panel-title">Overview Dashboard</div>
-              <div class="panel-subtitle">A quick look at what LeadScout is doing for you today.</div>
+              <div class="panel-subtitle">Daily scouting performance & lead funnel.</div>
             </div>
-            <div class="panel-tagline">Searching in the background...</div>
+            <div class="panel-tagline">Batch complete: 4 Qualified Leads</div>
           </div>
 
           <div class="grid grid-3">
-            <div class="panel-card" data-tooltip="Summary of the last completed search.">
-              <div class="panel-card-title">Latest Search Run</div>
-              <div class="panel-card-sub">What we found in the last batch.</div>
+            <div class="panel-card" data-tooltip="The volume of data processed today.">
+              <div class="panel-card-title">Daily Funnel</div>
+              <div class="panel-card-sub">From raw crawl to qualified matches.</div>
               <div class="metric-row">
-                <span class="metric-label">Finished</span>
-                <span class="metric-value-soft">Today, 10:14 AM</span>
+                <span class="metric-label">Sites Scanned</span>
+                <span class="metric-value-soft">142</span>
               </div>
               <div class="metric-row">
-                <span class="metric-label">Pages Visited</span>
-                <span class="metric-value">64</span>
-              </div>
-              <div class="metric-row">
-                <span class="metric-label">People Checked</span>
+                <span class="metric-label">Profiles Analyzed</span>
                 <span class="metric-value">31</span>
               </div>
               <div class="metric-row">
-                <span class="metric-label">Top Pick</span>
-                <span class="metric-value-soft">1 Match Found</span>
+                <span class="metric-label" style="color:#fff">Qualified Leads</span>
+                <span class="metric-value">4</span>
               </div>
             </div>
 
-            <div class="panel-card" data-tooltip="How well the top result matches your preferences.">
-              <div class="panel-card-title">Why they fit</div>
-              <div class="panel-card-sub">Breakdown of the match score.</div>
-              <div class="radar-wrapper">
-                <div class="radar-circle">
-                  <span class="radar-score">92</span>
-                </div>
-                <ul class="radar-list">
-                  <li><span>Matches Goals</span> <span class="radar-chip">95</span></li>
-                  <li><span>Right Skills</span> <span class="radar-chip">89</span></li>
-                  <li><span>Industry Fit</span> <span class="radar-chip">91</span></li>
-                  <li><span>Mutual Benefit</span> <span class="radar-chip">93</span></li>
-                </ul>
-              </div>
+            <div class="panel-card" data-tooltip="The specific people found in this batch.">
+              <div class="panel-card-title">Today's Shortlist</div>
+              <div class="panel-card-sub">Top 4 candidates found today.</div>
+              
+              <ul class="shortlist-list">
+                <li class="shortlist-item">
+                  <div class="sl-avatar">AK</div>
+                  <div class="sl-info">
+                    <div class="sl-name">Amina Khan</div>
+                    <div class="sl-role">SaaS GTM Founder</div>
+                  </div>
+                  <div class="sl-score">93</div>
+                </li>
+                <li class="shortlist-item">
+                  <div class="sl-avatar">DC</div>
+                  <div class="sl-info">
+                    <div class="sl-name">David Chen</div>
+                    <div class="sl-role">VP Growth</div>
+                  </div>
+                  <div class="sl-score">89</div>
+                </li>
+                <li class="shortlist-item">
+                  <div class="sl-avatar">SM</div>
+                  <div class="sl-info">
+                    <div class="sl-name">Sarah Miller</div>
+                    <div class="sl-role">Marketing Lead</div>
+                  </div>
+                  <div class="sl-score">87</div>
+                </li>
+                <li class="shortlist-item">
+                  <div class="sl-avatar">JW</div>
+                  <div class="sl-info">
+                    <div class="sl-name">James Wilson</div>
+                    <div class="sl-role">Revenue Ops</div>
+                  </div>
+                  <div class="sl-score">85</div>
+                </li>
+              </ul>
             </div>
 
             <div class="panel-card" data-tooltip="Real-time log of the AI's actions.">
               <div class="panel-card-title">Recent Actions</div>
               <div class="panel-card-sub">What the AI has been doing.</div>
               <ul class="activity-log">
-                <li><span>Found Top Pick: SaaS Advisor</span> <span class="activity-time">10:14</span></li>
+                <li><span>Shortlisted 4 candidates</span> <span class="activity-time">10:15</span></li>
+                <li><span>Filtering: Fit Score > 85</span> <span class="activity-time">10:14</span></li>
                 <li><span>Reading: Startup Blogs</span> <span class="activity-time">10:10</span></li>
                 <li><span>Updating Search Terms</span> <span class="activity-time">10:07</span></li>
                 <li><span>Starting Browser Agent</span> <span class="activity-time">10:04</span></li>
