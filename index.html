@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>HELLO! LeadScout™ Control Panel</title>
+  <title>HELLO! LeadRadar™ Intelligence</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* --- LINKUP DESIGN SYSTEM (Restored Purple/Blue Base) --- */
+    /* --- LINKUP DESIGN SYSTEM (Preserved) --- */
     :root {
       --ink: #F0F0F8;
       --muted: #BFC4E6;
@@ -18,10 +18,9 @@
       --panel-2: rgba(25,19,45,.7);
       --line: rgba(140,106,240,.4);
       
-      /* Original Purple Accents (for general UI elements) */
       --accent-purple: #A78BFA;
       
-      /* NEW: Green Accents for headers/buttons */
+      /* Green Accents for Headers/Buttons */
       --green-light: #86efac;  
       --green-btn-1: #4ade80;  
       --green-btn-2: #16a34a;  
@@ -43,7 +42,6 @@
       font-size: 17px; 
       font-family: "Inter", system-ui, sans-serif;
       color: var(--ink);
-      /* Restored original background */
       background:
         radial-gradient(1200px 600px at 20% -10%, rgba(124,58,237,.25), transparent 60%),
         radial-gradient(1200px 600px at 120% 0%, rgba(34,211,238,.16), transparent 55%),
@@ -52,7 +50,7 @@
       line-height: 1.5;
     }
 
-    /* Common Utility Classes */
+    /* --- UTILITIES --- */
     .glass {
       background: var(--panel);
       border: 1px solid var(--line);
@@ -63,15 +61,21 @@
     .chip {
       border: 1px solid rgba(255,255,255,.16);
       background: rgba(255,255,255,.06);
-      padding: 0.4rem 0.8rem;
+      padding: 0.3rem 0.7rem;
       border-radius: var(--radius-pill);
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
+
+    .chip.status-high { border-color: var(--success); color: var(--success); background: rgba(74, 222, 128, 0.1); }
+    .chip.status-med { border-color: var(--warning); color: var(--warning); background: rgba(250, 204, 21, 0.1); }
+    .chip.status-low { border-color: var(--muted); color: var(--muted); opacity: 0.7; }
 
     .chip.sel {
       background: linear-gradient(180deg, var(--green-btn-1), var(--green-btn-2));
@@ -94,7 +98,6 @@
       align-items: center;
       gap: 8px;
       transition: all 0.2s ease;
-      position: relative;
     }
     .btn:hover { background: rgba(255,255,255,.15); transform: translateY(-1px); }
 
@@ -106,44 +109,9 @@
     }
     .btn-primary:hover { opacity: 0.95; box-shadow: 0 0 15px rgba(74, 222, 128, 0.4); }
 
-    .avatar {
-      width: 54px; height: 54px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,.14);
-      display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, var(--panel), #000);
-      font-weight: 700; color: var(--teal);
-      font-size: 1.1rem;
-    }
+    .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
 
-    /* --- TOOLTIPS --- */
-    [data-tooltip] { position: relative; cursor: help; }
-    [data-tooltip]:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: 100%; left: 50%;
-      transform: translateX(-50%) translateY(-8px);
-      width: max-content; max-width: 250px;
-      background: #1e1b2e;
-      border: 1px solid var(--accent-purple);
-      color: #EAEAF6;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.8rem; font-weight: 500; line-height: 1.3;
-      z-index: 100;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-      pointer-events: none; text-align: center; white-space: normal;
-    }
-    [data-tooltip]:hover::before {
-      content: "";
-      position: absolute; bottom: 100%; left: 50%;
-      transform: translateX(-50%) translateY(-2px);
-      border-width: 6px; border-style: solid;
-      border-color: var(--accent-purple) transparent transparent transparent;
-      z-index: 100;
-    }
-
-    /* --- LAYOUT SPECIFICS --- */
+    /* --- LAYOUT --- */
     .app-shell {
       max-width: 1100px;
       margin: 40px auto;
@@ -165,15 +133,12 @@
       margin-bottom: 30px;
     }
 
-    @media (max-width: 700px) {
-      .app-header { flex-direction: column; align-items: flex-start; }
-    }
-
     .app-title {
       font-size: 1.5rem;
       font-weight: 800;
       color: var(--green-light);
       letter-spacing: -0.02em;
+      display: flex; align-items: center; gap: 10px;
     }
 
     .app-subtitle {
@@ -184,10 +149,11 @@
 
     .header-meta { display: flex; align-items: center; gap: 12px; }
     .dot {
-      width: 10px; height: 10px;
+      width: 8px; height: 8px;
       border-radius: 50%;
       background: var(--success);
-      box-shadow: 0 0 10px rgba(74, 222, 128, 0.6);
+      box-shadow: 0 0 8px var(--success);
+      display: inline-block;
     }
 
     /* Tabs */
@@ -199,12 +165,10 @@
       border-radius: var(--radius-pill);
       background: rgba(0,0,0,0.2);
       border: 1px solid rgba(255,255,255,0.05);
-      flex-wrap: wrap;
     }
 
     .tab {
       flex: 1;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
       text-align: center;
       padding: 10px 16px;
       border-radius: var(--radius-pill);
@@ -213,13 +177,9 @@
       color: var(--muted);
       cursor: pointer;
       transition: all 0.2s;
-      white-space: nowrap;
     }
 
-    .tab:hover:not(.tab-active) {
-      color: var(--ink);
-      background: rgba(255,255,255,0.08);
-    }
+    .tab:hover:not(.tab-active) { color: var(--ink); background: rgba(255,255,255,0.08); }
 
     .tab-active {
       background: linear-gradient(180deg, var(--green-btn-1), var(--green-btn-2));
@@ -228,24 +188,11 @@
       box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
     }
 
-    /* Audio Icon in Tabs */
-    .audio-icon-btn {
-        display: none; 
-        width: 24px; height: 24px;
-        border-radius: 50%;
-        background: rgba(0,0,0,0.2);
-        align-items: center; justify-content: center;
-        margin-left: 4px;
-        transition: transform 0.2s;
-    }
-    .tab-active .audio-icon-btn { display: inline-flex; }
-    .audio-icon-btn:hover { transform: scale(1.1); background: rgba(0,0,0,0.4); }
-
     /* Content Area */
     .tab-content { min-height: 400px; }
-    .tab-panel { display: none; animation: fadeIn 0.4s ease; }
+    .tab-panel { display: none; animation: fadeIn 0.3s ease; }
     .tab-panel.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
     .panel-header-row {
       display: flex; justify-content: space-between; align-items: flex-end;
@@ -254,175 +201,100 @@
       padding-bottom: 16px;
     }
 
-    .panel-title { 
-      font-size: 1.25rem; font-weight: 700; 
-      color: var(--green-light); 
-    }
+    .panel-title { font-size: 1.25rem; font-weight: 700; color: var(--green-light); }
     .panel-subtitle { font-size: 0.95rem; color: var(--muted); margin-top: 4px;}
-    .panel-tagline { font-size: 0.85rem; color: var(--teal); font-weight: 500; text-align: right; }
 
-    @media (max-width: 700px) {
-      .panel-header-row { flex-direction: column; align-items: flex-start; }
-      .panel-tagline { text-align: left; }
-    }
-
-    /* Grids */
-    .grid { display: grid; gap: 20px; }
-    .grid-2 { grid-template-columns: repeat(2, 1fr); }
-    .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    @media (max-width: 850px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
-
-    /* Panel Cards */
-    .panel-card {
-      background: var(--panel-2);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius-md);
-      padding: 20px;
-      position: relative;
-    }
-
-    .panel-card-title {
-      color: var(--green-light);
-      font-weight: 800;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-      letter-spacing: 0.05em;
-    }
-    .panel-card-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 16px; line-height: 1.4; }
-
-    /* Metric Rows */
-    .metric-row { display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.9rem; }
-    .metric-label { color: var(--muted); }
-    .metric-value { font-weight: 700; color: var(--teal); }
-    .metric-value-soft { color: var(--ink); }
-
-    /* SHORTLIST LIST STYLES (New for Overview Tab) */
-    .shortlist-list {
-      list-style: none; padding: 0; margin: 0;
-    }
-    .shortlist-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .shortlist-item:last-child { border-bottom: none; }
-    .sl-avatar {
-      width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1);
-      display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: var(--green-light);
-    }
-    .sl-info { flex: 1; }
-    .sl-name { font-size: 0.9rem; font-weight: 600; color: #fff; }
-    .sl-role { font-size: 0.75rem; color: var(--muted); }
-    .sl-score { font-weight: 700; color: var(--teal); font-size: 0.9rem; }
-
-    /* Logs */
-    .activity-log { list-style: none; padding: 0; margin: 0; font-size: 0.85rem; }
-    .activity-log li {
-      display: flex; justify-content: space-between; padding: 8px 0;
-      border-bottom: 1px dashed rgba(255,255,255,0.15);
-      color: var(--muted);
-    }
-    .activity-log li:last-child { border-bottom: none; }
-    .activity-time { color: var(--teal); opacity: 0.9; font-weight: 500; }
-
-    /* Forms */
-    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    @media (max-width: 800px) { .form-grid { grid-template-columns: 1fr; } }
-    .form-field { display: flex; flex-direction: column; gap: 8px; }
-    .field-label { font-size: 0.85rem; color: var(--muted); font-weight: 500; }
+    /* Feed & Radar Lists */
+    .feed-list { list-style: none; padding: 0; margin: 0; }
     
-    .field-input, .field-select, .field-textarea {
+    .feed-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px; margin-bottom: 12px;
+      background: var(--panel-2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md);
+      transition: all 0.2s;
+    }
+    .feed-item:hover { border-color: rgba(255,255,255,0.2); transform: translateX(4px); }
+
+    .feed-icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+
+    .feed-content { flex: 1; }
+    .feed-title { font-weight: 600; color: #fff; font-size: 0.95rem; margin-bottom: 4px; }
+    .feed-meta { font-size: 0.85rem; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+    
+    /* Radar Table Styles */
+    .radar-row {
+      display: grid; 
+      grid-template-columns: 2fr 2fr 1fr 1fr;
+      align-items: center;
+      padding: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .radar-row:last-child { border-bottom: none; }
+    .radar-header { 
+      background: rgba(255,255,255,0.03); 
+      font-size: 0.75rem; text-transform: uppercase; color: var(--muted); font-weight: 600;
+      border-radius: 8px; margin-bottom: 8px;
+    }
+
+    /* Discovery (Sniper) Styles */
+    .search-box-lg {
       background: rgba(0,0,0,0.3);
       border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 12px;
-      padding: 12px 14px;
-      color: var(--ink);
-      font-family: inherit;
-      font-size: 0.95rem;
-      outline: none;
-      transition: 0.2s;
+      border-radius: 16px;
+      padding: 16px 20px;
+      width: 100%;
+      color: #fff; font-size: 1.1rem;
+      outline: none; transition: 0.2s;
+      margin-bottom: 20px;
     }
-    .field-input:focus, .field-select:focus, .field-textarea:focus {
-      border-color: var(--accent-purple);
-      background: rgba(0,0,0,0.5);
-      box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.25);
-    }
-    .field-textarea { min-height: 90px; resize: vertical; }
-
-    /* Sliders */
-    .slider-row { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
-    .slider-label { width: 45%; font-size: 0.9rem; color: var(--muted); }
-    .slider-input { flex: 1; display: flex; align-items: center; }
-    .slider-input input[type="range"] {
-      width: 100%; -webkit-appearance: none; height: 6px; border-radius: 99px;
-      background: rgba(255,255,255,0.15); outline: none; cursor: pointer;
-    }
-    .slider-input input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
-      background: var(--teal); cursor: grab; box-shadow: 0 0 12px var(--teal);
-      border: 2px solid #fff;
-    }
-    .slider-value { width: 34px; text-align: right; font-weight: 700; color: var(--teal); font-size: 0.9rem; }
-
-    /* Toggle Switch */
-    .toggle-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: 0.95rem; color: var(--muted); }
-    .toggle-switch { position: relative; width: 46px; height: 26px; }
-    .toggle-switch input { opacity: 0; width: 0; height: 0; }
-    .toggle-slider {
-      position: absolute; cursor: pointer; inset: 0; background-color: rgba(255,255,255,0.1);
-      border-radius: 99px; transition: .3s; border: 1px solid rgba(255,255,255,0.15);
-    }
-    .toggle-slider:before {
-      position: absolute; content: ""; height: 18px; width: 18px; left: 4px; top: 3px;
-      background-color: var(--muted); border-radius: 50%; transition: .3s;
-    }
-    input:checked + .toggle-slider { background-color: rgba(34, 211, 238, 0.2); border-color: var(--teal); }
-    input:checked + .toggle-slider:before { transform: translateX(20px); background-color: var(--teal); box-shadow: 0 0 8px var(--teal); }
-
-    /* Domain List */
-    .domain-list { list-style: none; padding: 0; margin: 0; }
-    .domain-list li {
-      display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
-      font-size: 0.9rem; color: var(--muted);
-    }
-    .tag { font-size: 0.75rem; padding: 3px 10px; border-radius: 999px; border: 1px solid; font-weight: 600; }
-    .tag.allowed { border-color: var(--success); color: var(--success); background: rgba(74, 222, 128, 0.1); }
-    .tag.blocked { border-color: var(--danger); color: var(--danger); background: rgba(248, 113, 113, 0.1); }
-
-    /* Lead Card */
-    .lead-big-card { display: flex; gap: 20px; align-items: center; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; }
-    .lead-info { flex: 1; }
-    .lead-name { font-size: 1.3rem; font-weight: 700; color: var(--ink); }
-    .lead-role { font-size: 0.95rem; color: var(--teal); margin-bottom: 10px; }
-    .lead-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-    .lead-pill { font-size: 0.75rem; background: rgba(255,255,255,0.08); padding: 4px 10px; border-radius: 99px; color: var(--muted); border: 1px solid rgba(255,255,255,0.1); }
-    
-    .score-ring {
-      width: 72px; height: 72px; border-radius: 50%; border: 4px solid var(--accent-purple);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      box-shadow: 0 0 25px rgba(167, 139, 250, 0.35);
-      background: rgba(167, 139, 250, 0.05);
-    }
-    .score-num { font-size: 1.5rem; font-weight: 800; color: var(--ink); line-height: 1; }
-    .score-lbl { font-size: 0.65rem; text-transform: uppercase; color: var(--muted); margin-top: 2px; font-weight: 600; }
-
-    .lead-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
-    .lead-details-grid strong { 
-      color: var(--green-light); 
-      display: block; margin-bottom: 6px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; 
+    .search-box-lg:focus { 
+      border-color: var(--green-light); 
+      box-shadow: 0 0 0 2px rgba(134, 239, 172, 0.2);
     }
 
-    /* Outreach Generator Styles */
-    .outreach-container {
-      margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);
+    .dossier-card {
+      background: var(--panel-2);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      padding: 20px; margin-bottom: 16px;
+      display: flex; gap: 20px; align-items: flex-start;
     }
-    .outreach-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-    .outreach-title { 
-      font-weight: 700; 
-      color: var(--green-light); 
-      font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; 
+    .dossier-main { flex: 1; }
+    .dossier-name { font-size: 1.1rem; font-weight: 700; color: #fff; }
+    .dossier-role { color: var(--teal); font-size: 0.9rem; margin-bottom: 8px; }
+    .dossier-insights { 
+      background: rgba(167, 139, 250, 0.1); 
+      border: 1px dashed var(--accent-purple);
+      border-radius: 8px; padding: 10px;
+      font-size: 0.85rem; color: var(--muted); margin-top: 10px;
     }
-    .outreach-anim { animation: fadeIn 0.3s ease; }
+
+    .credit-badge {
+      display: flex; flex-direction: column; align-items: center;
+      background: rgba(0,0,0,0.3); border: 1px solid var(--line);
+      padding: 10px 20px; border-radius: 12px;
+    }
+    .credit-count { font-size: 1.5rem; font-weight: 800; color: var(--green-light); line-height: 1; }
+    .credit-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
+
+    /* Tooltips */
+    [data-tooltip] { position: relative; cursor: help; }
+    [data-tooltip]:hover::after {
+      content: attr(data-tooltip);
+      position: absolute; bottom: 100%; left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      background: #1e1b2e; border: 1px solid var(--accent-purple);
+      color: #fff; padding: 6px 10px; border-radius: 6px;
+      font-size: 0.75rem; white-space: nowrap; pointer-events: none;
+      z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
 
   </style>
 </head>
@@ -433,524 +305,276 @@
       
       <header class="app-header">
         <div class="app-title-group">
-          <div class="app-title">HELLO! LeadScout™ Control Panel</div>
+          <div class="app-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+            HELLO! LeadRadar™
+          </div>
           <div class="app-subtitle">
-            Your personal AI scout, finding the best opportunities for you.
+            Contextual Intelligence Console v2.1
           </div>
         </div>
         <div class="header-meta">
-          <div class="chip sel" data-tooltip="The system is currently running and searching for you.">
+          <div class="chip sel" style="cursor:default">
             <span class="dot"></span>
-            <span>Online</span>
-          </div>
-          <div class="chip" data-tooltip="Time until the next batch of leads is ready.">
-            Next results: <span id="next-run-timer" style="margin-left:4px; color:var(--teal)">14h 22m</span>
+            <span>Live Signal Active</span>
           </div>
         </div>
       </header>
 
-      <nav class="tab-bar" id="tab-bar">
-        <div class="tab tab-active" data-tab="system-status" data-tooltip="See how the system is working right now.">
-          <span>Overview</span>
-          <span class="audio-icon-btn" onclick="playTabAudio('https://static.wixstatic.com/mp3/c3283f_2f052d1ae2a24adeab408173ba60ab78.mp3', event)" title="Play Description">
-             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#022c22;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-          </span>
-        </div>
-        
-        <div class="tab" data-tab="your-goals" data-tooltip="Define what you want to achieve.">
-          <span>My Goals</span>
-          <span class="audio-icon-btn" onclick="playTabAudio('https://static.wixstatic.com/mp3/c3283f_211c5d4a1225477d96be022af4ee2c1b.mp3', event)" title="Play Description">
-             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#022c22;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-          </span>
-        </div>
-        
-        <div class="tab" data-tab="lead-criteria" data-tooltip="Describe the people you want to meet.">
-          <span>Ideal Lead</span>
-          <span class="audio-icon-btn" onclick="playTabAudio('https://static.wixstatic.com/mp3/c3283f_690cd57fac81428b94705e62c3f5699b.mp3', event)" title="Play Description">
-             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#022c22;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-          </span>
-        </div>
-        
-        <div class="tab" data-tab="matching-priorities" data-tooltip="Adjust how we score the matches.">
-          <span>Match Points</span>
-          <span class="audio-icon-btn" onclick="playTabAudio('https://static.wixstatic.com/mp3/c3283f_21fdd87da4114d1eaaee0b5b3cdf76c7.mp3', event)" title="Play Description">
-             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#022c22;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-          </span>
-        </div>
-        
-        <div class="tab" data-tab="search-settings" data-tooltip="Configure how and where we search.">
-          <span>Search Settings</span>
-          <span class="audio-icon-btn" onclick="playTabAudio('https://static.wixstatic.com/mp3/c3283f_e291a64113554dd8b4092a33f2c634a5.mp3', event)" title="Play Description">
-             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#022c22;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-          </span>
-        </div>
-        
-        <div class="tab" data-tab="daily-output" data-tooltip="View your best matches for today.">
-          <span>Results</span>
-          <span class="audio-icon-btn" onclick="playTabAudio('https://static.wixstatic.com/mp3/c3283f_c0bdfbf8a9e64ee7bb0b408e7b111dfe.mp3', event)" title="Play Description">
-             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#022c22;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-          </span>
-        </div>
+      <nav class="tab-bar">
+        <div class="tab tab-active" data-tab="briefing">Briefing</div>
+        <div class="tab" data-tab="radar">Visitor Radar</div>
+        <div class="tab" data-tab="discovery">Targeted Discovery</div>
       </nav>
 
-      <section class="tab-content">
-        
-        <div class="tab-panel active" id="panel-system-status">
-          <div class="panel-header-row">
-            <div>
-              <div class="panel-title">Overview Dashboard</div>
-              <div class="panel-subtitle">Daily scouting performance & lead funnel.</div>
-            </div>
-            <div class="panel-tagline">Batch complete: 4 Qualified Leads</div>
+      <div class="tab-panel active" id="panel-briefing">
+        <div class="panel-header-row">
+          <div>
+            <div class="panel-title">Intelligence Briefing</div>
+            <div class="panel-subtitle">Real-time signals from your network and content.</div>
           </div>
-
-          <div class="grid grid-3">
-            <div class="panel-card" data-tooltip="The volume of data processed today.">
-              <div class="panel-card-title">Daily Funnel</div>
-              <div class="panel-card-sub">From raw crawl to qualified matches.</div>
-              <div class="metric-row">
-                <span class="metric-label">Sites Scanned</span>
-                <span class="metric-value-soft">142</span>
-              </div>
-              <div class="metric-row">
-                <span class="metric-label">Profiles Analyzed</span>
-                <span class="metric-value">31</span>
-              </div>
-              <div class="metric-row">
-                <span class="metric-label" style="color:#fff">Qualified Leads</span>
-                <span class="metric-value">4</span>
-              </div>
-            </div>
-
-            <div class="panel-card" data-tooltip="The specific people found in this batch.">
-              <div class="panel-card-title">Today's Shortlist</div>
-              <div class="panel-card-sub">Top 4 candidates found today.</div>
-              
-              <ul class="shortlist-list">
-                <li class="shortlist-item">
-                  <div class="sl-avatar">AK</div>
-                  <div class="sl-info">
-                    <div class="sl-name">Amina Khan</div>
-                    <div class="sl-role">SaaS GTM Founder</div>
-                  </div>
-                  <div class="sl-score">93</div>
-                </li>
-                <li class="shortlist-item">
-                  <div class="sl-avatar">DC</div>
-                  <div class="sl-info">
-                    <div class="sl-name">David Chen</div>
-                    <div class="sl-role">VP Growth</div>
-                  </div>
-                  <div class="sl-score">89</div>
-                </li>
-                <li class="shortlist-item">
-                  <div class="sl-avatar">SM</div>
-                  <div class="sl-info">
-                    <div class="sl-name">Sarah Miller</div>
-                    <div class="sl-role">Marketing Lead</div>
-                  </div>
-                  <div class="sl-score">87</div>
-                </li>
-                <li class="shortlist-item">
-                  <div class="sl-avatar">JW</div>
-                  <div class="sl-info">
-                    <div class="sl-name">James Wilson</div>
-                    <div class="sl-role">Revenue Ops</div>
-                  </div>
-                  <div class="sl-score">85</div>
-                </li>
-              </ul>
-            </div>
-
-            <div class="panel-card" data-tooltip="Real-time log of the AI's actions.">
-              <div class="panel-card-title">Recent Actions</div>
-              <div class="panel-card-sub">What the AI has been doing.</div>
-              <ul class="activity-log">
-                <li><span>Shortlisted 4 candidates</span> <span class="activity-time">10:15</span></li>
-                <li><span>Filtering: Fit Score > 85</span> <span class="activity-time">10:14</span></li>
-                <li><span>Reading: Startup Blogs</span> <span class="activity-time">10:10</span></li>
-                <li><span>Updating Search Terms</span> <span class="activity-time">10:07</span></li>
-                <li><span>Starting Browser Agent</span> <span class="activity-time">10:04</span></li>
-              </ul>
-            </div>
-          </div>
+          <button class="btn btn-sm" onclick="location.reload()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Refresh</button>
         </div>
 
-        <div class="tab-panel" id="panel-your-goals">
-          <div class="panel-header-row">
-            <div>
-              <div class="panel-title">My Goals</div>
-              <div class="panel-subtitle">Tell us what "success" looks like to you.</div>
+        <ul class="feed-list">
+          <li class="feed-item">
+            <div class="feed-icon" style="color: var(--green-light);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4 8 4v14M8 14v-2M8 18v-2M16 14v-2M16 18v-2"/></svg>
             </div>
-          </div>
+            <div class="feed-content">
+              <div class="feed-title">Corporate Signal: <strong>Spotify Network</strong> detected</div>
+              <div class="feed-meta">
+                <span class="chip status-high">High Confidence</span>
+                <span>• 12m ago</span>
+                <span>• 3 visits</span>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-primary" onclick="switchToDiscovery('Spotify')">Identify Who</button>
+          </li>
 
-          <div class="form-grid">
-            <div class="form-field">
-              <label class="field-label" data-tooltip="What is the main thing you want to achieve professionally?">Primary Goal</label>
-              <input class="field-input" type="text" placeholder="e.g. Find 3 strategic partners this quarter" />
+          <li class="feed-item">
+            <div class="feed-icon" style="color: var(--teal);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             </div>
-            <div class="form-field">
-              <label class="field-label" data-tooltip="What are you focusing on for the next few months?">Short-term Focus (90 days)</label>
-              <input class="field-input" type="text" placeholder="e.g. Help B2B founders with marketing" />
+            <div class="feed-content">
+              <div class="feed-title"><strong>David Chen</strong> unlocked "Pricing Guide"</div>
+              <div class="feed-meta">
+                <span class="chip status-high" style="border-color:var(--teal); color:var(--teal)">Inbound Capture</span>
+                <span>• 45m ago</span>
+                <span>• Verified Email</span>
+              </div>
             </div>
-            <div class="form-field">
-              <label class="field-label" data-tooltip="What kind of arrangement are you looking for?">Opportunity Type</label>
-              <select class="field-select">
-                <option>Advisory & Consulting</option>
-                <option>Co-founder & Equity</option>
-                <option>Clients & Retainers</option>
-              </select>
-            </div>
-            <div class="form-field">
-              <label class="field-label" data-tooltip="Who is your ideal customer or partner?">Who do you want to help?</label>
-              <input class="field-input" type="text" placeholder="e.g. Early-stage founders" />
-            </div>
-            <div class="form-field" style="grid-column: 1/-1;">
-              <label class="field-label" data-tooltip="Any extra details to help the AI understand you better.">Notes for the AI</label>
-              <textarea class="field-textarea" placeholder="Tell us anything else that matters to you..."></textarea>
-            </div>
-          </div>
+            <button class="btn btn-sm">Email David</button>
+          </li>
 
-          <div style="margin-top:24px; display:flex; gap:12px;">
-            <button class="btn btn-primary" data-tooltip="Save these goals so the AI can use them.">Save Goals</button>
-            <button class="btn" data-tooltip="See a preview of what the search will look like.">Preview Search</button>
+          <li class="feed-item">
+            <div class="feed-icon" style="color: var(--accent-purple);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="feed-content">
+              <div class="feed-title">Meeting Prep: <strong>Amina Khan</strong> (SignalNorth)</div>
+              <div class="feed-meta">
+                <span class="chip status-med" style="border-color:var(--accent-purple); color:var(--accent-purple)">Calendar Sync</span>
+                <span>• Tomorrow, 2:00 PM</span>
+              </div>
+            </div>
+            <button class="btn btn-sm">View Dossier</button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tab-panel" id="panel-radar">
+        <div class="panel-header-row">
+          <div>
+            <div class="panel-title">Visitor Radar</div>
+            <div class="panel-subtitle">Deanonymized traffic analysis.</div>
           </div>
+          <div style="font-size:0.85rem; color:var(--muted)">Showing last 24 hours</div>
         </div>
 
-        <div class="tab-panel" id="panel-lead-criteria">
-          <div class="panel-header-row">
-            <div>
-              <div class="panel-title">Ideal Lead</div>
-              <div class="panel-subtitle">Describe the actual humans we should be looking for.</div>
-            </div>
+        <div style="background:var(--panel-2); border-radius:12px; border:1px solid rgba(255,255,255,0.1); overflow:hidden;">
+          <div class="radar-row radar-header">
+            <div>Entity / Network</div>
+            <div>Engagement Signal</div>
+            <div>Confidence</div>
+            <div style="text-align:right">Action</div>
           </div>
 
-          <div class="form-grid">
-            <div class="form-field">
-              <label class="field-label" data-tooltip="Which business sectors should they be in?">Industries</label>
-              <input class="field-input" type="text" placeholder="e.g. Software, AI, Business Services" />
-            </div>
-            <div class="form-field">
-              <label class="field-label" data-tooltip="What job titles do they usually hold?">Job Titles</label>
-              <input class="field-input" type="text" placeholder="e.g. Founder, CMO, Head of Growth" />
-            </div>
-            <div class="form-field">
-              <label class="field-label" data-tooltip="What problems can you solve for them?">Problems you solve</label>
-              <textarea class="field-textarea" placeholder="e.g. Low sales, bad messaging..."></textarea>
-            </div>
-            <div class="form-field">
-              <label class="field-label" data-tooltip="What problems do you need help with?">Problems you have</label>
-              <textarea class="field-textarea" placeholder="e.g. I need introductions to investors..."></textarea>
-            </div>
-            <div class="form-field">
-              <label class="field-label" data-tooltip="Types of people or industries to completely avoid.">Absolute No-Gos</label>
-              <input class="field-input" type="text" placeholder="e.g. Crypto, MLM, Idea stage" />
-            </div>
-            <div class="form-field">
-              <label class="field-label" data-tooltip="Where should they be located?">Location</label>
-              <input class="field-input" type="text" placeholder="e.g. North America, Remote" />
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-panel" id="panel-matching-priorities">
-          <div class="panel-header-row">
-            <div>
-              <div class="panel-title">Match Points</div>
-              <div class="panel-subtitle">Drag the sliders to tell us what is most important to you.</div>
-            </div>
-          </div>
-
-          <div class="panel-card" style="max-width: 680px;">
-            <div class="panel-card-title">Scoring Rules</div>
-            <div class="panel-card-sub" style="margin-bottom:24px">Higher value means this factor counts more towards the final score.</div>
-
-            <div id="priority-sliders">
-              <div class="slider-row" data-tooltip="How closely they align with your stated goals.">
-                <div class="slider-label">Matches my goals</div>
-                <div class="slider-input">
-                  <input type="range" min="0" max="100" value="90" data-slider />
-                </div>
-                <div class="slider-value">90</div>
-              </div>
-              <div class="slider-row" data-tooltip="Do they have the skills you are looking for?">
-                <div class="slider-label">Has the right skills</div>
-                <div class="slider-input">
-                  <input type="range" min="0" max="100" value="82" data-slider />
-                </div>
-                <div class="slider-value">82</div>
-              </div>
-              <div class="slider-row" data-tooltip="Are they in the same industry/field as you?">
-                <div class="slider-label">Industry Match</div>
-                <div class="slider-input">
-                  <input type="range" min="0" max="100" value="78" data-slider />
-                </div>
-                <div class="slider-value">78</div>
-              </div>
-              <div class="slider-row" data-tooltip="Are they active, growing, and serious?">
-                <div class="slider-label">Active & Growing</div>
-                <div class="slider-input">
-                  <input type="range" min="0" max="100" value="70" data-slider />
-                </div>
-                <div class="slider-value">70</div>
-              </div>
-              <div class="slider-row" data-tooltip="Is there a clear benefit for both sides?">
-                <div class="slider-label">Mutual Benefit</div>
-                <div class="slider-input">
-                  <input type="range" min="0" max="100" value="88" data-slider />
-                </div>
-                <div class="slider-value">88</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-panel" id="panel-search-settings">
-          <div class="panel-header-row">
-            <div>
-              <div class="panel-title">Search Settings</div>
-              <div class="panel-subtitle">Control how the AI behaves.</div>
-            </div>
-          </div>
-
-          <div class="grid grid-2">
-            <div class="panel-card" data-tooltip="Technical settings for the browsing agent.">
-              <div class="panel-card-title">Search Behavior</div>
-              <div class="panel-card-sub">How the browser agent runs.</div>
-              
-              <div class="form-field" style="margin-bottom:16px;">
-                <label class="field-label">How often to search?</label>
-                <select class="field-select">
-                  <option>Daily (recommended)</option>
-                  <option>Every 2 days</option>
-                  <option>Weekly</option>
-                </select>
-              </div>
-
-              <div class="toggle-row" data-tooltip="Run the browser without showing a window (faster).">
-                <span>Background Mode (Invisible)</span>
-                <label class="toggle-switch">
-                  <input type="checkbox" checked />
-                  <span class="toggle-slider"></span>
-                </label>
-              </div>
-              <div class="toggle-row" data-tooltip="Slow down browsing to avoid getting blocked by websites.">
-                <span>Browse Slowly (Safer)</span>
-                <label class="toggle-switch">
-                  <input type="checkbox" checked />
-                  <span class="toggle-slider"></span>
-                </label>
-              </div>
-            </div>
-
-            <div class="panel-card" data-tooltip="Websites we are allowed or forbidden to visit.">
-              <div class="panel-card-title">Allowed Websites</div>
-              <div class="panel-card-sub">Where the agent looks for people.</div>
-              
-              <ul class="domain-list">
-                <li>
-                  <span>Startup Blogs</span>
-                  <span class="tag allowed">Allowed</span>
-                </li>
-                <li>
-                  <span>Professional Communities</span>
-                  <span class="tag allowed">Allowed</span>
-                </li>
-                <li>
-                  <span>Spammy Directories</span>
-                  <span class="tag blocked">Blocked</span>
-                </li>
-                <li>
-                  <span>Generic Job Boards</span>
-                  <span class="tag blocked">Blocked</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-panel" id="panel-daily-output">
-          <div class="panel-header-row">
-            <div>
-              <div class="panel-title">Results</div>
-              <div class="panel-subtitle">Here is the best match we found for you today.</div>
-            </div>
-          </div>
-
-          <div class="panel-card">
-            <div class="panel-card-title">Top Match</div>
-            <div class="panel-card-sub">Highly recommended based on your goals.</div>
-
-            <div class="lead-big-card">
-              <div class="avatar">AK</div>
-              <div class="lead-info">
-                <div class="lead-name">Amina Khan</div>
-                <div class="lead-role">Founder @ SignalNorth</div>
-                <div class="lead-tags">
-                  <span class="lead-pill">SaaS Marketing</span>
-                  <span class="lead-pill">Sales Pipeline</span>
-                  <span class="lead-pill">NYC / Remote</span>
-                </div>
-              </div>
-              <div class="score-ring" data-tooltip="This is an exceptionally high match score!">
-                <span class="score-num">93</span>
-                <span class="score-lbl">FIT</span>
-              </div>
-            </div>
-
-            <div class="lead-details-grid">
+          <div class="radar-row">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:32px; height:32px; background:#fff; border-radius:4px; display:flex; align-items:center; justify-content:center; color:#000; font-weight:800;">S</div>
               <div>
-                <strong>Why them?</strong>
-                Strong overlap with your ideal buyers (post-PMF SaaS), and consistent focus on structured client acquisition systems.
-              </div>
-              <div>
-                <strong>Good Signs</strong>
-                • Writes weekly on Marketing playbooks<br/>
-                • Case studies on sales funnels<br/>
-                • Open to partnerships
-              </div>
-              <div>
-                <strong>Things to watch</strong>
-                Busy schedule; prioritizes collaborations with clear outcomes.
-              </div>
-              <div>
-                <strong>Icebreaker Idea</strong>
-                Offer a joint "audit" experiment framed as a co-built case study.
+                <div style="font-weight:600; color:#fff;">Spotify</div>
+                <div style="font-size:0.75rem; color:var(--muted)">New York, NY</div>
               </div>
             </div>
+            <div style="font-size:0.85rem; color:var(--ink);">
+              3 Visits • <strong>Portfolio</strong> • 4m Dwell
+            </div>
+            <div>
+              <span class="chip status-high">Corporate</span>
+            </div>
+            <div style="text-align:right">
+              <button class="btn btn-sm btn-primary" onclick="switchToDiscovery('Spotify')">Reveal</button>
+            </div>
+          </div>
 
-            <div class="outreach-container">
-                <div class="outreach-header">
-                    <span class="outreach-title">AI Outreach Writer</span>
-                </div>
+          <div class="radar-row">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:32px; height:32px; background:#ef4444; border-radius:4px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800;">O</div>
+              <div>
+                <div style="font-weight:600; color:#fff;">Ogilvy</div>
+                <div style="font-size:0.75rem; color:var(--muted)">London, UK</div>
+              </div>
+            </div>
+            <div style="font-size:0.85rem; color:var(--ink);">
+              1 Visit • Pricing Page
+            </div>
+            <div>
+              <span class="chip status-high">Corporate</span>
+            </div>
+            <div style="text-align:right">
+              <button class="btn btn-sm" onclick="switchToDiscovery('Ogilvy')">Reveal</button>
+            </div>
+          </div>
+
+          <div class="radar-row">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:32px; height:32px; background:rgba(255,255,255,0.1); border-radius:4px; display:flex; align-items:center; justify-content:center; color:var(--muted);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg></div>
+              <div>
+                <div style="font-weight:600; color:var(--muted);">Unknown (Comcast)</div>
+                <div style="font-size:0.75rem; color:var(--muted)">Los Angeles, CA</div>
+              </div>
+            </div>
+            <div style="font-size:0.85rem; color:var(--muted);">
+              Mobile Visit • 30s
+            </div>
+            <div>
+              <span class="chip status-low">ISP / Low</span>
+            </div>
+            <div style="text-align:right">
+              <button class="btn btn-sm" style="opacity:0.5; cursor:not-allowed">Hidden</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel-discovery">
+        <div class="panel-header-row">
+          <div>
+            <div class="panel-title">Targeted Discovery</div>
+            <div class="panel-subtitle">Surgical lookup for verified decision makers.</div>
+          </div>
+          <div class="credit-badge">
+            <div class="credit-count">5</div>
+            <div class="credit-label">Credits Left</div>
+          </div>
+        </div>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+          <input type="text" id="discovery-input" class="search-box-lg" placeholder="Try: 'Marketing Directors at Spotify in New York'..." />
+          
+          <div style="text-align:center; margin-bottom:40px;">
+            <button class="btn btn-primary" style="padding:12px 32px; font-size:1rem;" onclick="runDiscovery()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Start Hunt (-1 Credit)
+            </button>
+          </div>
+
+          <div id="discovery-results" style="display:none; animation: fadeIn 0.4s ease;">
+            <div class="panel-title" style="margin-bottom:16px; font-size:1rem;">Top Matches Found</div>
+            
+            <div class="dossier-card">
+              <div style="width:50px; height:50px; border-radius:50%; background:#333; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">SJ</div>
+              <div class="dossier-main">
+                <div class="dossier-name">Sarah Jenkins</div>
+                <div class="dossier-role">VP Brand Marketing @ Spotify</div>
+                <div class="chip status-high">Verified Email</div>
                 
-                <div id="outreach-controls-initial" style="display:flex; gap:12px;">
-                    <button class="btn btn-primary" onclick="generateMessage('dm')" data-tooltip="Create a short, punchy message for LinkedIn or Twitter.">
-                       Generate DM
-                    </button>
-                    <button class="btn btn-primary" onclick="generateMessage('email')" data-tooltip="Create a formal email draft with subject line.">
-                       Generate Email
-                    </button>
+                <div class="dossier-insights">
+                  <strong>Intelligence:</strong> Likely decision maker for ad spend. Recent LinkedIn activity discusses "Audio Programmatic". Tech stack includes Salesforce & Notion.
                 </div>
+              </div>
+              <button class="btn btn-sm btn-primary">Draft Email</button>
+            </div>
 
-                <div id="outreach-result" style="display:none;" class="outreach-anim">
-                    <div class="form-field" style="margin-bottom:12px;">
-                        <label class="field-label" id="outreach-label">Draft Message</label>
-                        <textarea id="outreach-text" class="field-textarea" style="height:140px; font-family:monospace; line-height:1.5; font-size:0.9rem; color:#EAEAF6;"></textarea>
-                    </div>
-                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                        <button class="btn btn-primary" onclick="copyToClipboard()" data-tooltip="Copy text to clipboard.">Copy Text</button>
-                        <button class="btn" onclick="document.getElementById('outreach-text').focus()" data-tooltip="Edit the text manually.">Tweak Message</button>
-                        <button class="btn" style="margin-left:auto; opacity:0.8;" onclick="resetOutreach()" data-tooltip="Start over.">Cancel</button>
-                    </div>
-                </div>
+            <div class="dossier-card">
+              <div style="width:50px; height:50px; border-radius:50%; background:#333; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">MR</div>
+              <div class="dossier-main">
+                <div class="dossier-name">Mike Ross</div>
+                <div class="dossier-role">Head of Growth @ Spotify</div>
+                <div class="chip status-high">Verified Email</div>
+              </div>
+              <button class="btn btn-sm btn-primary">Draft Email</button>
             </div>
 
           </div>
         </div>
+      </div>
 
-      </section>
     </div>
   </div>
 
   <script>
-    // Tab Switching Logic
-    const tabs = document.querySelectorAll(".tab");
+    // --- TAB LOGIC ---
+    const tabs = document.querySelectorAll('.tab');
     const panels = {
-      "system-status": document.getElementById("panel-system-status"),
-      "your-goals": document.getElementById("panel-your-goals"),
-      "lead-criteria": document.getElementById("panel-lead-criteria"),
-      "matching-priorities": document.getElementById("panel-matching-priorities"),
-      "search-settings": document.getElementById("panel-search-settings"),
-      "daily-output": document.getElementById("panel-daily-output"),
+      'briefing': document.getElementById('panel-briefing'),
+      'radar': document.getElementById('panel-radar'),
+      'discovery': document.getElementById('panel-discovery')
     };
 
+    function switchTab(tabId) {
+      // Deactivate all
+      tabs.forEach(t => t.classList.remove('tab-active'));
+      Object.values(panels).forEach(p => p.classList.remove('active'));
+      
+      // Activate target
+      const activeTab = document.querySelector(`.tab[data-tab="${tabId}"]`);
+      if(activeTab) activeTab.classList.add('tab-active');
+      if(panels[tabId]) panels[tabId].classList.add('active');
+    }
+
     tabs.forEach(tab => {
-      tab.addEventListener("click", (e) => {
-        // Prevent triggering tab switch if we clicked the audio icon (optional, handled via stopPropagation too)
-        if(e.target.closest('.audio-icon-btn')) return;
-
-        const target = tab.getAttribute("data-tab");
-        // Update Tabs
-        tabs.forEach(t => t.classList.remove("tab-active"));
-        tab.classList.add("tab-active");
-        // Update Panels
-        Object.keys(panels).forEach(key => {
-          panels[key].classList.toggle("active", key === target);
-        });
-      });
+      tab.addEventListener('click', () => switchTab(tab.dataset.tab));
     });
 
-    // Audio Playback Logic
-    let currentAudio = null;
-    function playTabAudio(url, e) {
-       e.stopPropagation(); 
-       if(currentAudio) {
-           currentAudio.pause();
-           currentAudio.currentTime = 0;
-       }
-       currentAudio = new Audio(url);
-       currentAudio.play().catch(err => {
-           console.log("Audio play blocked or failed:", err);
-       });
+    // --- INTER-TAB COMMUNICATION ---
+    function switchToDiscovery(companyName) {
+      switchTab('discovery');
+      const input = document.getElementById('discovery-input');
+      // Pre-fill specifically for decision makers at that company
+      input.value = `Marketing Decision Makers at ${companyName}`;
+      input.focus();
+      // Optional: Add visual flash to show it updated
+      input.style.borderColor = 'var(--green-light)';
+      setTimeout(() => input.style.borderColor = 'rgba(255,255,255,0.2)', 600);
     }
 
-    // Slider Logic
-    document.querySelectorAll("[data-slider]").forEach(slider => {
-      const row = slider.closest(".slider-row");
-      const valueEl = row.querySelector(".slider-value");
-      const updateVal = () => {
-        valueEl.textContent = slider.value;
-      };
-      slider.addEventListener("input", updateVal);
-      updateVal();
-    });
-
-    // Fake Timer
-    (function initFakeCountdown() {
-      const el = document.getElementById("next-run-timer");
-      if (!el) return;
-      el.textContent = "≈ 14h 22m";
-    })();
-
-    // Outreach Generator Logic
-    function generateMessage(type) {
-        const textArea = document.getElementById('outreach-text');
-        const initialControls = document.getElementById('outreach-controls-initial');
-        const resultArea = document.getElementById('outreach-result');
-
-        let text = "";
+    // --- MOCK DISCOVERY LOGIC ---
+    function runDiscovery() {
+      const btn = document.querySelector('button[onclick="runDiscovery()"]');
+      const originalText = btn.innerHTML;
+      const results = document.getElementById('discovery-results');
+      
+      // Loading State
+      btn.innerHTML = 'Scanning Premium Data...';
+      btn.style.opacity = '0.7';
+      
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.style.opacity = '1';
+        results.style.display = 'block';
         
-        if(type === 'dm') {
-            text = "Hi Amina,\n\nBeen following SignalNorth's work on SaaS GTM frameworks—really love the structured approach you take.\n\nI'm looking to partner with a few post-PMF founders on a joint 'audit' experiment. Given your focus on pipeline clarity, I thought this might align perfectly.\n\nOpen to a quick chat?\n\nBest,\n[Your Name]";
-        } else {
-            text = "Subject: Collaboration idea: SignalNorth + [Your Brand]\n\nHi Amina,\n\nI've been reading your weekly essays on GTM playbooks and have been impressed by your clarity on pipeline design.\n\nI work with B2B founders to solve [Your Skillset], and I noticed we share a very similar audience. I have an idea for a joint case study/audit that could drive value for both our networks.\n\nWould you be open to a brief 15-min intro call next Tuesday or Wednesday?\n\nCheers,\n[Your Name]";
+        // Mock Credit Deduction
+        const creditCount = document.querySelector('.credit-count');
+        if(creditCount.innerText === '5') {
+            creditCount.innerText = '4';
+            // Visual feedback on deduction
+            creditCount.style.color = 'var(--warning)';
+            setTimeout(() => creditCount.style.color = 'var(--green-light)', 1000);
         }
-
-        textArea.value = text;
-        
-        // UI toggle
-        initialControls.style.display = 'none';
-        resultArea.style.display = 'block';
-    }
-
-    function resetOutreach() {
-        document.getElementById('outreach-controls-initial').style.display = 'flex';
-        document.getElementById('outreach-result').style.display = 'none';
-    }
-
-    function copyToClipboard() {
-        const copyText = document.getElementById("outreach-text");
-        copyText.select();
-        copyText.setSelectionRange(0, 99999); 
-        navigator.clipboard.writeText(copyText.value);
-        
-        // Simple feedback
-        const originalText = document.querySelector("button[onclick='copyToClipboard()']").textContent;
-        document.querySelector("button[onclick='copyToClipboard()']").textContent = "Copied!";
-        setTimeout(() => {
-            document.querySelector("button[onclick='copyToClipboard()']").textContent = originalText;
-        }, 2000);
+      }, 1500);
     }
   </script>
 </body>
