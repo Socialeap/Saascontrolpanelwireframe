@@ -22,7 +22,7 @@
       
       /* Credit Logic Colors */
       --daily-blue: #60a5fa;   /* Daily Discoveries */
-      --premium-purple: #c084fc; /* Premium Reveals */
+      --premium-purple: #c084fc; /* Reveal Credits */
       
       /* Status Colors */
       --green-light: #86efac;  
@@ -82,59 +82,37 @@
       cursor: help;
     }
     .chip.high-intent { border-color: var(--success); color: var(--success); background: rgba(74, 222, 128, 0.05); }
-    .chip.med-intent { border-color: var(--warning); color: var(--warning); background: rgba(250, 204, 21, 0.05); }
     .chip.buying-mode { border-color: var(--success); color: #022c22; background: var(--green-light); }
     .chip.verified { background: linear-gradient(180deg, var(--green-btn-1), var(--green-btn-2)); color: #022c22; border:none; font-weight:800; }
-    .chip.locked { border-color: var(--muted); color: var(--muted); border-style: dashed; }
-    .chip.tech-check { border-color: var(--teal); color: var(--teal); background: rgba(34, 211, 238, 0.1); }
-    .chip.competitor { border-color: var(--danger); color: var(--danger); background: rgba(248, 113, 113, 0.1); }
-
+    
     /* Buttons */
     .btn {
-      border: 1px solid rgba(255,255,255,.15);
-      background: rgba(255,255,255,.05);
-      color: var(--ink);
-      padding: 8px 16px;
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.8rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s ease;
+      padding: 8px 16px; border-radius: var(--radius-md); cursor: pointer;
+      font-family: inherit; font-size: 0.8rem; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s ease;
       border: 1px solid transparent;
     }
+    .btn:hover { transform: translateY(-1px); }
     
     /* Tier 2 Button (Daily Discovery) */
     .btn-discovery {
-        background: rgba(59, 130, 246, 0.1);
-        border-color: rgba(59, 130, 246, 0.3);
-        color: var(--daily-blue);
+        background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3); color: var(--daily-blue);
     }
     
     /* Tier 3 Button (Premium Reveal) */
     .btn-premium {
         background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.1));
-        border-color: var(--premium-purple);
-        color: #e9d5ff;
+        border-color: var(--premium-purple); color: #e9d5ff;
     }
 
     /* Tier 3 Button (Action/Conversion) */
     .btn-action {
         background: linear-gradient(135deg, var(--green-btn-2), var(--green-btn-1));
-        color: #022c22;
-        font-weight: 800;
+        color: #022c22; font-weight: 800;
     }
 
     .btn-subtext {
-        font-size: 0.65rem;
-        display: block;
-        margin-top: 4px;
-        color: var(--muted);
-        text-align: center;
-        opacity: 0.8;
+        font-size: 0.65rem; display: block; margin-top: 4px; color: var(--muted); opacity: 0.8;
     }
     .btn-subtext-action { color: var(--premium-purple); font-weight: 700; }
 
@@ -153,7 +131,7 @@
     .stats-row { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 20px; margin-bottom: 32px; }
     
     .stat-card {
-      background: var(--panel-2);
+      background: rgba(30, 41, 59, 0.9);
       border: 1px solid rgba(255,255,255,0.1);
       padding: 20px;
       border-radius: var(--radius-md);
@@ -161,7 +139,6 @@
     }
     .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; display:flex; justify-content:space-between; align-items:center; }
     .stat-value { font-size: 1.8rem; font-weight: 700; color: #fff; line-height:1; }
-    .stat-sub { font-size: 0.8rem; margin-top: 6px; opacity: 0.7; }
     
     .credit-card { background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(167, 139, 250, 0.2); }
     .credit-grid { display: flex; margin-top: 10px; }
@@ -174,38 +151,25 @@
 
     /* Tabs */
     .tab-bar { display: flex; gap: 8px; margin-bottom: 24px; padding: 4px; border-radius: var(--radius-md); background: rgba(0,0,0,0.3); border: 1px solid var(--line); width: fit-content; }
-    .tab { padding: 8px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; color: var(--muted); cursor: pointer; transition: all 0.2s; }
-    .tab.active { background: var(--panel-2); color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    .tab.active { background: rgba(255,255,255,0.1); color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
 
     /* Panels */
     .tab-panel { display: none; animation: fadeIn 0.3s ease; }
     .tab-panel.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* --- FEED ITEMS (Briefing) --- */
-    .feed-item { display: grid; grid-template-columns: 48px 1fr auto; gap: 16px; padding: 20px; border-bottom: 1px solid var(--line); align-items: center; }
-    .feed-item:last-child { border-bottom: none; }
-    .feed-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    .feed-main h4 { margin: 0 0 4px 0; font-size: 1rem; color: #fff; }
-    .feed-main p { margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.4; }
-    .feed-meta { margin-top: 6px; font-size: 0.8rem; color: var(--muted); display:flex; gap:10px; align-items:center; }
-
-    /* --- RADAR TABLE (3-STATE) --- */
+    /* --- RADAR TABLE --- */
     .radar-table { width: 100%; border-collapse: collapse; background: var(--panel-2); border-radius: 12px; overflow: hidden; margin-top: 10px; }
     .radar-table th { text-align: left; padding: 14px 20px; color: var(--muted); font-size: 0.7rem; text-transform: uppercase; border-bottom: 1px solid var(--line); letter-spacing: 0.05em; background: rgba(0,0,0,0.2); }
     .radar-table td { padding: 18px 20px; border-bottom: 1px solid var(--line); vertical-align: middle; color: var(--ink); font-size: 0.9rem; }
-    .radar-table tr:hover td { background: rgba(255,255,255,0.02); }
-
     .entity-main { font-weight: 700; color: #fff; font-size: 0.95rem; }
-    .entity-sub { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
     
     /* Discovery */
     .discovery-box { background: var(--panel-2); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 40px; text-align: center; max-width: 600px; margin: 0 auto; }
     .search-input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--line); padding: 14px; border-radius: 10px; color: #fff; font-size: 1rem; margin-bottom: 20px; outline:none; transition:0.2s; }
-    .dossier-card { text-align: left; background: rgba(255,255,255,0.05); border: 1px solid var(--line); padding: 16px; border-radius: 12px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
-    
+
     /* Tooltip Styles */
-    [data-tooltip] { position: relative; }
+    [data-tooltip] { position: relative; cursor: help; }
     [data-tooltip]:hover::after {
       content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; 
       transform: translateX(-50%) translateY(-8px); background: #0f172a; border: 1px solid var(--line);
@@ -229,7 +193,7 @@
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
             HELLO! LeadRadar™
           </div>
-          <div style="font-size:0.85rem; color:var(--muted); margin-top:2px;">Contextual Intelligence v3.1</div>
+          <div style="font-size:0.85rem; color:var(--muted); margin-top:2px;">Contextual Intelligence Console v3.2</div>
         </div>
         <div class="status-badge" data-tooltip="The system is live. Traffic is being monitored and prioritized.">
             <span class="pulse-dot"></span>
@@ -239,7 +203,7 @@
 
       <div class="stats-row">
         
-        <div class="stat-card" data-tooltip="Behavioral signals based on visits, engagement, and repeat interest. No paid enrichment.">
+        <div class="stat-card" data-tooltip="Signals based on real engagement with your Signature Card — visits, repeat interest, time spent, and asset clicks. No paid enrichment.">
           <div class="stat-label">High-Intent Signals <span class="help-icon">ⓘ</span></div>
           <div class="stat-value" style="color:var(--success)">12</div>
           <div class="stat-sub">↑ 3 today (Behavioral)</div>
@@ -251,22 +215,22 @@
           <div class="stat-sub">Downloads / Clicks</div>
         </div>
 
-        <div class="stat-card credit-card" data-tooltip="Your daily and monthly allowance for unlocking paid enrichment. Use these wisely!">
+        <div class="stat-card credit-card" data-tooltip="Your allowance for unlocking paid enrichment. Use these intentionally.">
           <div class="stat-label" style="border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:8px; margin-bottom:12px; color:#fff;">
-            <span>Credits Today</span>
+            <span>Credits Available</span>
           </div>
           <div class="credit-grid">
             
             <div class="credit-col">
               <span class="c-label" style="color:var(--daily-blue)"><span class="c-dot" style="background:var(--daily-blue)"></span> Discoveries</span>
               <div class="c-count" id="daily-count">3 / 3</div>
-              <div style="font-size:0.65rem; color:var(--muted); margin-top:4px;" data-tooltip="Daily Discoveries let you explore who might be behind a signal — roles and departments. Resets daily.">Daily exploration</div>
+              <div style="font-size:0.65rem; color:var(--muted); margin-top:4px;" data-tooltip="Discoveries let you explore who might be behind a signal (roles and departments). These refresh daily.">Daily exploration</div>
             </div>
             
             <div class="credit-col">
-              <span class="c-label" style="color:var(--premium-purple)"><span class="c-dot" style="background:var(--premium-purple)"></span> Premium</span>
-              <div class="c-count" id="prem-count">9 / 10</div>
-              <div style="font-size:0.65rem; color:var(--muted); margin-top:4px;" data-tooltip="Premium Reveals unlock verified contact details (emails) and deep intelligence. Limited monthly.">Monthly limit</div>
+              <span class="c-label" style="color:var(--premium-purple)"><span class="c-dot" style="background:var(--premium-purple)"></span> Reveal Credits</span>
+              <div class="c-count" id="prem-count">9</div>
+              <div style="font-size:0.65rem; color:var(--muted); margin-top:4px;" data-tooltip="Reveal Credits unlock verified contact details (emails) and deep intelligence. Designed for high-confidence actions.">Use intentionally</div>
             </div>
 
           </div>
@@ -286,7 +250,7 @@
         </div>
 
         <div class="feed-item" id="signal-1">
-          <div class="feed-icon" style="color:var(--muted)">
+          <div class="feed-icon" style="color:var(--muted); background:rgba(255,255,255,0.08);">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
           <div class="feed-main">
@@ -308,7 +272,7 @@
             <p>You have a meeting tomorrow at 2:00 PM. Intelligence report is ready for generation.</p>
             <div class="feed-meta">Tomorrow 2:00 PM • Calendar Sync</div>
           </div>
-          <button class="btn btn-premium" data-tooltip="Uses 1 Premium Reveal Credit to generate the full intelligence report (tech stack, talking points).">
+          <button class="btn btn-premium" data-tooltip="Uses 1 Reveal Credit to generate the full intelligence report (tech stack, talking points).">
             Prep Dossier (-1)
           </button>
         </div>
@@ -338,7 +302,7 @@
                 <div style="font-size:0.75rem; color:var(--warning); margin-top:2px;">Scoring 88/100</div>
               </td>
               <td>
-                <span class="chip med-intent">High (Behavioral)</span>
+                <span class="chip high-intent" data-tooltip="Based on repeated visits and deeper engagement patterns. No external data sources used.">High (Behavioral)</span>
               </td>
               <td>
                 <div style="text-align:center;">
@@ -364,13 +328,13 @@
                 <div class="chip tech-check" data-tooltip="Evaluating technical feasibility.">Technical Check</div>
                 <div class="chip competitor" style="margin-top:4px;" data-tooltip="Arrived from a competitor's site or comparison blog.">Competitor Referrer</div>
               </td>
-              <td><span class="chip buying-mode">Buying Mode</span></td>
+              <td><span class="chip buying-mode" data-tooltip="High engagement on money-related pages.">Buying Mode</span></td>
               <td>
                 <div style="text-align:center;">
-                    <button class="btn btn-premium" onclick="revealRow('row-ogilvy')" data-tooltip="Uses 1 Premium Reveal to unlock a verified email address for this contact.">
+                    <button class="btn btn-premium" onclick="revealRow('row-ogilvy')" data-tooltip="Uses 1 Reveal Credit to unlock a verified email address for this contact.">
                         Reveal Email
                     </button>
-                    <span class="btn-subtext btn-subtext-action">1 Premium Credit</span>
+                    <span class="btn-subtext btn-subtext-action">1 Reveal Credit</span>
                 </div>
               </td>
             </tr>
@@ -410,7 +374,7 @@
           </div>
           
           <h2 style="margin:0 0 10px 0; font-size:1.6rem; color:#fff;">Targeted Discovery</h2>
-          <p style="margin:0 0 30px 0; color:var(--muted);" data-tooltip="This uses your premium API access (Apollo.io) to find verified contact data.">
+          <p style="margin:0 0 30px 0; color:var(--muted);" data-tooltip="Discovery uses your allocated daily credits to find relevant roles and departments.">
             Use 1 Discovery Credit to find relevant roles.
           </p>
 
@@ -428,86 +392,136 @@
   </div>
 
   <script>
-    // --- STATE SIMULATION ---
+    // --- TAB LOGIC ---
+    function setTab(id) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelector(`.tab[data-tab="${id}"]`).classList.add('active');
+      document.getElementById(id).classList.add('active');
+      // Reset Discovery View when switching out
+      if(id !== 'discovery') {
+          document.getElementById('hunt-input').value = '';
+          document.getElementById('hunt-results').style.display = 'none';
+      }
+    }
+
+    // --- MOCK CREDIT MANAGEMENT ---
+    function getCredits() {
+        return {
+            daily: parseInt(document.getElementById('daily-count').innerText.split('/')[0].trim()),
+            prem: parseInt(document.getElementById('prem-count').innerText.trim())
+        };
+    }
     
     function updateCreditDisplay(dailyChange = 0, premChange = 0) {
         const dailyCount = document.getElementById('daily-count');
         const premCount = document.getElementById('prem-count');
         const discRemainTab = document.getElementById('disc-remain-tab');
         
-        let currentDaily = parseInt(dailyCount.innerText.split('/')[0].trim());
-        let currentPrem = parseInt(premCount.innerText.split('/')[0].trim());
+        let currentDaily = getCredits().daily;
+        let currentPrem = getCredits().prem;
+        let maxDaily = 3; 
 
         // Update counts
-        dailyCount.innerText = `${currentDaily + dailyChange} / 3`;
-        premCount.innerText = `${currentPrem + premChange} / 10`;
-        discRemainTab.innerText = (currentDaily + dailyChange).toString();
+        const newDaily = Math.max(0, currentDaily + dailyChange);
+        const newPrem = Math.max(0, currentPrem + premChange);
+
+        dailyCount.innerText = `${newDaily} / ${maxDaily}`;
+        premCount.innerText = newPrem;
+        discRemainTab.innerText = newDaily.toString();
 
         // Visual feedback
         if (dailyChange !== 0) {
-            dailyCount.style.color = 'var(--warning)';
+            dailyCount.style.color = newDaily === 0 ? 'var(--danger)' : 'var(--warning)';
             setTimeout(() => dailyCount.style.color = 'var(--success)', 500);
         }
         if (premChange !== 0) {
-            premCount.style.color = 'var(--warning)';
+            premCount.style.color = newPrem === 0 ? 'var(--danger)' : 'var(--warning)';
             setTimeout(() => premCount.style.color = 'var(--premium-purple)', 500);
         }
     }
 
-    // A -> B: Unlock Context
-    function unlockRow(rowId) {
-        const row = document.getElementById(rowId);
-        const btnContainer = row.querySelector('td:last-child div');
-        
-        // Check Credit
-        if (parseInt(document.getElementById('daily-count').innerText.split('/')[0].trim()) <= 0) {
-            alert("Discovery Failed: You are out of Daily Discovery credits. Please wait for the daily reset.");
+    // A -> B: Unlock Context (Daily Credit)
+    function unlockContext(elementId) {
+        if (getCredits().daily <= 0) {
+            alert("Discovery Failed: You are out of Daily Discovery credits. Please wait for the daily refresh.");
             return;
         }
 
+        const row = document.getElementById(elementId);
+        const btnContainer = row.querySelector('td:last-child div') || row.querySelector('button').parentNode;
+        
         updateCreditDisplay(-1, 0);
 
         // Simulate Enrichment (Tier 2 API Spend)
         btnContainer.innerHTML = `<span style="font-size:0.8rem; color:var(--muted)">Enriching...</span>`;
         
         setTimeout(() => {
-            // Update Entity/Context
-            row.querySelector('.entity-main').innerHTML = `Spotify`;
-            row.querySelector('.entity-sub').innerText = `Corporate Network • New York, NY`;
-            
-            // Update Context & Intent Status
-            row.querySelector('td:nth-child(2)').innerHTML = `
-                <div class="chip med-intent">Product Dept</div>
-                <div class="chip med-intent" style="margin-top:4px;">Hiring Signals</div>
-            `;
-            row.querySelector('td:nth-child(3)').innerHTML = `<span class="chip buying-mode" data-tooltip="Scoring 92/100: High engagement on money-related pages.">Buying Mode</span>`;
-
-            // Update Action Button to Premium Reveal (Tier 3)
-            btnContainer.innerHTML = `
-                <button class="btn btn-premium" onclick="revealRow('${rowId}')" data-tooltip="Uses 1 Premium Reveal to unlock a verified email address for this contact.">
-                    Reveal Email
-                </button>
-                <span class="btn-subtext btn-subtext-action">1 Premium Credit</span>
-            `;
-            row.id = 'row-spotify'; // Change ID to new state
+            // Briefing Feed Update
+            if (row.id === 'signal-1') {
+                row.innerHTML = `
+                    <div class="feed-icon" style="color:var(--success); background:rgba(74, 222, 128, 0.1);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4 8 4v14M8 14v-2M8 18v-2M16 14v-2M16 18v-2"/></svg>
+                    </div>
+                    <div class="feed-main">
+                        <h4>Context Unlocked: <strong>Spotify Network</strong></h4>
+                        <p>Traffic confirmed from Spotify NYC HQ. Ready for action.</p>
+                        <div class="feed-meta"><span class="chip buying-mode">Buying Mode</span> • NYC Office</div>
+                    </div>
+                    <button class="btn btn-premium" onclick="revealRow('row-dummy')" data-tooltip="Uses 1 Reveal Credit to unlock a verified email address for a contact.">
+                        Reveal Email (-1)
+                    </button>
+                `;
+            }
         }, 1200);
     }
 
-    // B -> C: Reveal Email
+    // A -> B Transition for Radar Table
+    function unlockRow(rowId) {
+        if (getCredits().daily <= 0) {
+            alert("Discovery Failed: You are out of Daily Discovery credits. Please wait for the daily refresh.");
+            return;
+        }
+
+        const row = document.getElementById(rowId);
+        const btnContainer = row.querySelector('td:last-child div');
+
+        updateCreditDisplay(-1, 0);
+
+        btnContainer.innerHTML = `<span style="font-size:0.8rem; color:var(--muted)">Enriching...</span>`;
+
+        setTimeout(() => {
+            row.querySelector('.entity-main').innerHTML = `Spotify`;
+            row.querySelector('.entity-sub').innerText = `Corporate Network • New York, NY`;
+            row.querySelector('td:nth-child(2)').innerHTML = `
+                <div class="chip tech-check" data-tooltip="Evaluation focused on technical feasibility.">Tech Check</div>
+                <div class="chip competitor" style="margin-top:4px;" data-tooltip="Arrived from a competitor's site or comparison blog.">Competitor Referrer</div>
+            `;
+            row.querySelector('td:nth-child(3)').innerHTML = `<span class="chip buying-mode" data-tooltip="High engagement on money-related pages.">Buying Mode</span>`;
+
+            btnContainer.innerHTML = `
+                <button class="btn btn-premium" onclick="revealRow('${rowId}')" data-tooltip="Uses 1 Reveal Credit to unlock a verified email address for this contact.">
+                    Reveal Email
+                </button>
+                <span class="btn-subtext btn-subtext-action">1 Reveal Credit</span>
+            `;
+            row.id = 'row-spotify-unlocked';
+        }, 1200);
+    }
+
+    // B -> C: Reveal Email (Premium Credit)
     function revealRow(rowId) {
+        if (getCredits().prem <= 0) {
+            alert("Action Failed: You are out of Reveal Credits. Please contact support.");
+            return;
+        }
+
         const row = document.getElementById(rowId);
         const btnContainer = row.querySelector('td:last-child div');
         const contextCell = row.querySelector('td:nth-child(2)');
 
-        // Check Credit
-        if (parseInt(document.getElementById('prem-count').innerText.split('/')[0].trim()) <= 0) {
-            alert("Action Failed: You are out of Premium Reveal credits for the month.");
-            return;
-        }
-
         updateCreditDisplay(0, -1);
 
-        // Simulate Verification (Tier 3 API Spend)
         btnContainer.innerHTML = `<span style="font-size:0.8rem; color:var(--muted)">Verifying...</span>`;
 
         setTimeout(() => {
@@ -518,52 +532,37 @@
             `;
             
             // Update Intent Status to Verified
-            row.querySelector('td:nth-child(3)').innerHTML = `<span class="chip verified">Verified</span>`;
+            row.querySelector('td:nth-child(3)').innerHTML = `<span class="chip verified" data-tooltip="Email verified via SMTP check. Safe to send.">Verified</span>`;
 
             // Success Button
             btnContainer.innerHTML = `
-                <button class="btn btn-action">
+                <button class="btn btn-action" data-tooltip="This lead is ready to be contacted.">
                     Draft Email
                 </button>
             `;
         }, 1000);
     }
 
-    // --- CROSS-TAB LOGIC ---
-    function setTab(id) {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      document.querySelector(`.tab[data-tab="${id}"]`).classList.add('active');
-      document.getElementById(id).classList.add('active');
-    }
-
-    function goToDiscovery(company) {
-        setTab('discovery');
-        document.getElementById('hunt-input').value = `Decision Makers at ${company}`;
-    }
-
+    // Discovery Hunt
     function runHunt() {
-        const btn = document.querySelector('#discovery .btn-action');
-        const creditDisplay = document.getElementById('disc-remain-tab');
-        const originalText = btn.innerHTML;
-        
-        if (parseInt(creditDisplay.innerText.trim()) <= 0) {
+        if (getCredits().daily <= 0) {
              alert("Discovery Failed: You are out of Daily Discovery credits.");
              return;
         }
 
-        // Simulating credit deduction immediately (transactional server-side)
-        let currentDaily = parseInt(document.getElementById('daily-count').innerText.split('/')[0].trim());
-        document.getElementById('daily-count').innerText = `${currentDaily - 1} / 3`;
-        document.getElementById('disc-remain-tab').innerText = (currentDaily - 1).toString();
+        const btn = document.querySelector('#discovery .btn-discovery');
+        const originalText = btn.innerHTML;
         
+        updateCreditDisplay(-1, 0);
+
         btn.innerHTML = 'Scanning Apollo...';
         btn.style.opacity = 0.7;
         
         setTimeout(() => {
             btn.innerHTML = originalText;
             btn.style.opacity = 1;
-            document.getElementById('hunt-results').style.display = 'block';
+            // In a real app, this would render search results cards here.
+            alert("Results found! Ready for Premium Reveal.");
         }, 1500);
     }
   </script>
