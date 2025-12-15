@@ -8,27 +8,28 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+  
   <style>
-    /* --- LINKUP DESIGN SYSTEM (Preserved) --- */
+    /* --- DESIGN SYSTEM (Preserved & Refined) --- */
     :root {
       --ink: #F0F0F8;
-      --muted: #BFC4E6;
-      --panel: rgba(29,22,52,.92);
-      --panel-2: rgba(25,19,45,.7);
-      --line: rgba(140,106,240,.4);
+      --muted: #94a3b8; /* Cool Grey for better readability */
+      --panel: rgba(15, 23, 42, 0.95); /* Slate 900 */
+      --panel-2: rgba(30, 41, 59, 0.7); /* Slate 800 */
+      --line: rgba(148, 163, 184, 0.15);
       
+      /* Brand Colors */
       --accent-purple: #A78BFA;
-      
-      /* Green Accents for Headers/Buttons */
       --green-light: #86efac;  
       --green-btn-1: #4ade80;  
       --green-btn-2: #16a34a;  
-      
       --teal: #22D3EE;
+      
+      /* Status Colors */
       --success: #4ade80;
       --warning: #facc15;
       --danger: #f87171;
+      
       --radius-lg: 16px;
       --radius-md: 12px;
       --radius-pill: 999px;
@@ -39,13 +40,14 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-size: 17px; 
+      font-size: 16px; 
       font-family: "Inter", system-ui, sans-serif;
       color: var(--ink);
+      /* Deep Space Background */
       background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(124,58,237,.25), transparent 60%),
-        radial-gradient(1200px 600px at 120% 0%, rgba(34,211,238,.16), transparent 55%),
-        linear-gradient(180deg, #0D0B17, #0E0B1A 40%, #0C0A16 100%);
+        radial-gradient(1200px 600px at 20% -10%, rgba(124,58,237,.15), transparent 60%),
+        radial-gradient(1200px 600px at 80% 10%, rgba(34,211,238,.1), transparent 55%),
+        #020617; /* Slate 950 */
       -webkit-font-smoothing: antialiased;
       line-height: 1.5;
     }
@@ -54,16 +56,17 @@
     .glass {
       background: var(--panel);
       border: 1px solid var(--line);
-      box-shadow: 0 20px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.05);
-      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.05);
+      backdrop-filter: blur(20px);
     }
 
+    /* Status Badges */
     .chip {
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.06);
-      padding: 0.3rem 0.7rem;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.03);
+      padding: 0.25rem 0.6rem;
       border-radius: var(--radius-pill);
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
@@ -72,24 +75,17 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
+    .chip.high { border-color: rgba(74, 222, 128, 0.3); color: var(--success); background: rgba(74, 222, 128, 0.05); }
+    .chip.med { border-color: rgba(250, 204, 21, 0.3); color: var(--warning); background: rgba(250, 204, 21, 0.05); }
+    .chip.verified { background: linear-gradient(180deg, var(--green-btn-1), var(--green-btn-2)); color: #022c22; border:none; font-weight:800; }
 
-    .chip.status-high { border-color: var(--success); color: var(--success); background: rgba(74, 222, 128, 0.1); }
-    .chip.status-med { border-color: var(--warning); color: var(--warning); background: rgba(250, 204, 21, 0.1); }
-    .chip.status-low { border-color: var(--muted); color: var(--muted); opacity: 0.7; }
-
-    .chip.sel {
-      background: linear-gradient(180deg, var(--green-btn-1), var(--green-btn-2));
-      color: #022c22;
-      border-color: transparent;
-      font-weight: 800;
-    }
-
+    /* Buttons */
     .btn {
-      border: 1px solid rgba(255,255,255,.2);
-      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.05);
       color: var(--ink);
       padding: 10px 18px;
-      border-radius: var(--radius-pill);
+      border-radius: var(--radius-md);
       cursor: pointer;
       font-family: inherit;
       font-size: 0.9rem;
@@ -99,21 +95,21 @@
       gap: 8px;
       transition: all 0.2s ease;
     }
-    .btn:hover { background: rgba(255,255,255,.15); transform: translateY(-1px); }
-
+    .btn:hover { background: rgba(255,255,255,.1); transform: translateY(-1px); border-color: var(--accent-purple); }
+    
     .btn-primary {
-      background: linear-gradient(180deg, var(--green-btn-1), var(--green-btn-2));
-      color: #022c22;
+      background: var(--accent-purple);
+      color: #1e1b2e;
       border: none;
-      font-weight: 800;
+      font-weight: 700;
     }
-    .btn-primary:hover { opacity: 0.95; box-shadow: 0 0 15px rgba(74, 222, 128, 0.4); }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(167, 139, 250, 0.3); }
 
-    .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
+    .btn-sm { padding: 6px 12px; font-size: 0.8rem; border-radius: 8px; }
 
     /* --- LAYOUT --- */
     .app-shell {
-      max-width: 1100px;
+      max-width: 1000px;
       margin: 40px auto;
       padding: 0 16px 60px;
     }
@@ -122,178 +118,155 @@
       border-radius: 24px;
       overflow: hidden;
       padding: 32px;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Header */
     .app-header {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 30px;
+      margin-bottom: 32px;
     }
 
     .app-title {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       font-weight: 800;
-      color: var(--green-light);
-      letter-spacing: -0.02em;
+      color: #fff;
       display: flex; align-items: center; gap: 10px;
+      letter-spacing: -0.02em;
     }
+    .app-subtitle { font-size: 0.9rem; color: var(--muted); margin-top: 4px; font-weight:400; }
 
-    .app-subtitle {
-      font-size: 1rem;
-      color: var(--muted);
-      margin-top: 4px;
+    /* Stats Row (New Metrics) */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
     }
-
-    .header-meta { display: flex; align-items: center; gap: 12px; }
-    .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--success);
-      box-shadow: 0 0 8px var(--success);
-      display: inline-block;
+    .stat-card {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      padding: 16px;
+      border-radius: var(--radius-md);
     }
+    .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+    .stat-value { font-size: 1.5rem; font-weight: 700; color: #fff; line-height:1; }
+    .stat-trend { font-size: 0.8rem; color: var(--success); margin-top: 4px; display: flex; align-items: center; gap: 4px; }
 
-    /* Tabs */
+    /* --- TABS --- */
     .tab-bar {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       margin-bottom: 24px;
-      padding: 6px;
-      border-radius: var(--radius-pill);
-      background: rgba(0,0,0,0.2);
-      border: 1px solid rgba(255,255,255,0.05);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--line);
+      width: fit-content;
     }
 
     .tab {
-      flex: 1;
-      text-align: center;
-      padding: 10px 16px;
-      border-radius: var(--radius-pill);
+      padding: 8px 20px;
+      border-radius: 8px;
       font-size: 0.9rem;
       font-weight: 600;
       color: var(--muted);
       cursor: pointer;
       transition: all 0.2s;
     }
+    .tab:hover { color: #fff; }
+    .tab.active { background: var(--panel-2); color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
 
-    .tab:hover:not(.tab-active) { color: var(--ink); background: rgba(255,255,255,0.08); }
-
-    .tab-active {
-      background: linear-gradient(180deg, var(--green-btn-1), var(--green-btn-2));
-      color: #022c22;
-      font-weight: 800;
-      box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
-    }
-
-    /* Content Area */
-    .tab-content { min-height: 400px; }
+    /* Content Areas */
     .tab-panel { display: none; animation: fadeIn 0.3s ease; }
     .tab-panel.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-    .panel-header-row {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      gap: 12px; margin-bottom: 22px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding-bottom: 16px;
-    }
-
-    .panel-title { font-size: 1.25rem; font-weight: 700; color: var(--green-light); }
-    .panel-subtitle { font-size: 0.95rem; color: var(--muted); margin-top: 4px;}
-
-    /* Feed & Radar Lists */
-    .feed-list { list-style: none; padding: 0; margin: 0; }
-    
+    /* --- FEED STYLES (Briefing) --- */
     .feed-item {
-      display: flex; align-items: center; gap: 16px;
-      padding: 16px; margin-bottom: 12px;
-      background: var(--panel-2);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-md);
-      transition: all 0.2s;
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 16px;
+      padding: 20px;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
     }
-    .feed-item:hover { border-color: rgba(255,255,255,0.2); transform: translateX(4px); }
-
+    .feed-item:last-child { border-bottom: none; }
+    
     .feed-icon {
-      width: 42px; height: 42px; border-radius: 12px;
+      width: 48px; height: 48px; border-radius: 12px;
       background: rgba(255,255,255,0.05);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; flex-shrink: 0;
+      font-size: 1.2rem;
     }
+    .feed-main h4 { margin: 0 0 6px 0; font-size: 1rem; color: #fff; }
+    .feed-main p { margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.4; }
+    .feed-meta { margin-top: 8px; display: flex; gap: 12px; font-size: 0.8rem; color: var(--muted); opacity: 0.8; }
 
-    .feed-content { flex: 1; }
-    .feed-title { font-weight: 600; color: #fff; font-size: 0.95rem; margin-bottom: 4px; }
-    .feed-meta { font-size: 0.85rem; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+    /* --- RADAR TABLE --- */
+    .radar-table { width: 100%; border-collapse: collapse; }
+    .radar-table th { text-align: left; padding: 12px 16px; color: var(--muted); font-size: 0.75rem; text-transform: uppercase; border-bottom: 1px solid var(--line); }
+    .radar-table td { padding: 16px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+    .radar-table tr:hover td { background: rgba(255,255,255,0.02); }
     
-    /* Radar Table Styles */
-    .radar-row {
-      display: grid; 
-      grid-template-columns: 2fr 2fr 1fr 1fr;
-      align-items: center;
-      padding: 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .radar-row:last-child { border-bottom: none; }
-    .radar-header { 
-      background: rgba(255,255,255,0.03); 
-      font-size: 0.75rem; text-transform: uppercase; color: var(--muted); font-weight: 600;
-      border-radius: 8px; margin-bottom: 8px;
-    }
+    .entity-cell { display: flex; align-items: center; gap: 12px; }
+    .logo-box { width: 32px; height: 32px; border-radius: 6px; background: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #000; font-size: 0.8rem; }
 
-    /* Discovery (Sniper) Styles */
-    .search-box-lg {
-      background: rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 16px;
-      padding: 16px 20px;
-      width: 100%;
-      color: #fff; font-size: 1.1rem;
-      outline: none; transition: 0.2s;
-      margin-bottom: 20px;
-    }
-    .search-box-lg:focus { 
-      border-color: var(--green-light); 
-      box-shadow: 0 0 0 2px rgba(134, 239, 172, 0.2);
-    }
-
-    .dossier-card {
+    /* --- DISCOVERY (Sniper) --- */
+    .discovery-container {
       background: var(--panel-2);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid var(--line);
       border-radius: var(--radius-lg);
-      padding: 20px; margin-bottom: 16px;
-      display: flex; gap: 20px; align-items: flex-start;
+      padding: 40px;
+      text-align: center;
     }
-    .dossier-main { flex: 1; }
-    .dossier-name { font-size: 1.1rem; font-weight: 700; color: #fff; }
-    .dossier-role { color: var(--teal); font-size: 0.9rem; margin-bottom: 8px; }
-    .dossier-insights { 
-      background: rgba(167, 139, 250, 0.1); 
-      border: 1px dashed var(--accent-purple);
-      border-radius: 8px; padding: 10px;
-      font-size: 0.85rem; color: var(--muted); margin-top: 10px;
+    
+    .search-bar-wrapper {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto 24px;
+    }
+    
+    .search-input {
+      width: 100%;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--line);
+      padding: 16px 20px;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1.1rem;
+      outline: none;
+      transition: 0.2s;
+    }
+    .search-input:focus { border-color: var(--accent-purple); box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.1); }
+
+    .credit-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(134, 239, 172, 0.1);
+      border: 1px solid rgba(134, 239, 172, 0.2);
+      padding: 6px 12px;
+      border-radius: 99px;
+      color: var(--green-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 32px;
     }
 
-    .credit-badge {
-      display: flex; flex-direction: column; align-items: center;
-      background: rgba(0,0,0,0.3); border: 1px solid var(--line);
-      padding: 10px 20px; border-radius: 12px;
-    }
-    .credit-count { font-size: 1.5rem; font-weight: 800; color: var(--green-light); line-height: 1; }
-    .credit-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
-
-    /* Tooltips */
-    [data-tooltip] { position: relative; cursor: help; }
-    [data-tooltip]:hover::after {
-      content: attr(data-tooltip);
-      position: absolute; bottom: 100%; left: 50%;
-      transform: translateX(-50%) translateY(-8px);
-      background: #1e1b2e; border: 1px solid var(--accent-purple);
-      color: #fff; padding: 6px 10px; border-radius: 6px;
-      font-size: 0.75rem; white-space: nowrap; pointer-events: none;
-      z-index: 10; box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    .result-card {
+      text-align: left;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
   </style>
@@ -304,211 +277,182 @@
     <div class="main-container glass">
       
       <header class="app-header">
-        <div class="app-title-group">
+        <div>
           <div class="app-title">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><circle cx="12" cy="12" r="10"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
             HELLO! LeadRadar™
           </div>
-          <div class="app-subtitle">
-            Contextual Intelligence Console v2.1
-          </div>
+          <div class="app-subtitle">Intelligence Console v2.2</div>
         </div>
-        <div class="header-meta">
-          <div class="chip sel" style="cursor:default">
-            <span class="dot"></span>
-            <span>Live Signal Active</span>
-          </div>
+        <div class="chip high">
+          <span style="width:6px; height:6px; background:var(--success); border-radius:50%; display:block;"></span>
+          System Active
         </div>
       </header>
 
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Corporate Signals</div>
+          <div class="stat-value">12</div>
+          <div class="stat-trend">↑ 3 today</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Asset Engagement</div>
+          <div class="stat-value">5</div>
+          <div class="stat-trend" style="color:var(--teal)">Downloads</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Meetings Prepped</div>
+          <div class="stat-value">2</div>
+          <div class="stat-trend" style="color:var(--accent-purple)">Ready</div>
+        </div>
+      </div>
+
       <nav class="tab-bar">
-        <div class="tab tab-active" data-tab="briefing">Briefing</div>
-        <div class="tab" data-tab="radar">Visitor Radar</div>
-        <div class="tab" data-tab="discovery">Targeted Discovery</div>
+        <div class="tab active" onclick="setTab('briefing')">Briefing</div>
+        <div class="tab" onclick="setTab('radar')">Radar</div>
+        <div class="tab" onclick="setTab('discovery')">Targeted Discovery</div>
       </nav>
 
-      <div class="tab-panel active" id="panel-briefing">
-        <div class="panel-header-row">
-          <div>
-            <div class="panel-title">Intelligence Briefing</div>
-            <div class="panel-subtitle">Real-time signals from your network and content.</div>
-          </div>
-          <button class="btn btn-sm" onclick="location.reload()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Refresh</button>
+      <div id="briefing" class="tab-panel active">
+        <div style="margin-bottom:16px; font-size:0.9rem; color:var(--muted); display:flex; justify-content:space-between;">
+          <span>Today's Intelligence Feed</span>
+          <span style="cursor:pointer" onclick="location.reload()">Refresh</span>
         </div>
 
-        <ul class="feed-list">
-          <li class="feed-item">
-            <div class="feed-icon" style="color: var(--green-light);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4 8 4v14M8 14v-2M8 18v-2M16 14v-2M16 18v-2"/></svg>
-            </div>
-            <div class="feed-content">
-              <div class="feed-title">Corporate Signal: <strong>Spotify Network</strong> detected</div>
-              <div class="feed-meta">
-                <span class="chip status-high">High Confidence</span>
-                <span>• 12m ago</span>
-                <span>• 3 visits</span>
-              </div>
-            </div>
-            <button class="btn btn-sm btn-primary" onclick="switchToDiscovery('Spotify')">Identify Who</button>
-          </li>
-
-          <li class="feed-item">
-            <div class="feed-icon" style="color: var(--teal);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            </div>
-            <div class="feed-content">
-              <div class="feed-title"><strong>David Chen</strong> unlocked "Pricing Guide"</div>
-              <div class="feed-meta">
-                <span class="chip status-high" style="border-color:var(--teal); color:var(--teal)">Inbound Capture</span>
-                <span>• 45m ago</span>
-                <span>• Verified Email</span>
-              </div>
-            </div>
-            <button class="btn btn-sm">Email David</button>
-          </li>
-
-          <li class="feed-item">
-            <div class="feed-icon" style="color: var(--accent-purple);">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <div class="feed-content">
-              <div class="feed-title">Meeting Prep: <strong>Amina Khan</strong> (SignalNorth)</div>
-              <div class="feed-meta">
-                <span class="chip status-med" style="border-color:var(--accent-purple); color:var(--accent-purple)">Calendar Sync</span>
-                <span>• Tomorrow, 2:00 PM</span>
-              </div>
-            </div>
-            <button class="btn btn-sm">View Dossier</button>
-          </li>
-        </ul>
-      </div>
-
-      <div class="tab-panel" id="panel-radar">
-        <div class="panel-header-row">
-          <div>
-            <div class="panel-title">Visitor Radar</div>
-            <div class="panel-subtitle">Deanonymized traffic analysis.</div>
+        <div class="feed-item">
+          <div class="feed-icon" style="color:var(--success)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4 8 4v14M8 14v-2M8 18v-2M16 14v-2M16 18v-2"/></svg>
           </div>
-          <div style="font-size:0.85rem; color:var(--muted)">Showing last 24 hours</div>
+          <div class="feed-main">
+            <h4>Corporate Signal: Spotify Network</h4>
+            <p>High-confidence traffic detected from Spotify's corporate IP block. 3 distinct views on your Portfolio page.</p>
+            <div class="feed-meta">14m ago • 3 visits • <span class="chip high">High Confidence</span></div>
+          </div>
+          <button class="btn btn-sm" onclick="huntCompany('Spotify')">Identify Who</button>
         </div>
 
-        <div style="background:var(--panel-2); border-radius:12px; border:1px solid rgba(255,255,255,0.1); overflow:hidden;">
-          <div class="radar-row radar-header">
-            <div>Entity / Network</div>
-            <div>Engagement Signal</div>
-            <div>Confidence</div>
-            <div style="text-align:right">Action</div>
+        <div class="feed-item">
+          <div class="feed-icon" style="color:var(--teal)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           </div>
+          <div class="feed-main">
+            <h4>Inbound Capture: David Chen</h4>
+            <p>Verified user unlocked your "Pricing Guide" via LinkUp.</p>
+            <div class="feed-meta">1h ago • david@acme.com • <span class="chip verified">Verified</span></div>
+          </div>
+          <button class="btn btn-sm btn-primary">Email David</button>
+        </div>
 
-          <div class="radar-row">
-            <div style="display:flex; align-items:center; gap:12px;">
-              <div style="width:32px; height:32px; background:#fff; border-radius:4px; display:flex; align-items:center; justify-content:center; color:#000; font-weight:800;">S</div>
-              <div>
-                <div style="font-weight:600; color:#fff;">Spotify</div>
-                <div style="font-size:0.75rem; color:var(--muted)">New York, NY</div>
-              </div>
-            </div>
-            <div style="font-size:0.85rem; color:var(--ink);">
-              3 Visits • <strong>Portfolio</strong> • 4m Dwell
-            </div>
-            <div>
-              <span class="chip status-high">Corporate</span>
-            </div>
-            <div style="text-align:right">
-              <button class="btn btn-sm btn-primary" onclick="switchToDiscovery('Spotify')">Reveal</button>
-            </div>
+        <div class="feed-item">
+          <div class="feed-icon" style="color:var(--accent-purple)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           </div>
-
-          <div class="radar-row">
-            <div style="display:flex; align-items:center; gap:12px;">
-              <div style="width:32px; height:32px; background:#ef4444; border-radius:4px; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800;">O</div>
-              <div>
-                <div style="font-weight:600; color:#fff;">Ogilvy</div>
-                <div style="font-size:0.75rem; color:var(--muted)">London, UK</div>
-              </div>
-            </div>
-            <div style="font-size:0.85rem; color:var(--ink);">
-              1 Visit • Pricing Page
-            </div>
-            <div>
-              <span class="chip status-high">Corporate</span>
-            </div>
-            <div style="text-align:right">
-              <button class="btn btn-sm" onclick="switchToDiscovery('Ogilvy')">Reveal</button>
-            </div>
+          <div class="feed-main">
+            <h4>Meeting Prep: Amina Khan</h4>
+            <p>Upcoming call with SignalNorth. Dossier enriched with 3 recent talking points.</p>
+            <div class="feed-meta">Tomorrow 2:00 PM • Calendar Sync</div>
           </div>
-
-          <div class="radar-row">
-            <div style="display:flex; align-items:center; gap:12px;">
-              <div style="width:32px; height:32px; background:rgba(255,255,255,0.1); border-radius:4px; display:flex; align-items:center; justify-content:center; color:var(--muted);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5v14"/></svg></div>
-              <div>
-                <div style="font-weight:600; color:var(--muted);">Unknown (Comcast)</div>
-                <div style="font-size:0.75rem; color:var(--muted)">Los Angeles, CA</div>
-              </div>
-            </div>
-            <div style="font-size:0.85rem; color:var(--muted);">
-              Mobile Visit • 30s
-            </div>
-            <div>
-              <span class="chip status-low">ISP / Low</span>
-            </div>
-            <div style="text-align:right">
-              <button class="btn btn-sm" style="opacity:0.5; cursor:not-allowed">Hidden</button>
-            </div>
-          </div>
+          <button class="btn btn-sm">View Dossier</button>
         </div>
       </div>
 
-      <div class="tab-panel" id="panel-discovery">
-        <div class="panel-header-row">
-          <div>
-            <div class="panel-title">Targeted Discovery</div>
-            <div class="panel-subtitle">Surgical lookup for verified decision makers.</div>
-          </div>
-          <div class="credit-badge">
-            <div class="credit-count">5</div>
-            <div class="credit-label">Credits Left</div>
-          </div>
-        </div>
+      <div id="radar" class="tab-panel">
+        <table class="radar-table">
+          <thead>
+            <tr>
+              <th>Entity / Network</th>
+              <th>Location</th>
+              <th>Engagement Signal</th>
+              <th>Confidence</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="entity-cell">
+                  <div class="logo-box">S</div>
+                  <strong>Spotify</strong>
+                </div>
+              </td>
+              <td>New York, NY</td>
+              <td>3 Visits • Portfolio</td>
+              <td><span class="chip high">Corporate</span></td>
+              <td><button class="btn btn-sm" onclick="huntCompany('Spotify')">Reveal</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="entity-cell">
+                  <div class="logo-box" style="background:#ef4444; color:#fff">O</div>
+                  <strong>Ogilvy</strong>
+                </div>
+              </td>
+              <td>London, UK</td>
+              <td>1 Visit • Pricing</td>
+              <td><span class="chip high">Corporate</span></td>
+              <td><button class="btn btn-sm" onclick="huntCompany('Ogilvy')">Reveal</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="entity-cell">
+                  <div class="logo-box" style="background:transparent; border:1px solid #333; color:#666">?</div>
+                  <span style="color:var(--muted)">Unknown (Comcast)</span>
+                </div>
+              </td>
+              <td>Los Angeles, CA</td>
+              <td>Mobile • 30s</td>
+              <td><span class="chip med">Likely ISP</span></td>
+              <td><span style="font-size:0.8rem; color:var(--muted)">-</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <div style="max-width: 800px; margin: 0 auto;">
-          <input type="text" id="discovery-input" class="search-box-lg" placeholder="Try: 'Marketing Directors at Spotify in New York'..." />
+      <div id="discovery" class="tab-panel">
+        <div class="discovery-container">
+          <div class="credit-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10"/></svg>
+            <span id="credit-display">5 Credits Remaining</span>
+          </div>
           
-          <div style="text-align:center; margin-bottom:40px;">
-            <button class="btn btn-primary" style="padding:12px 32px; font-size:1rem;" onclick="runDiscovery()">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              Start Hunt (-1 Credit)
-            </button>
+          <h2 style="margin:0 0 16px 0; font-size:1.5rem; color:#fff;">Who do you need to reach?</h2>
+          <p style="margin:0 0 32px 0; color:var(--muted);">Use credits to verify decision makers at specific companies.</p>
+
+          <div class="search-bar-wrapper">
+            <input type="text" id="hunt-input" class="search-input" placeholder="e.g. Marketing Directors at Spotify..." />
           </div>
 
-          <div id="discovery-results" style="display:none; animation: fadeIn 0.4s ease;">
-            <div class="panel-title" style="margin-bottom:16px; font-size:1rem;">Top Matches Found</div>
+          <button class="btn btn-primary" onclick="runHunt()">
+            Start Discovery (-1 Credit)
+          </button>
+
+          <div id="hunt-results" style="display:none; margin-top:40px; animation: fadeIn 0.5s ease;">
+            <div style="text-align:left; color:var(--muted); font-size:0.8rem; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.05em;">Found 2 Verified Matches</div>
             
-            <div class="dossier-card">
-              <div style="width:50px; height:50px; border-radius:50%; background:#333; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">SJ</div>
-              <div class="dossier-main">
-                <div class="dossier-name">Sarah Jenkins</div>
-                <div class="dossier-role">VP Brand Marketing @ Spotify</div>
-                <div class="chip status-high">Verified Email</div>
-                
-                <div class="dossier-insights">
-                  <strong>Intelligence:</strong> Likely decision maker for ad spend. Recent LinkedIn activity discusses "Audio Programmatic". Tech stack includes Salesforce & Notion.
+            <div class="result-card">
+              <div style="display:flex; gap:16px; align-items:center;">
+                <div style="width:40px; height:40px; background:#333; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff;">SJ</div>
+                <div>
+                  <div style="color:#fff; font-weight:600;">Sarah Jenkins</div>
+                  <div style="color:var(--teal); font-size:0.9rem;">VP Brand Marketing</div>
                 </div>
               </div>
               <button class="btn btn-sm btn-primary">Draft Email</button>
             </div>
 
-            <div class="dossier-card">
-              <div style="width:50px; height:50px; border-radius:50%; background:#333; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">MR</div>
-              <div class="dossier-main">
-                <div class="dossier-name">Mike Ross</div>
-                <div class="dossier-role">Head of Growth @ Spotify</div>
-                <div class="chip status-high">Verified Email</div>
+            <div class="result-card">
+              <div style="display:flex; gap:16px; align-items:center;">
+                <div style="width:40px; height:40px; background:#333; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff;">MR</div>
+                <div>
+                  <div style="color:#fff; font-weight:600;">Mike Ross</div>
+                  <div style="color:var(--teal); font-size:0.9rem;">Head of Growth</div>
+                </div>
               </div>
               <button class="btn btn-sm btn-primary">Draft Email</button>
             </div>
-
           </div>
+
         </div>
       </div>
 
@@ -516,64 +460,47 @@
   </div>
 
   <script>
-    // --- TAB LOGIC ---
-    const tabs = document.querySelectorAll('.tab');
-    const panels = {
-      'briefing': document.getElementById('panel-briefing'),
-      'radar': document.getElementById('panel-radar'),
-      'discovery': document.getElementById('panel-discovery')
-    };
-
-    function switchTab(tabId) {
-      // Deactivate all
-      tabs.forEach(t => t.classList.remove('tab-active'));
-      Object.values(panels).forEach(p => p.classList.remove('active'));
+    // --- SIMPLE TAB LOGIC ---
+    function setTab(id) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
       
-      // Activate target
-      const activeTab = document.querySelector(`.tab[data-tab="${tabId}"]`);
-      if(activeTab) activeTab.classList.add('tab-active');
-      if(panels[tabId]) panels[tabId].classList.add('active');
+      // Handle button clicks finding tab by index or logic
+      // Ideally use data attributes, but for simple demo:
+      const tabs = Array.from(document.querySelectorAll('.tab'));
+      const index = id === 'briefing' ? 0 : id === 'radar' ? 1 : 2;
+      
+      tabs[index].classList.add('active');
+      document.getElementById(id).classList.add('active');
     }
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => switchTab(tab.dataset.tab));
-    });
-
-    // --- INTER-TAB COMMUNICATION ---
-    function switchToDiscovery(companyName) {
-      switchTab('discovery');
-      const input = document.getElementById('discovery-input');
-      // Pre-fill specifically for decision makers at that company
-      input.value = `Marketing Decision Makers at ${companyName}`;
+    // --- INTER-TAB ACTIONS ---
+    function huntCompany(company) {
+      setTab('discovery');
+      const input = document.getElementById('hunt-input');
+      input.value = `Decision Makers at ${company}`;
       input.focus();
-      // Optional: Add visual flash to show it updated
-      input.style.borderColor = 'var(--green-light)';
-      setTimeout(() => input.style.borderColor = 'rgba(255,255,255,0.2)', 600);
+      input.style.borderColor = 'var(--accent-purple)';
     }
 
-    // --- MOCK DISCOVERY LOGIC ---
-    function runDiscovery() {
-      const btn = document.querySelector('button[onclick="runDiscovery()"]');
-      const originalText = btn.innerHTML;
-      const results = document.getElementById('discovery-results');
+    // --- MOCK API CALL ---
+    function runHunt() {
+      const btn = document.querySelector('button[onclick="runHunt()"]');
+      const originalText = btn.innerText;
       
       // Loading State
-      btn.innerHTML = 'Scanning Premium Data...';
-      btn.style.opacity = '0.7';
+      btn.innerText = "Scanning Apollo Network...";
+      btn.style.opacity = 0.7;
       
       setTimeout(() => {
-        btn.innerHTML = originalText;
-        btn.style.opacity = '1';
-        results.style.display = 'block';
+        // Success State
+        btn.innerText = originalText;
+        btn.style.opacity = 1;
+        document.getElementById('hunt-results').style.display = 'block';
         
-        // Mock Credit Deduction
-        const creditCount = document.querySelector('.credit-count');
-        if(creditCount.innerText === '5') {
-            creditCount.innerText = '4';
-            // Visual feedback on deduction
-            creditCount.style.color = 'var(--warning)';
-            setTimeout(() => creditCount.style.color = 'var(--green-light)', 1000);
-        }
+        // Update Credits
+        document.getElementById('credit-display').innerText = "4 Credits Remaining";
+        document.getElementById('credit-display').style.color = "var(--warning)";
       }, 1500);
     }
   </script>
