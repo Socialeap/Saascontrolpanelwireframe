@@ -201,13 +201,27 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 .btn-action { background: linear-gradient(135deg, #22c55e, #4ade80); color: #022c22; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3); }
 
 /* ===============================
-   DISCOVERY & TOOLTIPS
+   DISCOVERY & EXPLORER
 ================================ */
-.discovery-container { padding: 60px 20px; text-align: center; background: var(--panel-soft); border-radius: 16px; max-width: 600px; margin: 20px auto; border: 1px solid var(--line); }
+.discovery-container { padding: 50px 30px; text-align: center; background: var(--panel-soft); border-radius: 16px; max-width: 650px; margin: 20px auto; border: 1px solid var(--line); }
 .search-input { width: 100%; padding: 16px 20px; background: rgba(0,0,0,0.3); border: 1px solid var(--line); border-radius: 12px; color: #fff; font-size: 1rem; margin-bottom: 24px; outline: none; transition: 0.2s; }
 .search-input:focus { border-color: var(--green); box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.1); }
 
-/* Tooltip Logic */
+/* The "How it Works" Micro-Explainer */
+.explainer-box {
+  display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; 
+  padding: 16px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--line);
+}
+.explainer-step {
+  display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.75rem; color: var(--muted); position: relative; padding: 0 10px;
+}
+.explainer-step strong { color: #fff; font-size: 0.85rem; }
+.explainer-arrow { color: var(--line); margin-top: 6px; }
+.step-tag { font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.05); }
+
+/* ===============================
+   TOOLTIP LOGIC
+================================ */
 [data-tooltip] { position: relative; }
 [data-tooltip]:hover::after {
   content: attr(data-tooltip);
@@ -226,10 +240,10 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   max-width: 260px;
   text-align: center;
   pointer-events: none;
-  z-index: 999;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  z-index: 9999;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
   opacity: 0;
-  animation: tipIn 0.18s forwards;
+  animation: tipIn 0.15s forwards;
 }
 
 /* Tooltip Arrow */
@@ -241,11 +255,11 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   border-width: 6px;
   border-style: solid;
   border-color: #0f172a transparent transparent transparent;
-  z-index: 999;
+  z-index: 9999;
   opacity: 0;
-  animation: tipIn 0.18s forwards;
+  animation: tipIn 0.15s forwards;
 }
-@keyframes tipIn { to { opacity: 1; } }
+@keyframes tipIn { to { opacity: 1; transform: translateX(-50%) translateY(-5px); } }
 
 </style>
 </head>
@@ -256,25 +270,25 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 
 <header class="app-header">
   <div>
-    <div class="app-title" data-tooltip="LeadRadar is your intelligence layer for identifying relevance and acting with precision.">
+    <div class="app-title" data-tooltip="Discovery step: This is your command center for identifying relevance and taking action.">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
         HELLO! LeadRadar™
     </div>
-    <div class="sub-title">Contextual Intelligence Console v3.6</div>
+    <div class="sub-title">Contextual Intelligence Console v3.7</div>
   </div>
-  <div class="status-badge" data-tooltip="The system is currently running. New high-relevance activity will surface here first.">
+  <div class="status-badge" data-tooltip="Discovery step: The system is currently active. New high-relevance activity will appear here.">
     <span class="pulse-dot"></span> Active
   </div>
 </header>
 
 <div class="stats-row">
-  <div class="stat-card" data-tooltip="Your warmest visitors—people returning, exploring, and paying attention. Based on first-party engagement.">
+  <div class="stat-card" data-tooltip="Discovery step: Counts visitors showing meaningful engagement (first-party data). No credits used.">
     <div class="stat-label">High-Relevance Activity</div>
     <div class="stat-value" style="color:var(--green)">12</div>
     <div class="stat-sub">+3 today (behavioral)</div>
   </div>
 
-  <div class="stat-card" data-tooltip="File downloads and link clicks tell you what a visitor cares about.">
+  <div class="stat-card" data-tooltip="Discovery step: Tracks file downloads and link clicks. Use this to gauge specific interests.">
     <div class="stat-label">Asset Engagement</div>
     <div class="stat-value" style="color:var(--daily-blue)">5</div>
     <div class="stat-sub">Clicks & downloads</div>
@@ -283,12 +297,12 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   <div class="stat-card credit-card">
     <div class="stat-label" style="color:#fff; opacity:0.9;">Credits Available</div>
     <div class="credit-grid">
-      <div class="credit-col" data-tooltip="Use Discoveries to reveal the Company Name and Location of a visitor. These reset every 24 hours.">
+      <div class="credit-col" data-tooltip="Discovery step: Discoveries reveal company identity/roles. Resets daily to encourage exploration.">
         <span class="c-label" style="color:var(--daily-blue)">Discoveries</span>
         <div class="c-count" id="credit-discoveries">3 / 3</div>
         <div class="stat-sub">Daily exploration</div>
       </div>
-      <div class="credit-col" data-tooltip="Use Reveals to unlock a verified personal email address. Best used when you are ready to reach out.">
+      <div class="credit-col" data-tooltip="Reveal step: Reveals unlock verified emails. Use these only when you are ready to reach out.">
         <span class="c-label" style="color:var(--premium-purple)">Reveals</span>
         <div class="c-count" id="credit-reveals">9</div>
         <div class="stat-sub">High-confidence actions</div>
@@ -298,9 +312,9 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 </div>
 
 <nav class="tab-bar">
-  <div class="tab active" onclick="switchTab('briefing')" id="tab-briefing">Briefing</div>
-  <div class="tab" onclick="switchTab('radar')" id="tab-radar">Visitor Radar</div>
-  <div class="tab" onclick="switchTab('discovery')" id="tab-discovery">Targeted Discovery</div>
+  <div class="tab active" onclick="switchTab('briefing')" id="tab-briefing" data-tooltip="Discovery step: Your prioritized feed of urgent activity.">Briefing</div>
+  <div class="tab" onclick="switchTab('radar')" id="tab-radar" data-tooltip="Discovery step: Full list of all identified visitor traffic.">Visitor Radar</div>
+  <div class="tab" onclick="switchTab('discovery')" id="tab-discovery" data-tooltip="Discovery step: Proactively search for roles at any company.">Targeted Discovery</div>
 </nav>
 
 <div id="briefing" class="tab-panel active">
@@ -323,13 +337,13 @@ tr:hover td { background: rgba(255,255,255,0.02); }
           Viewed Portfolio • 4m dwell
         </td>
         <td>
-          <span class="chip status" data-tooltip="Strong engagement detected based on repeat visits and dwell time.">
+          <span class="chip status" data-tooltip="Discovery step: Strong engagement pattern detected. Worth exploring.">
             High Intent
           </span>
         </td>
         <td>
-          <button class="btn btn-discovery" onclick="switchTab('radar')" data-tooltip="Go to Visitor Radar to unlock company identity and decide your next move.">
-            Explore
+          <button class="btn btn-discovery" onclick="switchTab('radar')" data-tooltip="Discovery step: Identify the company behind this signal. (Uses 1 Daily Discovery)">
+            Discover Roles
           </button>
         </td>
       </tr>
@@ -343,13 +357,13 @@ tr:hover td { background: rgba(255,255,255,0.02); }
           Internal Sharing Detected
         </td>
         <td>
-          <span class="chip status-solid" data-tooltip="Multiple visits + deep engagement suggests active evaluation.">
+          <span class="chip status-solid" data-tooltip="Discovery step: Multiple visits suggest active evaluation.">
             Buying Mode
           </span>
         </td>
         <td>
-          <button class="btn btn-premium" onclick="switchTab('radar')" data-tooltip="Go to Visitor Radar to reveal a verified decision-maker email (uses 1 Reveal).">
-            Reveal Email
+          <button class="btn btn-premium" onclick="switchTab('radar')" data-tooltip="Reveal step: Unlock a verified contact email for this signal. (Uses 1 Reveal Credit)">
+            Reveal Contact
           </button>
         </td>
       </tr>
@@ -363,13 +377,13 @@ tr:hover td { background: rgba(255,255,255,0.02); }
           Provided email + message
         </td>
         <td>
-          <span class="chip status-solid" data-tooltip="Verified inbound = ready to act immediately.">
+          <span class="chip status-solid" data-tooltip="Act step: Data was voluntarily provided. Ready for outreach.">
             Verified
           </span>
         </td>
         <td>
-          <button class="btn btn-action" data-tooltip="Open the next-step action—draft a reply or schedule a follow-up.">
-            Draft Email
+          <button class="btn btn-action" data-tooltip="Act step: Start your reply to this lead.">
+            Draft Outreach
           </button>
         </td>
       </tr>
@@ -394,18 +408,18 @@ tr:hover td { background: rgba(255,255,255,0.02); }
           <span class="entity-sub">High-Volume Visitor</span>
         </td>
         <td>
-          <span class="chip locked" data-tooltip="Context is hidden. Unlock to see Company Name.">
+          <span class="chip locked" data-tooltip="Discovery step: Engagement is visible, but identity is locked.">
             Locked Context
           </span>
         </td>
         <td>
-          <span class="chip status" data-tooltip="High relevance based on repeat activity and meaningful engagement.">
+          <span class="chip status">
             High Intent
           </span>
         </td>
         <td>
-          <button class="btn btn-discovery" data-tooltip="Unlock company name + location (uses 1 Discovery). Then you can decide whether to Reveal contacts.">
-            Unlock Context
+          <button class="btn btn-discovery" data-tooltip="Discovery step: Unlock company name & location. (Uses 1 Daily Discovery)">
+            Discover Roles
           </button>
         </td>
       </tr>
@@ -419,13 +433,13 @@ tr:hover td { background: rgba(255,255,255,0.02); }
           pricing_page_v2 • API Docs
         </td>
         <td>
-          <span class="chip status-solid" data-tooltip="High purchase intent: pricing + technical docs suggests serious evaluation.">
+          <span class="chip status-solid">
             Buying Mode
           </span>
         </td>
         <td>
-          <button class="btn btn-premium" data-tooltip="Unlock a verified decision-maker email (uses 1 Reveal).">
-            Reveal Email
+          <button class="btn btn-premium" data-tooltip="Reveal step: Get the verified email for a decision maker. (Uses 1 Reveal Credit)">
+            Reveal Contact
           </button>
         </td>
       </tr>
@@ -439,13 +453,13 @@ tr:hover td { background: rgba(255,255,255,0.02); }
           david@acme.com
         </td>
         <td>
-          <span class="chip status-solid" data-tooltip="Email verified and safe to send.">
+          <span class="chip status-solid">
             Verified
           </span>
         </td>
         <td>
-          <button class="btn btn-action" data-tooltip="Draft a tailored outreach while their interest is hot.">
-            Draft Email
+          <button class="btn btn-action" data-tooltip="Act step: Send an email to this verified contact.">
+            Draft Outreach
           </button>
         </td>
       </tr>
@@ -455,18 +469,38 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 
 <div id="discovery" class="tab-panel">
   <div class="discovery-container">
-    <h2 style="margin:0 0 12px 0; color:#fff; font-size:1.5rem;" data-tooltip="Use this when you want to proactively reach out to specific companies.">
+    <h2 style="margin:0 0 8px 0; color:#fff; font-size:1.5rem;" data-tooltip="Discovery step: Search for any company you want to target.">
       Targeted Discovery
     </h2>
 
-    <p style="margin:0 0 24px 0; color:var(--muted); font-size:0.9rem;" data-tooltip="Discovery finds relevant roles and departments. You can then spend a Reveal to unlock verified contact details.">
-      Find the right person to contact at any company.
+    <p style="margin:0 0 24px 0; color:var(--muted); font-size:0.9rem;">
+      Search any company to find roles (Discovery) and unlock contacts (Reveal).
     </p>
 
-    <input type="text" id="discovery-input" class="search-input" placeholder="Enter Role, Company, Location..." />
+    <div class="explainer-box">
+      <div class="explainer-step">
+        <strong style="color:var(--daily-blue)">1. DISCOVER</strong>
+        <span>Find Roles</span>
+        <span class="step-tag">Daily Credit</span>
+      </div>
+      <div class="explainer-arrow">→</div>
+      <div class="explainer-step">
+        <strong style="color:var(--premium-purple)">2. REVEAL</strong>
+        <span>Get Email</span>
+        <span class="step-tag">Reveal Credit</span>
+      </div>
+      <div class="explainer-arrow">→</div>
+      <div class="explainer-step">
+        <strong style="color:var(--green)">3. ACT</strong>
+        <span>Outreach</span>
+        <span class="step-tag">Free</span>
+      </div>
+    </div>
 
-    <button class="btn btn-discovery" style="width:100%; justify-content:center; padding:14px;" onclick="runDiscoveryDemo()" data-tooltip="Runs a Discovery search (uses 1 Discovery). Results would appear below in production.">
-      Run Discovery
+    <input type="text" id="discovery-input" class="search-input" placeholder="Enter Role, Company, Location..." data-tooltip="Discovery step: Type a target like 'Marketing VP at Nike'." />
+
+    <button class="btn btn-discovery" style="width:100%; justify-content:center; padding:14px;" onclick="runDiscoveryDemo()" data-tooltip="Discovery step: Find matching roles at this company. (Uses 1 Daily Discovery)">
+      Discover Roles
     </button>
 
     <div id="discovery-results" style="display:none; margin-top:22px; text-align:left;">
@@ -477,8 +511,8 @@ tr:hover td { background: rgba(255,255,255,0.02); }
             <div style="color:#fff; font-weight:700;">VP Marketing • Nike</div>
             <div style="color:var(--muted); font-size:0.85rem;">Portland, OR • Brand Growth</div>
           </div>
-          <button class="btn btn-premium" data-tooltip="Unlock the verified email for this contact (uses 1 Reveal).">
-            Reveal Email
+          <button class="btn btn-premium" data-tooltip="Reveal step: Unlock the email for this specific person. (Uses 1 Reveal Credit)">
+            Reveal Contact
           </button>
         </div>
       </div>
