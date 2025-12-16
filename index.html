@@ -114,7 +114,7 @@ body {
 .c-count { font-size: 1.5rem; font-weight: 800; margin-top: 4px; color: #fff; }
 
 /* ===============================
-   TABS (Pill Shaped)
+   MAIN TABS (Pill Shaped)
 ================================ */
 .tab-bar {
   display: flex; gap: 8px; padding: 6px;
@@ -150,26 +150,13 @@ body {
 
 /* Status Chips - ALL GREEN (Unified) */
 .chip.status {
-  border-color: var(--green);
-  color: var(--green);
-  background: var(--green-glow);
-  font-weight: 600;
+  border-color: var(--green); color: var(--green); background: var(--green-glow); font-weight: 600;
 }
-
-/* Solid Variant for very high importance */
 .chip.status-solid {
-  background: var(--green-bg);
-  color: #022c22;
-  border-color: transparent;
-  font-weight: 800;
+  background: var(--green-bg); color: #022c22; border-color: transparent; font-weight: 800;
 }
-
-/* Locked/Neutral State */
 .chip.locked {
-  border-color: var(--line);
-  color: var(--muted);
-  border-style: dashed;
-  opacity: 0.7;
+  border-color: var(--line); color: var(--muted); border-style: dashed; opacity: 0.7;
 }
 
 /* ===============================
@@ -201,26 +188,41 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 .btn-action { background: linear-gradient(135deg, #22c55e, #4ade80); color: #022c22; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3); }
 
 /* ===============================
-   DISCOVERY & EXPLORER
+   DISCOVERY PIPELINE (The New 3-Stage System)
 ================================ */
-.discovery-container { padding: 50px 30px; text-align: center; background: var(--panel-soft); border-radius: 16px; max-width: 650px; margin: 20px auto; border: 1px solid var(--line); }
+.discovery-container { padding: 40px 30px; text-align: center; background: var(--panel-soft); border-radius: 16px; max-width: 700px; margin: 20px auto; border: 1px solid var(--line); }
 .search-input { width: 100%; padding: 16px 20px; background: rgba(0,0,0,0.3); border: 1px solid var(--line); border-radius: 12px; color: #fff; font-size: 1rem; margin-bottom: 24px; outline: none; transition: 0.2s; }
 .search-input:focus { border-color: var(--green); box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.1); }
 
-/* The "How it Works" Micro-Explainer */
-.explainer-box {
-  display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; 
-  padding: 16px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid var(--line);
+/* The Pipeline Stepper */
+.pipeline-nav {
+  display: flex; justify-content: center; gap: 4px; margin-bottom: 30px; 
+  background: rgba(0,0,0,0.3); border-radius: var(--radius-pill); padding: 4px; border: 1px solid var(--line);
+  width: fit-content; margin-left: auto; margin-right: auto;
 }
-.explainer-step {
-  display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.75rem; color: var(--muted); position: relative; padding: 0 10px;
+.pipe-step {
+  padding: 8px 24px; border-radius: var(--radius-pill); font-size: 0.75rem; font-weight: 700; color: var(--muted); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px;
 }
-.explainer-step strong { color: #fff; font-size: 0.85rem; }
-.explainer-arrow { color: var(--line); margin-top: 6px; }
-.step-tag { font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.05); }
+.pipe-step:hover { color: #fff; background: rgba(255,255,255,0.05); }
+.pipe-step.active { background: var(--panel); border: 1px solid var(--line); color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+
+/* Step Colors */
+.pipe-step.step-1.active { color: var(--daily-blue); border-color: rgba(96, 165, 250, 0.4); }
+.pipe-step.step-2.active { color: var(--premium-purple); border-color: rgba(192, 132, 252, 0.4); }
+.pipe-step.step-3.active { color: var(--green); border-color: rgba(74, 222, 128, 0.4); }
+
+/* Pipeline Panels */
+.pipe-panel { display: none; animation: fadePanel 0.2s ease; }
+.pipe-panel.active { display: block; }
+
+/* Results Card */
+.result-card {
+  background: rgba(0,0,0,0.25); border: 1px solid var(--line); border-radius: 14px; padding: 20px;
+  display: flex; justify-content: space-between; align-items: center; text-align: left; margin-top: 10px;
+}
 
 /* ===============================
-   TOOLTIP LOGIC
+   TOOLTIP LOGIC (Consolidated)
 ================================ */
 [data-tooltip] { position: relative; }
 [data-tooltip]:hover::after {
@@ -274,7 +276,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
         HELLO! LeadRadar™
     </div>
-    <div class="sub-title">Contextual Intelligence Console v3.7</div>
+    <div class="sub-title" data-tooltip="Demo console showing the intended UX flow for Ultra users.">Contextual Intelligence Console v4.0</div>
   </div>
   <div class="status-badge" data-tooltip="Discovery step: The system is currently active. New high-relevance activity will appear here.">
     <span class="pulse-dot"></span> Active
@@ -473,48 +475,50 @@ tr:hover td { background: rgba(255,255,255,0.02); }
       Targeted Discovery
     </h2>
 
-    <p style="margin:0 0 24px 0; color:var(--muted); font-size:0.9rem;">
-      Search any company to find roles (Discovery) and unlock contacts (Reveal).
+    <p style="margin:0 0 30px 0; color:var(--muted); font-size:0.9rem;">
+      Proactively find roles at any company. Reveal credits are only spent when you unlock contact details.
     </p>
 
-    <div class="explainer-box">
-      <div class="explainer-step">
-        <strong style="color:var(--daily-blue)">1. DISCOVER</strong>
-        <span>Find Roles</span>
-        <span class="step-tag">Daily Credit</span>
+    <div class="pipeline-nav">
+      <div class="pipe-step step-1 active" onclick="setPipelineStep(1)" id="ps-1">1. DISCOVER</div>
+      <div class="pipe-step step-2" onclick="setPipelineStep(2)" id="ps-2">2. REVEAL</div>
+      <div class="pipe-step step-3" onclick="setPipelineStep(3)" id="ps-3">3. ACT</div>
+    </div>
+
+    <div id="pipe-view-1" class="pipe-panel active">
+      <input type="text" id="discovery-input" class="search-input" placeholder="Enter Role, Company, Location (e.g. Marketing VP at Nike)..." data-tooltip="Discovery step: Type a target company and role." />
+      <button class="btn btn-discovery" style="width:100%; justify-content:center; padding:14px;" onclick="runDiscoveryDemo()" data-tooltip="Discovery step: Find matching roles at this company. (Uses 1 Daily Discovery)">
+        Discover Roles
+      </button>
+    </div>
+
+    <div id="pipe-view-2" class="pipe-panel">
+      <div class="result-card">
+        <div>
+          <div style="color:#fff; font-weight:700;">VP Marketing • Nike</div>
+          <div style="color:var(--muted); font-size:0.85rem;">Portland, OR • Brand Growth</div>
+        </div>
+        <button class="btn btn-premium" onclick="revealContactDemo()" data-tooltip="Reveal step: Unlock the email for this specific person. (Uses 1 Reveal Credit)">
+          Reveal Contact
+        </button>
       </div>
-      <div class="explainer-arrow">→</div>
-      <div class="explainer-step">
-        <strong style="color:var(--premium-purple)">2. REVEAL</strong>
-        <span>Get Email</span>
-        <span class="step-tag">Reveal Credit</span>
-      </div>
-      <div class="explainer-arrow">→</div>
-      <div class="explainer-step">
-        <strong style="color:var(--green)">3. ACT</strong>
-        <span>Outreach</span>
-        <span class="step-tag">Free</span>
+      <div style="margin-top:16px; font-size:0.8rem; color:var(--muted); text-align:center;">
+        Confirm this is the right person before revealing.
       </div>
     </div>
 
-    <input type="text" id="discovery-input" class="search-input" placeholder="Enter Role, Company, Location..." data-tooltip="Discovery step: Type a target like 'Marketing VP at Nike'." />
-
-    <button class="btn btn-discovery" style="width:100%; justify-content:center; padding:14px;" onclick="runDiscoveryDemo()" data-tooltip="Discovery step: Find matching roles at this company. (Uses 1 Daily Discovery)">
-      Discover Roles
-    </button>
-
-    <div id="discovery-results" style="display:none; margin-top:22px; text-align:left;">
-      <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); border-radius:14px; padding:16px;">
-        <div style="font-weight:700; color:#fff; margin-bottom:10px;">Results (Demo)</div>
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div>
-            <div style="color:#fff; font-weight:700;">VP Marketing • Nike</div>
-            <div style="color:var(--muted); font-size:0.85rem;">Portland, OR • Brand Growth</div>
-          </div>
-          <button class="btn btn-premium" data-tooltip="Reveal step: Unlock the email for this specific person. (Uses 1 Reveal Credit)">
-            Reveal Contact
-          </button>
+    <div id="pipe-view-3" class="pipe-panel">
+      <div class="result-card" style="border-color:var(--green);">
+        <div>
+          <div style="color:#fff; font-weight:700;">Sarah Johnson (Verified)</div>
+          <div style="color:var(--green); font-size:0.85rem;">sarah.j@nike.com</div>
         </div>
+        <button class="btn btn-action" onclick="alert('Opening Email Client...')" data-tooltip="Act step: Send an email to this verified contact.">
+          Draft Outreach
+        </button>
+      </div>
+      <div style="margin-top:16px; font-size:0.8rem; color:var(--green); text-align:center;">
+        Success! Contact revealed.
       </div>
     </div>
 
@@ -525,20 +529,47 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 </div>
 
 <script>
-/* Tab Logic */
+/* Main Tab Logic */
 function switchTab(tabId) {
   document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
-  const tabEl = document.getElementById('tab-' + tabId);
-  const panelEl = document.getElementById(tabId);
-  if (tabEl) tabEl.classList.add('active');
-  if (panelEl) panelEl.classList.add('active');
+  document.getElementById('tab-' + tabId).classList.add('active');
+  document.getElementById(tabId).classList.add('active');
 }
 
-/* Discovery demo */
+/* Pipeline Logic (Sub-Tabs) */
+function setPipelineStep(stepNum) {
+  // Update Nav
+  document.querySelectorAll('.pipe-step').forEach(el => el.classList.remove('active'));
+  document.getElementById('ps-' + stepNum).classList.add('active');
+  
+  // Update View
+  document.querySelectorAll('.pipe-panel').forEach(el => el.classList.remove('active'));
+  document.getElementById('pipe-view-' + stepNum).classList.add('active');
+}
+
+/* Demo Automation: Search -> Results */
 function runDiscoveryDemo() {
-  const results = document.getElementById('discovery-results');
-  if (results) results.style.display = 'block';
+  const btn = document.querySelector('#pipe-view-1 .btn-discovery');
+  const originalText = btn.innerText;
+  btn.innerText = "Searching...";
+  
+  setTimeout(() => {
+    btn.innerText = originalText;
+    setPipelineStep(2); // Auto-advance to Reveal
+  }, 800);
+}
+
+/* Demo Automation: Reveal -> Act */
+function revealContactDemo() {
+  const btn = document.querySelector('#pipe-view-2 .btn-premium');
+  const originalText = btn.innerText;
+  btn.innerText = "Verifying...";
+  
+  setTimeout(() => {
+    btn.innerText = originalText;
+    setPipelineStep(3); // Auto-advance to Act
+  }, 800);
 }
 </script>
 
