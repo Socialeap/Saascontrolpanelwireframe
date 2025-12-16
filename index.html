@@ -25,7 +25,7 @@
   --green-bg: #22c55e;    /* Solid Buttons/Badges */
   --green-glow: rgba(74, 222, 128, 0.15);
 
-  /* Credit Logic Colors (Kept distinct for functional clarity only) */
+  /* Credit Logic Colors */
   --daily-blue: #60a5fa;
   --premium-purple: #c084fc;
 
@@ -41,7 +41,7 @@ body {
   font-family: "Inter", system-ui, sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(1200px 600px at 20% -10%, rgba(34, 197, 94, 0.15), transparent 60%), /* Subtle Green Tint */
+    radial-gradient(1200px 600px at 20% -10%, rgba(34, 197, 94, 0.15), transparent 60%),
     radial-gradient(1200px 600px at 120% 0%, rgba(34, 197, 94, 0.1), transparent 55%),
     #020617;
 }
@@ -91,6 +91,7 @@ body {
   border: 1px solid var(--line);
   padding: 22px; border-radius: var(--radius-md);
   position: relative;
+  cursor: help;
 }
 .stat-label {
   font-size: 0.7rem; text-transform: uppercase; color: var(--muted);
@@ -102,7 +103,7 @@ body {
 /* Credit Ledger */
 .credit-card { border-color: rgba(96, 165, 250, 0.3); background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)); }
 .credit-grid { display: flex; margin-top: 14px; }
-.credit-col { flex: 1; }
+.credit-col { flex: 1; position: relative; cursor: help; }
 .credit-col + .credit-col { border-left: 1px solid var(--line); padding-left: 18px; }
 
 .c-label { font-size: 0.65rem; text-transform: uppercase; display: flex; align-items: center; gap: 6px; font-weight: 700; }
@@ -190,7 +191,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 }
 .btn:hover { transform: translateY(-1px); }
 
-/* Functional Colors for Actions (Still distinct for logic) */
+/* Functional Colors for Actions */
 .btn-discovery { background: rgba(96, 165, 250, 0.15); color: var(--daily-blue); border-color: rgba(96, 165, 250, 0.3); }
 .btn-premium { background: rgba(192, 132, 252, 0.15); color: var(--premium-purple); border-color: rgba(192, 132, 252, 0.3); }
 .btn-action { background: linear-gradient(135deg, #22c55e, #4ade80); color: #022c22; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3); }
@@ -202,12 +203,46 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 .search-input { width: 100%; padding: 16px 20px; background: rgba(0,0,0,0.3); border: 1px solid var(--line); border-radius: 12px; color: #fff; font-size: 1rem; margin-bottom: 24px; outline: none; transition: 0.2s; }
 .search-input:focus { border-color: var(--green); box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.1); }
 
+/* Tooltip Logic */
 [data-tooltip] { position: relative; }
 [data-tooltip]:hover::after {
-  content: attr(data-tooltip); position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%);
-  background: #0f172a; border: 1px solid var(--line); padding: 8px 12px; border-radius: 8px;
-  font-size: 0.75rem; color: #fff; white-space: pre-wrap; width: max-content; max-width: 220px; text-align: center; pointer-events: none; z-index: 99; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%; left: 50%;
+  transform: translateX(-50%);
+  background: #0f172a;
+  border: 1px solid var(--line);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: #fff;
+  white-space: pre-wrap;
+  width: max-content;
+  max-width: 260px;
+  text-align: center;
+  pointer-events: none;
+  z-index: 999;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  opacity: 0;
+  animation: fadeIn 0.2s forwards;
 }
+@keyframes fadeIn { to { opacity: 1; transform: translateX(-50%) translateY(-5px); } }
+
+/* Tooltip Arrow */
+[data-tooltip]:hover::before {
+  content: "";
+  position: absolute;
+  bottom: 115%; left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #0f172a transparent transparent transparent;
+  z-index: 999;
+  opacity: 0;
+  animation: fadeIn 0.2s forwards;
+}
+
 </style>
 </head>
 
@@ -221,47 +256,47 @@ tr:hover td { background: rgba(255,255,255,0.02); }
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
         HELLO! LeadRadar™
     </div>
-    <div class="sub-title">Contextual Intelligence Console v3.4</div>
+    <div class="sub-title">Contextual Intelligence Console v3.5</div>
   </div>
-  <div class="status-badge" data-tooltip="LeadRadar is actively monitoring engagement and prioritizing opportunities for you.">
+  <div class="status-badge" data-tooltip="The system is currently running. We will notify you when new high-intent signals are detected.">
     <span class="pulse-dot"></span> Active
   </div>
 </header>
 
 <div class="stats-row">
-  <div class="stat-card" data-tooltip="High-intent activity based purely on how visitors interact with your Signature Card. No paid data used.">
+  <div class="stat-card" data-tooltip="Visitors who are spending real time on your page and returning frequently. These are your warmest leads.">
     <div class="stat-label">High-Relevance Activity</div>
     <div class="stat-value" style="color:var(--green)">12</div>
     <div class="stat-sub">+3 today (behavioral)</div>
   </div>
 
-  <div class="stat-card" data-tooltip="Tracks engagement with your portfolio, pricing, and downloads — signals you fully control.">
+  <div class="stat-card" data-tooltip="The number of times visitors downloaded your files or clicked your links.">
     <div class="stat-label">Asset Engagement</div>
     <div class="stat-value" style="color:var(--daily-blue)">5</div>
     <div class="stat-sub">Clicks & downloads</div>
   </div>
 
-  <div class="stat-card credit-card" data-tooltip="Your daily and premium allowances for unlocking deeper context and verified contacts.">
+  <div class="stat-card credit-card">
     <div class="stat-label" style="color:#fff; opacity:0.9;">Credits Available</div>
     <div class="credit-grid">
-      <div class="credit-col">
+      <div class="credit-col" data-tooltip="Use these to reveal the Company Name and Location of a visitor. These reset every 24 hours.">
         <span class="c-label" style="color:var(--daily-blue)">Discoveries</span>
         <div class="c-count">3 / 3</div>
         <div class="stat-sub">Daily exploration</div>
       </div>
-      <div class="credit-col">
+      <div class="credit-col" data-tooltip="Use these to unlock a verified personal email address. Best for when you are ready to reach out.">
         <span class="c-label" style="color:var(--premium-purple)">Reveals</span>
         <div class="c-count">9</div>
-        <div class="stat-sub">Use intentionally</div>
+        <div class="stat-sub">High-confidence actions</div>
       </div>
     </div>
   </div>
 </div>
 
 <nav class="tab-bar">
-  <div class="tab active" onclick="switchTab('briefing')" id="tab-briefing">Briefing</div>
-  <div class="tab" onclick="switchTab('radar')" id="tab-radar">Visitor Radar</div>
-  <div class="tab" onclick="switchTab('discovery')" id="tab-discovery">Targeted Discovery</div>
+  <div class="tab active" onclick="switchTab('briefing')" id="tab-briefing" data-tooltip="Your main feed of urgent signals and actionable alerts.">Briefing</div>
+  <div class="tab" onclick="switchTab('radar')" id="tab-radar" data-tooltip="A complete list of every company visiting your card.">Visitor Radar</div>
+  <div class="tab" onclick="switchTab('discovery')" id="tab-discovery" data-tooltip="Search for specific people at companies you want to reach.">Targeted Discovery</div>
 </nav>
 
 <div id="briefing" class="tab-panel active">
@@ -281,8 +316,8 @@ tr:hover td { background: rgba(255,255,255,0.02); }
             <span class="entity-sub">12m ago • 3 visits</span>
         </td>
         <td>Viewed Portfolio • 4m dwell</td>
-        <td><span class="chip status">High Intent</span></td>
-        <td><button class="btn btn-discovery" onclick="switchTab('radar')">Explore</button></td>
+        <td><span class="chip status" data-tooltip="This visitor is showing strong interest but their identity is hidden.">High Intent</span></td>
+        <td><button class="btn btn-discovery" onclick="switchTab('radar')" data-tooltip="Reveal which company is visiting you. (Uses 1 Daily Discovery)">Explore</button></td>
       </tr>
       <tr>
         <td>
@@ -290,8 +325,8 @@ tr:hover td { background: rgba(255,255,255,0.02); }
             <span class="entity-sub">45m ago • NYC Office</span>
         </td>
         <td>Internal Sharing Detected</td>
-        <td><span class="chip status-solid">Buying Mode</span></td>
-        <td><button class="btn btn-premium">Reveal Email</button></td>
+        <td><span class="chip status-solid" data-tooltip="Multiple people from this company are visiting. They are likely discussing you.">Buying Mode</span></td>
+        <td><button class="btn btn-premium" data-tooltip="Get the verified email for the decision maker. (Uses 1 Reveal Credit)">Reveal Email</button></td>
       </tr>
     </tbody>
   </table>
@@ -314,10 +349,10 @@ tr:hover td { background: rgba(255,255,255,0.02); }
             <span class="entity-sub">High-Volume Visitor</span>
         </td>
         <td>
-            <span class="chip locked">Locked Context</span>
+            <span class="chip locked" data-tooltip="Context is hidden. Unlock to see Company Name.">Locked Context</span>
         </td>
-        <td><span class="chip status">High Signal</span></td>
-        <td><button class="btn btn-discovery">Unlock Context</button></td>
+        <td><span class="chip status" data-tooltip="Based on time spent and repeat visits.">High Signal</span></td>
+        <td><button class="btn btn-discovery" data-tooltip="Reveal the company name and location. (Uses 1 Daily Discovery)">Unlock Context</button></td>
       </tr>
       <tr>
         <td>
@@ -325,8 +360,8 @@ tr:hover td { background: rgba(255,255,255,0.02); }
             <span class="entity-sub">Creative Dept</span>
         </td>
         <td>pricing_page_v2 • API Docs</td>
-        <td><span class="chip status-solid">Buying Mode</span></td>
-        <td><button class="btn btn-premium">Reveal Email</button></td>
+        <td><span class="chip status-solid" data-tooltip="They are checking your pricing and technical docs.">Buying Mode</span></td>
+        <td><button class="btn btn-premium" data-tooltip="Unlock the email for the Creative Director at Ogilvy. (Uses 1 Reveal Credit)">Reveal Email</button></td>
       </tr>
       <tr>
         <td>
@@ -334,8 +369,8 @@ tr:hover td { background: rgba(255,255,255,0.02); }
             <span class="entity-sub">Acme Corp</span>
         </td>
         <td>david@acme.com</td>
-        <td><span class="chip status-solid">Verified</span></td>
-        <td><button class="btn btn-action">Draft Email</button></td>
+        <td><span class="chip status-solid" data-tooltip="Email verified and safe to send.">Verified</span></td>
+        <td><button class="btn btn-action" data-tooltip="Open your email client to contact David.">Draft Email</button></td>
       </tr>
     </tbody>
   </table>
@@ -345,10 +380,10 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   <div class="discovery-container">
     <h2 style="margin:0 0 12px 0; color:#fff; font-size:1.5rem;">Targeted Discovery</h2>
     <p style="margin:0 0 24px 0; color:var(--muted); font-size:0.9rem;">
-        Use 1 Discovery Credit to find roles. Example: "Marketing VPs at Spotify".
+        Find the right person to contact at any company.
     </p>
-    <input type="text" class="search-input" placeholder="Enter Role, Company, Location..." />
-    <button class="btn btn-discovery" style="width:100%; justify-content:center; padding:14px;">Run Discovery</button>
+    <input type="text" class="search-input" placeholder="Enter Role, Company, Location..." data-tooltip="Example: 'Marketing VP at Nike in Oregon'" />
+    <button class="btn btn-discovery" style="width:100%; justify-content:center; padding:14px;" data-tooltip="Find matching roles. (Uses 1 Daily Discovery)">Run Discovery</button>
   </div>
 </div>
 
@@ -358,11 +393,8 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 <script>
 // Tab Logic
 function switchTab(tabId) {
-  // 1. Remove active class from all tabs and panels
   document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
-
-  // 2. Add active class to clicked tab and corresponding panel
   document.getElementById('tab-' + tabId).classList.add('active');
   document.getElementById(tabId).classList.add('active');
 }
