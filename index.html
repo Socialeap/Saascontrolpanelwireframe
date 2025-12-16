@@ -131,9 +131,9 @@ body {
 }
 
 /* Panels */
-.tab-panel { display: none; animation: fadeIn 0.3s ease; }
+.tab-panel { display: none; animation: fadePanel 0.28s ease; }
 .tab-panel.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadePanel { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* ===============================
    UNIFIED INDICATOR PILLS
@@ -225,9 +225,8 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   z-index: 999;
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   opacity: 0;
-  animation: fadeIn 0.2s forwards;
+  animation: tipIn 0.18s forwards;
 }
-@keyframes fadeIn { to { opacity: 1; transform: translateX(-50%) translateY(-5px); } }
 
 /* Tooltip Arrow */
 [data-tooltip]:hover::before {
@@ -240,8 +239,9 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   border-color: #0f172a transparent transparent transparent;
   z-index: 999;
   opacity: 0;
-  animation: fadeIn 0.2s forwards;
+  animation: tipIn 0.18s forwards;
 }
+@keyframes tipIn { to { opacity: 1; } }
 
 </style>
 </head>
@@ -252,138 +252,247 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 
 <header class="app-header">
   <div>
-    <div class="app-title">
+    <div class="app-title" data-tooltip="LeadRadar is your intelligence layer for identifying relevance and acting with precision.">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
         HELLO! LeadRadar™
     </div>
-    <div class="sub-title">Contextual Intelligence Console v3.5</div>
+    <div class="sub-title" data-tooltip="Demo console showing the intended UX flow for Ultra users.">Contextual Intelligence Console v3.5</div>
   </div>
-  <div class="status-badge" data-tooltip="The system is currently running. We will notify you when new high-intent signals are detected.">
+  <div class="status-badge" data-tooltip="The system is currently running. New high-relevance activity will surface here first.">
     <span class="pulse-dot"></span> Active
   </div>
 </header>
 
 <div class="stats-row">
-  <div class="stat-card" data-tooltip="Visitors who are spending real time on your page and returning frequently. These are your warmest leads.">
-    <div class="stat-label">High-Relevance Activity</div>
-    <div class="stat-value" style="color:var(--green)">12</div>
-    <div class="stat-sub">+3 today (behavioral)</div>
+  <div class="stat-card" data-tooltip="Counts visitors showing meaningful engagement like repeat visits and strong dwell time. This is first-party behavior (no paid enrichment).">
+    <div class="stat-label" data-tooltip="Your warmest visitors—people returning, exploring, and paying attention.">High-Relevance Activity</div>
+    <div class="stat-value" style="color:var(--green)" data-tooltip="Example count for demo. In production this is computed from engagement scoring.">12</div>
+    <div class="stat-sub" data-tooltip="Shows change vs. prior 24 hours.">+3 today (behavioral)</div>
   </div>
 
-  <div class="stat-card" data-tooltip="The number of times visitors downloaded your files or clicked your links.">
-    <div class="stat-label">Asset Engagement</div>
-    <div class="stat-value" style="color:var(--daily-blue)">5</div>
-    <div class="stat-sub">Clicks & downloads</div>
+  <div class="stat-card" data-tooltip="Measures interactions with portfolio links, pricing links, downloads, and key CTAs you control.">
+    <div class="stat-label" data-tooltip="File downloads and link clicks tell you what a visitor cares about.">Asset Engagement</div>
+    <div class="stat-value" style="color:var(--daily-blue)" data-tooltip="Example count for demo. In production this is aggregated per user.">5</div>
+    <div class="stat-sub" data-tooltip="Includes link clicks and downloads from your Signature Card.">Clicks & downloads</div>
   </div>
 
-  <div class="stat-card credit-card">
-    <div class="stat-label" style="color:#fff; opacity:0.9;">Credits Available</div>
+  <div class="stat-card credit-card" data-tooltip="Credits are your allowance for paid lookups. They keep the system premium and sustainable.">
+    <div class="stat-label" style="color:#fff; opacity:0.9;" data-tooltip="Credits determine how often you can unlock identity and contact details.">Credits Available</div>
     <div class="credit-grid">
-      <div class="credit-col" data-tooltip="Use these to reveal the Company Name and Location of a visitor. These reset every 24 hours.">
-        <span class="c-label" style="color:var(--daily-blue)">Discoveries</span>
-        <div class="c-count">3 / 3</div>
-        <div class="stat-sub">Daily exploration</div>
+      <div class="credit-col" data-tooltip="Discoveries reveal company identity and context (company name + location). These reset daily.">
+        <span class="c-label" style="color:var(--daily-blue)" data-tooltip="Used for revealing who is behind a high-relevance visitor.">Discoveries</span>
+        <div class="c-count" id="credit-discoveries" data-tooltip="Remaining today (demo).">3 / 3</div>
+        <div class="stat-sub" data-tooltip="Designed for consistent daily use without encouraging noise.">Daily exploration</div>
       </div>
-      <div class="credit-col" data-tooltip="Use these to unlock a verified personal email address. Best for when you are ready to reach out.">
-        <span class="c-label" style="color:var(--premium-purple)">Reveals</span>
-        <div class="c-count">9</div>
-        <div class="stat-sub">High-confidence actions</div>
+      <div class="credit-col" data-tooltip="Reveals unlock verified contact details (like emails). Best used when you are ready to reach out.">
+        <span class="c-label" style="color:var(--premium-purple)" data-tooltip="Used for verified contact details and deeper enrichment.">Reveals</span>
+        <div class="c-count" id="credit-reveals" data-tooltip="Remaining this cycle (demo).">9</div>
+        <div class="stat-sub" data-tooltip="Reserved for high-confidence actions.">High-confidence actions</div>
       </div>
     </div>
   </div>
 </div>
 
-<nav class="tab-bar">
-  <div class="tab active" onclick="switchTab('briefing')" id="tab-briefing" data-tooltip="Your main feed of urgent signals and actionable alerts.">Briefing</div>
-  <div class="tab" onclick="switchTab('radar')" id="tab-radar" data-tooltip="A complete list of every company visiting your card.">Visitor Radar</div>
-  <div class="tab" onclick="switchTab('discovery')" id="tab-discovery" data-tooltip="Search for specific people at companies you want to reach.">Targeted Discovery</div>
+<nav class="tab-bar" data-tooltip="These tabs form the Intelligence Loop: Briefing → Radar → Discovery.">
+  <div class="tab active" onclick="switchTab('briefing')" id="tab-briefing" data-tooltip="Your daily feed of the most important activity—what deserves attention now.">Briefing</div>
+  <div class="tab" onclick="switchTab('radar')" id="tab-radar" data-tooltip="See everyone who visited, how they behaved, and what to do next.">Visitor Radar</div>
+  <div class="tab" onclick="switchTab('discovery')" id="tab-discovery" data-tooltip="Actively search for aligned roles at target companies when you want to accelerate outcomes.">Targeted Discovery</div>
 </nav>
 
+<!-- ===============================
+     TAB 1: BRIEFING (FULL PANEL)
+================================ -->
 <div id="briefing" class="tab-panel active">
   <table>
     <thead>
       <tr>
-        <th style="width:40%">Signal</th>
-        <th style="width:30%">Context</th>
-        <th style="width:15%">Status</th>
-        <th style="width:15%">Action</th>
+        <th style="width:40%" data-tooltip="What happened and who it may be.">Activity</th>
+        <th style="width:30%" data-tooltip="First-party context: what they explored and how long they stayed.">Context</th>
+        <th style="width:15%" data-tooltip="Status reflects urgency based on engagement.">Status</th>
+        <th style="width:15%" data-tooltip="Next best action to move this forward.">Action</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>
-            <span class="entity-main">Unidentified Corporate Visitor</span>
-            <span class="entity-sub">12m ago • 3 visits</span>
+        <td data-tooltip="High-relevance visitor detected but identity is not yet unlocked.">
+          <span class="entity-main">Unidentified Corporate Visitor</span>
+          <span class="entity-sub">12m ago • 3 visits</span>
         </td>
-        <td>Viewed Portfolio • 4m dwell</td>
-        <td><span class="chip status" data-tooltip="This visitor is showing strong interest but their identity is hidden.">High Intent</span></td>
-        <td><button class="btn btn-discovery" onclick="switchTab('radar')" data-tooltip="Reveal which company is visiting you. (Uses 1 Daily Discovery)">Explore</button></td>
+        <td data-tooltip="This is what they did on your Signature Card.">
+          Viewed Portfolio • 4m dwell
+        </td>
+        <td>
+          <span class="chip status" data-tooltip="Strong engagement detected based on repeat visits and dwell time.">
+            High Intent
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-discovery" onclick="switchTab('radar')" data-tooltip="Go to Visitor Radar to unlock company identity and decide your next move.">
+            Explore
+          </button>
+        </td>
       </tr>
+
       <tr>
-        <td>
-            <span class="entity-main">Spotify Network</span>
-            <span class="entity-sub">45m ago • NYC Office</span>
+        <td data-tooltip="Example of an identified company context already available.">
+          <span class="entity-main">Spotify Network</span>
+          <span class="entity-sub">45m ago • NYC Office</span>
         </td>
-        <td>Internal Sharing Detected</td>
-        <td><span class="chip status-solid" data-tooltip="Multiple people from this company are visiting. They are likely discussing you.">Buying Mode</span></td>
-        <td><button class="btn btn-premium" data-tooltip="Get the verified email for the decision maker. (Uses 1 Reveal Credit)">Reveal Email</button></td>
+        <td data-tooltip="Internal sharing suggests multiple people may be viewing you.">
+          Internal Sharing Detected
+        </td>
+        <td>
+          <span class="chip status-solid" data-tooltip="Multiple visits + deep engagement suggests active evaluation.">
+            Buying Mode
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-premium" onclick="switchTab('radar')" data-tooltip="Go to Visitor Radar to reveal a verified decision-maker email (uses 1 Reveal).">
+            Reveal Email
+          </button>
+        </td>
+      </tr>
+
+      <tr>
+        <td data-tooltip="Inbound leads (via LinkUp) can appear here when a visitor submits their details.">
+          <span class="entity-main">Inbound Lead Captured</span>
+          <span class="entity-sub">Just now • LinkUp form</span>
+        </td>
+        <td data-tooltip="Inbound is first-party data the visitor chose to submit.">
+          Provided email + message
+        </td>
+        <td>
+          <span class="chip status-solid" data-tooltip="Verified inbound = ready to act immediately.">
+            Verified
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-action" data-tooltip="Open the next-step action—draft a reply or schedule a follow-up.">
+            Draft Email
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
 
+<!-- ===============================
+     TAB 2: RADAR (FULL PANEL)
+================================ -->
 <div id="radar" class="tab-panel">
   <table>
     <thead>
       <tr>
-        <th style="width:30%">Entity</th>
-        <th style="width:30%">Behavior</th>
-        <th style="width:20%">Status</th>
-        <th style="width:20%">Next Step</th>
+        <th style="width:30%" data-tooltip="The visitor identity layer. Locked until you choose to reveal.">Entity</th>
+        <th style="width:30%" data-tooltip="What they did on your Signature Card (behavioral context).">Behavior</th>
+        <th style="width:20%" data-tooltip="Status reflects urgency based on engagement patterns.">Status</th>
+        <th style="width:20%" data-tooltip="The next action you can take—and what it costs.">Next Step</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>
-            <span class="entity-main" style="color:var(--muted)">? Unidentified</span>
-            <span class="entity-sub">High-Volume Visitor</span>
+        <td data-tooltip="This row represents a high-relevance visitor whose company identity is still locked.">
+          <span class="entity-main" style="color:var(--muted)">? Unidentified</span>
+          <span class="entity-sub">High-Volume Visitor</span>
+        </td>
+        <td data-tooltip="Context is hidden until you unlock it using a Discovery credit.">
+          <span class="chip locked" data-tooltip="Locked context means you have engagement, but not identity. Unlock when it’s worth acting.">
+            Locked Context
+          </span>
         </td>
         <td>
-            <span class="chip locked" data-tooltip="Context is hidden. Unlock to see Company Name.">Locked Context</span>
+          <span class="chip status" data-tooltip="High relevance based on repeat activity and meaningful engagement.">
+            High Intent
+          </span>
         </td>
-        <td><span class="chip status" data-tooltip="Based on time spent and repeat visits.">High Signal</span></td>
-        <td><button class="btn btn-discovery" data-tooltip="Reveal the company name and location. (Uses 1 Daily Discovery)">Unlock Context</button></td>
+        <td>
+          <button class="btn btn-discovery" data-tooltip="Unlock company name + location (uses 1 Discovery). Then you can decide whether to Reveal contacts.">
+            Unlock Context
+          </button>
+        </td>
       </tr>
+
       <tr>
-        <td>
-            <span class="entity-main">Ogilvy London</span>
-            <span class="entity-sub">Creative Dept</span>
+        <td data-tooltip="Example identified company with department context.">
+          <span class="entity-main">Ogilvy London</span>
+          <span class="entity-sub">Creative Dept</span>
         </td>
-        <td>pricing_page_v2 • API Docs</td>
-        <td><span class="chip status-solid" data-tooltip="They are checking your pricing and technical docs.">Buying Mode</span></td>
-        <td><button class="btn btn-premium" data-tooltip="Unlock the email for the Creative Director at Ogilvy. (Uses 1 Reveal Credit)">Reveal Email</button></td>
+        <td data-tooltip="Examples of assets or pages they engaged with.">
+          pricing_page_v2 • API Docs
+        </td>
+        <td>
+          <span class="chip status-solid" data-tooltip="High purchase intent: pricing + technical docs suggests serious evaluation.">
+            Buying Mode
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-premium" data-tooltip="Unlock a verified decision-maker email (uses 1 Reveal).">
+            Reveal Email
+          </button>
+        </td>
       </tr>
+
       <tr>
-        <td>
-            <span class="entity-main">David Chen</span>
-            <span class="entity-sub">Acme Corp</span>
+        <td data-tooltip="Example of an inbound lead identity (provided directly).">
+          <span class="entity-main">David Chen</span>
+          <span class="entity-sub">Acme Corp</span>
         </td>
-        <td>david@acme.com</td>
-        <td><span class="chip status-solid" data-tooltip="Email verified and safe to send.">Verified</span></td>
-        <td><button class="btn btn-action" data-tooltip="Open your email client to contact David.">Draft Email</button></td>
+        <td data-tooltip="Inbound email captured via LinkUp; no paid reveal needed.">
+          david@acme.com
+        </td>
+        <td>
+          <span class="chip status-solid" data-tooltip="Verified means the email is safe to use for outreach.">
+            Verified
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-action" data-tooltip="Draft a tailored outreach while their interest is hot.">
+            Draft Email
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
 
+<!-- ===============================
+     TAB 3: TARGETED DISCOVERY (FULL PANEL)
+================================ -->
 <div id="discovery" class="tab-panel">
   <div class="discovery-container">
-    <h2 style="margin:0 0 12px 0; color:#fff; font-size:1.5rem;">Targeted Discovery</h2>
-    <p style="margin:0 0 24px 0; color:var(--muted); font-size:0.9rem;">
-        Find the right person to contact at any company.
+    <h2 style="margin:0 0 12px 0; color:#fff; font-size:1.5rem;" data-tooltip="Use this when you want to proactively reach out to specific companies.">
+      Targeted Discovery
+    </h2>
+
+    <p style="margin:0 0 24px 0; color:var(--muted); font-size:0.9rem;" data-tooltip="Discovery finds relevant roles and departments. You can then spend a Reveal to unlock verified contact details.">
+      Find the right person to contact at any company.
     </p>
-    <input type="text" class="search-input" placeholder="Enter Role, Company, Location..." data-tooltip="Example: 'Marketing VP at Nike in Oregon'" />
-    <button class="btn btn-discovery" style="width:100%; justify-content:center; padding:14px;" data-tooltip="Find matching roles. (Uses 1 Daily Discovery)">Run Discovery</button>
+
+    <input type="text" id="discovery-input" class="search-input" placeholder="Enter Role, Company, Location..." data-tooltip="Example: “Marketing VP at Nike in Oregon” or “Head of Growth at Spotify NYC”" />
+
+    <button class="btn btn-discovery" style="width:100%; justify-content:center; padding:14px;" onclick="runDiscoveryDemo()" data-tooltip="Runs a Discovery search (uses 1 Discovery). Results would appear below in production.">
+      Run Discovery
+    </button>
+
+    <div style="margin-top:18px; font-size:0.8rem; color:var(--muted);" data-tooltip="In production this shows remaining Discoveries and refresh time.">
+      Tip: Use Discovery to shortlist roles, then Reveal only the contacts you truly want.
+    </div>
+
+    <div id="discovery-results" style="display:none; margin-top:22px; text-align:left;" data-tooltip="Demo results to show how the flow would look post-search.">
+      <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); border-radius:14px; padding:16px;">
+        <div style="font-weight:700; color:#fff;" data-tooltip="Example role result—what you’d see before a paid Reveal.">Results (Demo)</div>
+        <div style="margin-top:10px; display:flex; justify-content:space-between; align-items:center; gap:12px;">
+          <div>
+            <div style="color:#fff; font-weight:700;" data-tooltip="Role and company match (demo).">VP Marketing • Nike</div>
+            <div style="color:var(--muted); font-size:0.85rem;" data-tooltip="Location and team context (demo).">Portland, OR • Brand Growth</div>
+          </div>
+          <button class="btn btn-premium" data-tooltip="In production this would unlock a verified email (uses 1 Reveal).">
+            Reveal Email
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -391,12 +500,21 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 </div>
 
 <script>
-// Tab Logic
+/* Tab Logic: each tab opens its respective dashboard visual */
 function switchTab(tabId) {
   document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
-  document.getElementById('tab-' + tabId).classList.add('active');
-  document.getElementById(tabId).classList.add('active');
+  const tabEl = document.getElementById('tab-' + tabId);
+  const panelEl = document.getElementById(tabId);
+  if (tabEl) tabEl.classList.add('active');
+  if (panelEl) panelEl.classList.add('active');
+}
+
+/* Discovery demo: shows a results block so the panel feels “complete” for demos */
+function runDiscoveryDemo() {
+  const results = document.getElementById('discovery-results');
+  if (!results) return;
+  results.style.display = 'block';
 }
 </script>
 
