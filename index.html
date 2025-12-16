@@ -276,7 +276,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
         HELLO! LeadRadar™
     </div>
-    <div class="sub-title" data-tooltip="Demo console showing the intended UX flow for Ultra users.">Contextual Intelligence Console v4.0</div>
+    <div class="sub-title" data-tooltip="Demo console showing the intended UX flow for Ultra users.">Contextual Intelligence Console v4.1</div>
   </div>
   <div class="status-badge" data-tooltip="Discovery step: The system is currently active. New high-relevance activity will appear here.">
     <span class="pulse-dot"></span> Active
@@ -344,7 +344,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
           </span>
         </td>
         <td>
-          <button class="btn btn-discovery" onclick="switchTab('radar')" data-tooltip="Discovery step: Identify the company behind this signal. (Uses 1 Daily Discovery)">
+          <button class="btn btn-discovery" onclick="startDiscoveryFromRadar('Likely Decision Makers at Active Visitor Company')" data-tooltip="Discovery step: Identify the company behind this signal. (Uses 1 Daily Discovery)">
             Discover Roles
           </button>
         </td>
@@ -420,7 +420,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
           </span>
         </td>
         <td>
-          <button class="btn btn-discovery" data-tooltip="Discovery step: Unlock company name & location. (Uses 1 Daily Discovery)">
+          <button class="btn btn-discovery" onclick="startDiscoveryFromRadar('Likely Decision Makers at Active Visitor Company')" data-tooltip="Discovery step: Unlock company name & location. (Uses 1 Daily Discovery)">
             Discover Roles
           </button>
         </td>
@@ -476,7 +476,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
     </h2>
 
     <p style="margin:0 0 30px 0; color:var(--muted); font-size:0.9rem;">
-      Proactively find roles at any company. Reveal credits are only spent when you unlock contact details.
+      Identify leads interacting with your Signature Card, or proactively find roles at companies you already know. Reveal credits are spent only on verified contacts.
     </p>
 
     <div class="pipeline-nav">
@@ -546,6 +546,24 @@ function setPipelineStep(stepNum) {
   // Update View
   document.querySelectorAll('.pipe-panel').forEach(el => el.classList.remove('active'));
   document.getElementById('pipe-view-' + stepNum).classList.add('active');
+}
+
+/* Cross-Tab Logic: Radar -> Discovery */
+function startDiscoveryFromRadar(query) {
+  // 1. Switch to Discovery Tab
+  switchTab('discovery');
+  
+  // 2. Set to Step 1
+  setPipelineStep(1);
+  
+  // 3. Pre-fill Input
+  const input = document.getElementById('discovery-input');
+  input.value = query;
+  input.focus();
+  
+  // 4. Visual Feedback (Flash border)
+  input.style.borderColor = 'var(--daily-blue)';
+  setTimeout(() => input.style.borderColor = 'var(--line)', 800);
 }
 
 /* Demo Automation: Search -> Results */
