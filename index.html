@@ -114,7 +114,7 @@ body {
 .c-count { font-size: 1.5rem; font-weight: 800; margin-top: 4px; color: #fff; }
 
 /* ===============================
-   MAIN TABS (Pill Shaped)
+   MAIN TABS (Pill Shaped + Audio)
 ================================ */
 .tab-bar {
   display: flex; gap: 8px; padding: 6px;
@@ -126,6 +126,7 @@ body {
   padding: 10px 24px; font-size: 0.85rem; font-weight: 600;
   border-radius: var(--radius-pill); cursor: pointer;
   color: var(--muted); transition: all 0.2s;
+  display: flex; align-items: center; gap: 8px;
 }
 .tab:hover { color: #fff; background: rgba(255,255,255,0.05); }
 .tab.active {
@@ -133,6 +134,24 @@ body {
   color: #022c22; font-weight: 800;
   box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
 }
+
+/* Audio Button Styling (Hidden by default, visible on active) */
+.audio-btn {
+  display: none; /* Hidden unless parent is active */
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.2);
+  align-items: center; justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+}
+.tab.active .audio-btn, .pipe-step.active .audio-btn {
+  display: inline-flex;
+}
+.audio-btn:hover {
+  transform: scale(1.1);
+  background: rgba(0,0,0,0.4);
+}
+.audio-btn svg { width: 12px; height: 12px; stroke: currentColor; }
 
 /* Panels */
 .tab-panel { display: none; animation: fadePanel 0.28s ease; }
@@ -188,7 +207,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 .btn-action { background: linear-gradient(135deg, #22c55e, #4ade80); color: #022c22; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3); }
 
 /* ===============================
-   DISCOVERY PIPELINE (The New 3-Stage System)
+   DISCOVERY PIPELINE
 ================================ */
 .discovery-container { padding: 40px 30px; text-align: center; background: var(--panel-soft); border-radius: 16px; max-width: 700px; margin: 20px auto; border: 1px solid var(--line); }
 .search-input { width: 100%; padding: 16px 20px; background: rgba(0,0,0,0.3); border: 1px solid var(--line); border-radius: 12px; color: #fff; font-size: 1rem; margin-bottom: 24px; outline: none; transition: 0.2s; }
@@ -201,7 +220,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   width: fit-content; margin-left: auto; margin-right: auto;
 }
 .pipe-step {
-  padding: 8px 24px; border-radius: var(--radius-pill); font-size: 0.75rem; font-weight: 700; color: var(--muted); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  padding: 8px 24px; border-radius: var(--radius-pill); font-size: 0.75rem; font-weight: 700; color: var(--muted); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px;
 }
 .pipe-step:hover { color: #fff; background: rgba(255,255,255,0.05); }
 .pipe-step.active { background: var(--panel); border: 1px solid var(--line); color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
@@ -276,7 +295,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
         HELLO! LeadRadar™
     </div>
-    <div class="sub-title" data-tooltip="Demo console showing the intended UX flow for Ultra users.">Contextual Intelligence Console v4.1</div>
+    <div class="sub-title" data-tooltip="Demo console showing the intended UX flow for Ultra users.">Contextual Intelligence Console v4.2</div>
   </div>
   <div class="status-badge" data-tooltip="Discovery step: The system is currently active. New high-relevance activity will appear here.">
     <span class="pulse-dot"></span> Active
@@ -314,9 +333,24 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 </div>
 
 <nav class="tab-bar">
-  <div class="tab active" onclick="switchTab('briefing')" id="tab-briefing" data-tooltip="Discovery step: Your prioritized feed of urgent activity.">Briefing</div>
-  <div class="tab" onclick="switchTab('radar')" id="tab-radar" data-tooltip="Discovery step: Full list of all identified visitor traffic.">Visitor Radar</div>
-  <div class="tab" onclick="switchTab('discovery')" id="tab-discovery" data-tooltip="Discovery step: Proactively search for roles at any company.">Targeted Discovery</div>
+  <div class="tab active" onclick="switchTab('briefing')" id="tab-briefing" data-tooltip="Discovery step: Your prioritized feed of urgent activity.">
+    Briefing
+    <span class="audio-btn" onclick="playAudio('https://static.wixstatic.com/mp3/c3283f_ddc9fde50ebe41a8a7ef5d736995f5ce.wav', event)" title="Play Briefing Summary">
+       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+    </span>
+  </div>
+  <div class="tab" onclick="switchTab('radar')" id="tab-radar" data-tooltip="Discovery step: Full list of all identified visitor traffic.">
+    Visitor Radar
+    <span class="audio-btn" onclick="playAudio('https://static.wixstatic.com/mp3/c3283f_59de40d1a6b24363b48186afaadfa35f.wav', event)" title="Play Radar Summary">
+       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+    </span>
+  </div>
+  <div class="tab" onclick="switchTab('discovery')" id="tab-discovery" data-tooltip="Discovery step: Proactively search for roles at any company.">
+    Targeted Discovery
+    <span class="audio-btn" onclick="playAudio('https://static.wixstatic.com/mp3/c3283f_3caa0972446e4e80a3cde3fc5bd77717.wav', event)" title="Play Discovery Summary">
+       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+    </span>
+  </div>
 </nav>
 
 <div id="briefing" class="tab-panel active">
@@ -480,9 +514,24 @@ tr:hover td { background: rgba(255,255,255,0.02); }
     </p>
 
     <div class="pipeline-nav">
-      <div class="pipe-step step-1 active" onclick="setPipelineStep(1)" id="ps-1">1. DISCOVER</div>
-      <div class="pipe-step step-2" onclick="setPipelineStep(2)" id="ps-2">2. REVEAL</div>
-      <div class="pipe-step step-3" onclick="setPipelineStep(3)" id="ps-3">3. ACT</div>
+      <div class="pipe-step step-1 active" onclick="setPipelineStep(1)" id="ps-1">
+        1. DISCOVER
+        <span class="audio-btn" onclick="playAudio('https://static.wixstatic.com/mp3/c3283f_5d1629aaea8c4b02a2db13602f21b0d3.wav', event)" title="Play Discovery Audio">
+           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+        </span>
+      </div>
+      <div class="pipe-step step-2" onclick="setPipelineStep(2)" id="ps-2">
+        2. REVEAL
+        <span class="audio-btn" onclick="playAudio('https://static.wixstatic.com/mp3/c3283f_01aa3aa2433b4e8b806b44df82e419ad.wav', event)" title="Play Reveal Audio">
+           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+        </span>
+      </div>
+      <div class="pipe-step step-3" onclick="setPipelineStep(3)" id="ps-3">
+        3. ACT
+        <span class="audio-btn" onclick="playAudio('https://static.wixstatic.com/mp3/c3283f_0fafc1b34a714ca3a2271ee62bd703db.wav', event)" title="Play Act Audio">
+           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+        </span>
+      </div>
     </div>
 
     <div id="pipe-view-1" class="pipe-panel active">
@@ -529,6 +578,21 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 </div>
 
 <script>
+/* Global Audio Controller */
+let currentAudio = null;
+
+function playAudio(url, event) {
+  event.stopPropagation(); // Prevent tab switching
+  
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+  }
+  
+  currentAudio = new Audio(url);
+  currentAudio.play().catch(e => console.log("Audio playback blocked:", e));
+}
+
 /* Main Tab Logic */
 function switchTab(tabId) {
   document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
