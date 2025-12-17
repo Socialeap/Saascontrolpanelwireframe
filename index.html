@@ -143,6 +143,7 @@ body {
   background: rgba(0,0,0,0.2);
   align-items: center; justify-content: center;
   transition: transform 0.2s, background 0.2s;
+  cursor: pointer;
 }
 .tab.active .audio-btn, .pipe-step.active .audio-btn {
   display: inline-flex;
@@ -151,7 +152,7 @@ body {
   transform: scale(1.1);
   background: rgba(0,0,0,0.4);
 }
-.audio-btn svg { width: 12px; height: 12px; stroke: currentColor; }
+.audio-btn svg { width: 12px; height: 12px; stroke: currentColor; pointer-events: none; }
 
 /* Panels */
 .tab-panel { display: none; animation: fadePanel 0.28s ease; }
@@ -295,7 +296,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
         HELLO! LeadRadar™
     </div>
-    <div class="sub-title" data-tooltip="Demo console showing the intended UX flow for Ultra users.">Contextual Intelligence Console v4.2</div>
+    <div class="sub-title" data-tooltip="Demo console showing the intended UX flow for Ultra users.">Contextual Intelligence Console v4.3</div>
   </div>
   <div class="status-badge" data-tooltip="Discovery step: The system is currently active. New high-relevance activity will appear here.">
     <span class="pulse-dot"></span> Active
@@ -335,19 +336,19 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 <nav class="tab-bar">
   <div class="tab active" onclick="switchTab('briefing')" id="tab-briefing" data-tooltip="Discovery step: Your prioritized feed of urgent activity.">
     Briefing
-    <span class="audio-btn" onclick="playAudio('https://static.wixstatic.com/mp3/c3283f_ddc9fde50ebe41a8a7ef5d736995f5ce.wav', event)" title="Play Briefing Summary">
+    <span class="audio-btn" onclick="toggleAudio('https://static.wixstatic.com/mp3/c3283f_ddc9fde50ebe41a8a7ef5d736995f5ce.wav', event, this)" title="Briefing Summary">
        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
     </span>
   </div>
   <div class="tab" onclick="switchTab('radar')" id="tab-radar" data-tooltip="Discovery step: Full list of all identified visitor traffic.">
     Visitor Radar
-    <span class="audio-btn" onclick="playAudio('https://static.wixstatic.com/mp3/c3283f_59de40d1a6b24363b48186afaadfa35f.wav', event)" title="Play Radar Summary">
+    <span class="audio-btn" onclick="toggleAudio('https://static.wixstatic.com/mp3/c3283f_59de40d1a6b24363b48186afaadfa35f.wav', event, this)" title="Radar Summary">
        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
     </span>
   </div>
   <div class="tab" onclick="switchTab('discovery')" id="tab-discovery" data-tooltip="Discovery step: Proactively search for roles at any company.">
     Targeted Discovery
-    <span class="audio-btn" onclick="playAudio('https://static.wixstatic.com/mp3/c3283f_3caa0972446e4e80a3cde3fc5bd77717.wav', event)" title="Play Discovery Summary">
+    <span class="audio-btn" onclick="toggleAudio('https://static.wixstatic.com/mp3/c3283f_3caa0972446e4e80a3cde3fc5bd77717.wav', event, this)" title="Discovery Summary">
        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
     </span>
   </div>
@@ -516,19 +517,19 @@ tr:hover td { background: rgba(255,255,255,0.02); }
     <div class="pipeline-nav">
       <div class="pipe-step step-1 active" onclick="setPipelineStep(1)" id="ps-1">
         1. DISCOVER
-        <span class="audio-btn" onclick="playAudio('https://static.wixstatic.com/mp3/c3283f_5d1629aaea8c4b02a2db13602f21b0d3.wav', event)" title="Play Discovery Audio">
+        <span class="audio-btn" onclick="toggleAudio('https://static.wixstatic.com/mp3/c3283f_5d1629aaea8c4b02a2db13602f21b0d3.wav', event, this)" title="Play Discovery Audio">
            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
         </span>
       </div>
       <div class="pipe-step step-2" onclick="setPipelineStep(2)" id="ps-2">
         2. REVEAL
-        <span class="audio-btn" onclick="playAudio('https://static.wixstatic.com/mp3/c3283f_01aa3aa2433b4e8b806b44df82e419ad.wav', event)" title="Play Reveal Audio">
+        <span class="audio-btn" onclick="toggleAudio('https://static.wixstatic.com/mp3/c3283f_01aa3aa2433b4e8b806b44df82e419ad.wav', event, this)" title="Play Reveal Audio">
            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
         </span>
       </div>
       <div class="pipe-step step-3" onclick="setPipelineStep(3)" id="ps-3">
         3. ACT
-        <span class="audio-btn" onclick="playAudio('https://static.wixstatic.com/mp3/c3283f_0fafc1b34a714ca3a2271ee62bd703db.wav', event)" title="Play Act Audio">
+        <span class="audio-btn" onclick="toggleAudio('https://static.wixstatic.com/mp3/c3283f_0fafc1b34a714ca3a2271ee62bd703db.wav', event, this)" title="Play Act Audio">
            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
         </span>
       </div>
@@ -578,18 +579,46 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 </div>
 
 <script>
-/* Global Audio Controller */
+/* Global Audio Logic (Toggle Support) */
 let currentAudio = null;
+let currentBtn = null;
 
-function playAudio(url, event) {
-  event.stopPropagation(); // Prevent tab switching
-  
+// Icons
+const playIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
+const stopIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12"></rect></svg>`;
+
+function toggleAudio(url, event, btnElement) {
+  event.stopPropagation();
+
+  // 1. Check if we need to stop the current audio
   if (currentAudio) {
     currentAudio.pause();
     currentAudio.currentTime = 0;
+    // Reset previous button icon
+    if (currentBtn) currentBtn.innerHTML = playIcon;
+    
+    // If clicking the SAME button, we just stop (toggle off)
+    if (currentBtn === btnElement) {
+      currentAudio = null;
+      currentBtn = null;
+      return;
+    }
   }
-  
+
+  // 2. Play new audio
   currentAudio = new Audio(url);
+  currentBtn = btnElement;
+  
+  // Set new icon to Stop
+  btnElement.innerHTML = stopIcon;
+
+  // Handle natural end of file
+  currentAudio.onended = () => {
+    btnElement.innerHTML = playIcon;
+    currentAudio = null;
+    currentBtn = null;
+  };
+
   currentAudio.play().catch(e => console.log("Audio playback blocked:", e));
 }
 
