@@ -304,13 +304,13 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 </header>
 
 <div class="stats-row">
-  <div class="stat-card" data-tooltip="Discovery step: Counts visitors showing meaningful engagement (first-party data). No credits used.">
+  <div class="stat-card" data-tooltip="Number of visitors showing meaningful engagement (first-party data). No credits used.">
     <div class="stat-label">High-Relevance Activity</div>
     <div class="stat-value" style="color:var(--green)">12</div>
     <div class="stat-sub">+3 today (behavioral)</div>
   </div>
 
-  <div class="stat-card" data-tooltip="Discovery step: Tracks file downloads and link clicks. Use this to gauge specific interests.">
+  <div class="stat-card" data-tooltip="Tracks your contact downloads and link clicks. Use this to gauge specific interests.">
     <div class="stat-label">Asset Engagement</div>
     <div class="stat-value" style="color:var(--daily-blue)">5</div>
     <div class="stat-sub">Clicks & downloads</div>
@@ -319,15 +319,15 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   <div class="stat-card credit-card">
     <div class="stat-label" style="color:#fff; opacity:0.9;">Credits Available</div>
     <div class="credit-grid">
-      <div class="credit-col" data-tooltip="Discovery step: Discoveries reveal company identity/roles. Resets daily to encourage exploration.">
-        <span class="c-label" style="color:var(--daily-blue)">Discoveries</span>
+      <div class="credit-col" data-tooltip="Credits used to discover the companies behind interactions with your Card. No personal identities are revealed at this stage. Resets daily to encourage exploration.">
+        <span class="c-label" style="color:var(--daily-blue)">Company Lookups</span>
         <div class="c-count" id="credit-discoveries">3 / 3</div>
-        <div class="stat-sub">Daily exploration</div>
+        <div class="stat-sub">Reveal Company & Location</div>
       </div>
       <div class="credit-col" data-tooltip="Reveal step: Reveals unlock verified emails. Use these only when you are ready to reach out.">
         <span class="c-label" style="color:var(--premium-purple)">Reveals</span>
         <div class="c-count" id="credit-reveals">9</div>
-        <div class="stat-sub">High-confidence actions</div>
+        <div class="stat-sub">Verified Contacts</div>
       </div>
     </div>
   </div>
@@ -340,13 +340,13 @@ tr:hover td { background: rgba(255,255,255,0.02); }
        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
     </span>
   </div>
-  <div class="tab" onclick="switchTab('radar')" id="tab-radar" data-tooltip="Discovery step: Full list of all identified visitor traffic.">
+  <div class="tab" onclick="switchTab('radar')" id="tab-radar" data-tooltip="Discovery step: Full list of all individual visitor traffic.">
     Visitor Radar
     <span class="audio-btn" onclick="toggleAudio('https://static.wixstatic.com/mp3/c3283f_59de40d1a6b24363b48186afaadfa35f.wav', event, this)" title="Radar Summary">
        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
     </span>
   </div>
-  <div class="tab" onclick="switchTab('discovery')" id="tab-discovery" data-tooltip="Discovery step: Proactively search for roles at any company.">
+  <div class="tab" onclick="switchTab('discovery')" id="tab-discovery" data-tooltip="Discovery step: Proactively search for roles and contacts at any company.">
     Targeted Discovery
     <span class="audio-btn" onclick="toggleAudio('https://static.wixstatic.com/mp3/c3283f_3caa0972446e4e80a3cde3fc5bd77717.wav', event, this)" title="Discovery Summary">
        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
