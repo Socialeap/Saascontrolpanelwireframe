@@ -298,7 +298,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
     </div>
     <div class="sub-title" data-tooltip="Demo console showing the intended UX flow for Ultra users.">Contextual Intelligence Console v4.3</div>
   </div>
-  <div class="status-badge" data-tooltip="Discovery step: The system is currently active. New high-relevance activity will appear here.">
+  <div class="status-badge" data-tooltip="The system is currently active. New high-relevance activity will appear here.">
     <span class="pulse-dot"></span> Active
   </div>
 </header>
@@ -310,8 +310,8 @@ tr:hover td { background: rgba(255,255,255,0.02); }
     <div class="stat-sub">+3 today (behavioral)</div>
   </div>
 
-  <div class="stat-card" data-tooltip="Tracks your contact downloads and link clicks. Use this to gauge specific interests.">
-    <div class="stat-label">Asset Engagement</div>
+  <div class="stat-card" data-tooltip="Number of persons that interacted by downloading your contact info, clicking a link or button">
+    <div class="stat-label">Signature Engagement</div>
     <div class="stat-value" style="color:var(--daily-blue)">5</div>
     <div class="stat-sub">Clicks & downloads</div>
   </div>
@@ -327,27 +327,27 @@ tr:hover td { background: rgba(255,255,255,0.02); }
       <div class="credit-col" data-tooltip="Reveal step: Reveals unlock verified emails. Use these only when you are ready to reach out.">
         <span class="c-label" style="color:var(--premium-purple)">Reveals</span>
         <div class="c-count" id="credit-reveals">9</div>
-        <div class="stat-sub">Verified Contacts</div>
+        <div class="stat-sub">Contact Verifications Remaining</div>
       </div>
     </div>
   </div>
 </div>
 
 <nav class="tab-bar">
-  <div class="tab active" onclick="switchTab('briefing')" id="tab-briefing" data-tooltip="Discovery step: Your prioritized feed of urgent activity.">
+  <div class="tab active" onclick="switchTab('briefing')" id="tab-briefing" data-tooltip="Your prioritized feed of recent activity.">
     Briefing
     <span class="audio-btn" onclick="toggleAudio('https://static.wixstatic.com/mp3/c3283f_ddc9fde50ebe41a8a7ef5d736995f5ce.wav', event, this)" title="Briefing Summary">
        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
     </span>
   </div>
-  <div class="tab" onclick="switchTab('radar')" id="tab-radar" data-tooltip="Discovery step: Full list of all individual visitor traffic.">
+  <div class="tab" onclick="switchTab('radar')" id="tab-radar" data-tooltip="Full list of all individual visitor traffic.">
     Visitor Radar
     <span class="audio-btn" onclick="toggleAudio('https://static.wixstatic.com/mp3/c3283f_59de40d1a6b24363b48186afaadfa35f.wav', event, this)" title="Radar Summary">
        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
     </span>
   </div>
-  <div class="tab" onclick="switchTab('discovery')" id="tab-discovery" data-tooltip="Discovery step: Proactively search for roles and contacts at any company.">
-    Targeted Discovery
+  <div class="tab" onclick="switchTab('discovery')" id="tab-discovery" data-tooltip="Proactively search for roles and contacts at any company.">
+   Discovery Phase
     <span class="audio-btn" onclick="toggleAudio('https://static.wixstatic.com/mp3/c3283f_3caa0972446e4e80a3cde3fc5bd77717.wav', event, this)" title="Discovery Summary">
        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
     </span>
