@@ -935,11 +935,11 @@ Shared efforts that build capability, trust, or momentum inside the Collective.
           <div class="rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
 
             <!-- TABLE HEADER -->
-            <div class="grid grid-cols-4 gap-0 px-4 sm:px-6 py-4 bg-black/30 border-b border-white/10 text-xs sm:text-sm font-bold text-blue-100/90">
-              <div class="col-span-1">Feature</div>
-              <div class="text-center">Basic</div>
-              <div class="text-center">Pro</div>
-              <div class="text-center">Ultra</div>
+            <div class="compare-row-header px-4 sm:px-6 py-4 bg-black/30 border-b border-white/10 text-xs sm:text-sm font-bold text-blue-100/90">
+              <div class="feature">Feature</div>
+              <div class="cell text-center">Basic</div>
+              <div class="cell text-center">Pro</div>
+              <div class="cell text-center">Ultra</div>
             </div>
 
             <!-- Accordion Sections -->
@@ -965,16 +965,6 @@ Shared efforts that build capability, trust, or momentum inside the Collective.
                     </div>
 
                     <div class="compare-row">
-                      <div class="feature">
-                        Number of live published cards
-                        <span class="tip" data-tip="Publishing slots control how many cards can be live at once.">i</span>
-                      </div>
-                      <div class="cell text">1</div>
-                      <div class="cell text">1</div>
-                      <div class="cell text">Multiple</div>
-                    </div>
-
-                    <div class="compare-row">
                       <div class="feature">Profile and background images</div>
                       <div class="cell yes">✔</div>
                       <div class="cell yes">✔</div>
@@ -983,6 +973,13 @@ Shared efforts that build capability, trust, or momentum inside the Collective.
 
                     <div class="compare-row">
                       <div class="feature">Custom buttons and links</div>
+                      <div class="cell yes">✔</div>
+                      <div class="cell yes">✔</div>
+                      <div class="cell yes">✔</div>
+                    </div>
+
+                    <div class="compare-row">
+                      <div class="feature">Custom GPT for AI Styling Assistance</div>
                       <div class="cell yes">✔</div>
                       <div class="cell yes">✔</div>
                       <div class="cell yes">✔</div>
@@ -1008,7 +1005,7 @@ Shared efforts that build capability, trust, or momentum inside the Collective.
                     </div>
 
                     <div class="compare-row">
-                      <div class="feature">YouTube and Vimeo video popups</div>
+                      <div class="feature">Video popups for YouTube and Vimeo</div>
                       <div class="cell yes">✔</div>
                       <div class="cell yes">✔</div>
                       <div class="cell yes">✔</div>
@@ -1063,7 +1060,7 @@ Shared efforts that build capability, trust, or momentum inside the Collective.
 
                     <div class="compare-row">
                       <div class="feature">Share card to social platforms</div>
-                      <div class="cell no">—</div>
+                      <div class="cell yes">✔</div>
                       <div class="cell yes">✔</div>
                       <div class="cell yes">✔</div>
                     </div>
@@ -1148,7 +1145,7 @@ Shared efforts that build capability, trust, or momentum inside the Collective.
                       <div class="feature">Connection requests per day</div>
                       <div class="cell text">3</div>
                       <div class="cell text">20</div>
-                      <div class="cell text">High / Scaled</div>
+                      <div class="cell text">100</div>
                     </div>
 
                     <div class="compare-row">
@@ -1225,6 +1222,11 @@ Shared efforts that build capability, trust, or momentum inside the Collective.
         <style>
           /* Comparison table row layout (Tailwind-friendly) */
           #compare-panel .compare-rows { display: grid; gap: 0; }
+          #compare-panel .compare-row-header {
+            display: grid;
+            grid-template-columns: 1fr 110px 110px 110px;
+            align-items: center;
+          }
           #compare-panel .compare-row {
             display: grid;
             grid-template-columns: 1fr 110px 110px 110px;
@@ -1233,6 +1235,9 @@ Shared efforts that build capability, trust, or momentum inside the Collective.
             border-top: 1px solid rgba(255,255,255,0.08);
           }
           @media (max-width: 640px) {
+            #compare-panel .compare-row-header {
+              grid-template-columns: 1fr 70px 70px 70px;
+            }
             #compare-panel .compare-row {
               grid-template-columns: 1fr 70px 70px 70px;
               padding: 10px 10px;
